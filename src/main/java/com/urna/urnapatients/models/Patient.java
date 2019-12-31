@@ -37,6 +37,9 @@ public class Patient implements java.io.Serializable {
 	private String address;
 	
 	private String dob;
+	
+	private String secretPasscode;
+
 
 	public Integer getId() {
 		return id;
@@ -132,6 +135,14 @@ public class Patient implements java.io.Serializable {
 
 	public void setMiddleName(String middleName) {
 		this.middleName = middleName;
+	}
+
+	public String getSecretPasscode() {
+		return secretPasscode;
+	}
+
+	public void setSecretPasscode(String secretPin) {
+		this.secretPasscode = secretPin;
 	}
 	
 	
