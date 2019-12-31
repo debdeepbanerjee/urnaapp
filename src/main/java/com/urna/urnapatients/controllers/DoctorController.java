@@ -55,7 +55,7 @@ public class DoctorController {
 	     doctorRepository.delete(doctor);
 	}
 	
-	@DeleteMapping("/doctor")
+	@DeleteMapping("/doctor/id")
 	public void deleteDoctorById(@Valid @RequestBody Doctor doctor) {
 	     doctorRepository.deleteById(doctor.getId());;
 	}

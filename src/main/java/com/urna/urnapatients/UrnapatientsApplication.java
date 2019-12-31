@@ -9,5 +9,7 @@ public class UrnapatientsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(UrnapatientsApplication.class, args);
 	}
+	
+	
 
 }
