@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,13 +33,23 @@ public class LoginController {
 	public void setPatientRepository(PatientRepository patientRepository) {
 		this.patientRepository = patientRepository;
 	}
-	@GetMapping("/doctor")
+	@PostMapping("/doctor")
 	public @ResponseBody Optional<Doctor> getDoctorByLoginId(@Valid @RequestBody Doctor doctor) {
 	    return doctorRepository.findDoctorByLoginIds(doctor.getMobile(), doctor.getSecretPasscode());
 	  }
 	
-	@GetMapping("/patient")
+	@PostMapping("/doctor/email")
+	public @ResponseBody Optional<Doctor> getDoctorByLoginIdEmail(@Valid @RequestBody Doctor doctor) {
+	    return doctorRepository.findDoctorByLoginIdsEmail(doctor.getEmail(), doctor.getSecretPasscode());
+	  }
+	
+	@PostMapping("/patient")
 	public @ResponseBody Optional<Patient> getPatientByLoginId(@Valid @RequestBody Patient patient) {
 	    return patientRepository.findPatientByLoginIds(patient.getMobile(), patient.getSecretPasscode());
+	  }
+	
+	@PostMapping("/patient/emial")
+	public @ResponseBody Optional<Patient> getPatientByLoginIdEmail(@Valid @RequestBody Patient patient) {
+	    return patientRepository.findPatientByLoginIdsEmail(patient.getEmail(), patient.getSecretPasscode());
 	  }
 }
