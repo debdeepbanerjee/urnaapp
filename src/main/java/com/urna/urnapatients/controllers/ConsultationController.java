@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import com.urna.urnapatients.models.Consultation;
 import com.urna.urnapatients.models.Patient;
 import com.urna.urnapatients.repo.ConsultationRepository;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/rest/urna/consultation")
 public class ConsultationController {

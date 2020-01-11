@@ -27,17 +27,14 @@ export default class DoctorLogin extends Component  {
     axios
       .post(
         "http://localhost:8080/rest/urna/login/doctor/email",
-        {
-          user: {
-            email: email,
-            password: password
-          }
-        },
-        { withCredentials: true }
+            {
+            "email": email,
+           "secretPasscode": password
+            }
       )
       .then(response => {
-        if (response.data.logged_in) {
-          this.props.handleSuccessfulAuth(response.data);
+        if (response.data != null ) {
+          console.log("logged in ");
         }
       })
       .catch(error => {

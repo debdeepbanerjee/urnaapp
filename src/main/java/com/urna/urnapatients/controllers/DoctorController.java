@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.urna.urnapatients.models.Doctor;
 import com.urna.urnapatients.repo.DoctorRepository;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/rest/urna/doctors")
 public class DoctorController {

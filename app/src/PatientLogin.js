@@ -27,7 +27,7 @@ export default class PatientLogin extends Component {
 
     axios
       .post(
-        "http://localhost:3001/sessions",
+        "http://localhost:8080/rest/urna/login/patient/email",
         {
           user: {
             email: email,
@@ -37,7 +37,7 @@ export default class PatientLogin extends Component {
         { withCredentials: true }
       )
       .then(response => {
-        if (response.data.logged_in) {
+        if (response.data != null ) {
           this.props.handleSuccessfulAuth(response.data);
         }
       })
