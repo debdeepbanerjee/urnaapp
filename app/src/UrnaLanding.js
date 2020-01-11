@@ -7,7 +7,8 @@ import {
 } from "react-router-dom";
 import PatientLogin from './PatientLogin';
 import DoctorLogin from './DoctorLogin';
-
+import RegisterDoctor from './RegisterDoctor';
+import RegisterPatient from './RegisterPatient';
 
 export default function UrnaLanding() {
     
@@ -17,7 +18,11 @@ export default function UrnaLanding() {
         <nav>
         <Link to="/PatientLogin">Patient Login  </Link>
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <Link to="/DoctorLogin">Doctor Login  </Link>
+        <Link to="/DoctorLogin">Doctor Login  </Link>       
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <Link to="/RegisterDoctor">Register as a Doctor </Link>
+         &nbsp;&nbsp;&nbsp;&nbsp;
+        <Link to="/RegisterPatient">Patient Registration  </Link>
         </nav>
         <Route 
         path="/PatientLogin"
@@ -27,6 +32,16 @@ export default function UrnaLanding() {
         <Route 
         path="/DoctorLogin"
         component = {DoctorLogin}
+        exact
+        />
+        <Route 
+        path="/RegisterDoctor"
+        component = {RegisterDoctor}
+        exact
+        />
+        <Route 
+        path="/RegisterPatient"
+        component = {RegisterPatient}
         exact
         />
     </div>  
