@@ -71,6 +71,7 @@ export default class RegisterPatient extends Component {
   render() {
     return (
       <div>
+        <h1> Patient Registration.</h1>
         <form onSubmit={this.handleSubmit}>
           <input
             type="email"
@@ -106,6 +107,7 @@ export default class RegisterPatient extends Component {
           value={this.state.firstName}
           placeholder={"Enter your first name"}
           handleChange={this.handleChange}
+        required
         />
         
          <Input
@@ -124,6 +126,7 @@ export default class RegisterPatient extends Component {
           value={this.state.lastName}
           placeholder={"Enter your last name"}
           handleChange={this.handleChange}
+        required
         />
 
           <Input
@@ -137,7 +140,7 @@ export default class RegisterPatient extends Component {
         
           <Input
           inputType={"text"}
-          title={"languagesSpoken"}
+          title={"Languages Spoken"}
           name={"languageSpoken"}
           value={this.state.languageSpoken}
           placeholder={"Languages spoken (separated by commas)"}
@@ -146,7 +149,7 @@ export default class RegisterPatient extends Component {
         
          <Input
           inputType={"number"}
-          title={"phone"}
+          title={"Phone"}
           name={"phone"}
           value={this.state.phone}
           placeholder={"Work Phone"}
@@ -155,11 +158,12 @@ export default class RegisterPatient extends Component {
         
           <Input
           inputType={"number"}
-          title={"mobile"}
+          title={"Mobile"}
           name={"mobile"}
           value={this.state.mobile}
           placeholder={"Cell Phone"}
           handleChange={this.handleChange}
+        required
         />
         
         <TextArea
@@ -169,19 +173,22 @@ export default class RegisterPatient extends Component {
           name={"address"}
           handleChange={this.handleTextArea}
           placeholder={"Enter your address with city and pincode"}
+         required
         />
         
         <Input
           inputType={"text"}
-          title={"dob"}
+          title={"Date of birth"}
           name={"dob"}
           value={this.state.dob}
           placeholder={"Date of birth(dd/mm/yyyy)"}
           handleChange={this.handleChange}
+        required
         />
         
 
           <button type="submit">Register</button>
+        <br />
         </form>
       </div>
     );

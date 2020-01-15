@@ -4,7 +4,7 @@ import Input from "./Input";
 import TextArea from "./TextArea";
 
 
-export default class RegisterDoctor extends Component {
+export default class EditProfile extends Component {
   constructor(props) {
     super(props);
 
@@ -16,10 +16,7 @@ export default class RegisterDoctor extends Component {
       lastName: "",
       middleName: "",
       fullName: "",
-      speciality: "",
       qualifications: "",
-      practice: "",
-      specializations: "",
       languageSpoken: "",
       phone: "",
       mobile: "",
@@ -40,12 +37,12 @@ export default class RegisterDoctor extends Component {
 
   handleSubmit(event) {
     fullName = firstName + ' ' + middleName + ' '+ lastName;
-    const { email, password, password_confirmation,firstName,lastName,middleName,fullName,speciality,qualifications,practice,specializations,languageSpoken,phone,mobile,address,dob } = this.state;
+    const { email, password, password_confirmation,firstName,lastName,middleName,fullName,qualifications,languageSpoken,phone,mobile,address,dob } = this.state;
 
     axios
       .post(
-        "http://localhost:8080/rest/urna/doctors/doctor",
-        {
+        "http://localhost:8080/rest/urna/patients/patient",
+       {
         "address": address,
         "dob": dob,
         "email": email,
@@ -56,11 +53,8 @@ export default class RegisterDoctor extends Component {
         "middleName": middleName,
         "mobile": mobile,
         "phone": phone,
-        "practice": practice,
         "qualifications": qualifications,
-        "secretPasscode": password,
-        "speciality": speciality,
-        "specializations": specializations
+        "secretPasscode": password
         }
       )
       .then(response => {
@@ -77,7 +71,7 @@ export default class RegisterDoctor extends Component {
   render() {
     return (
       <div>
-        <h1> Register as a Doctor.</h1>
+        <h1> Patient Registration.</h1>
         <form onSubmit={this.handleSubmit}>
           <input
             type="email"
@@ -105,7 +99,8 @@ export default class RegisterDoctor extends Component {
             onChange={this.handleChange}
             required
           />
-         <Input
+        
+        <Input
           inputType={"text"}
           title={"First Name"}
           name={"firstName"}
@@ -141,26 +136,6 @@ export default class RegisterDoctor extends Component {
           value={this.state.qualifications}
           placeholder={"Enter your qualifications"}
           handleChange={this.handleChange}
-        required
-        />
-        
-           <Input
-          inputType={"text"}
-          title={"Practice"}
-          name={"practice"}
-          value={this.state.practice}
-          placeholder={"Enter your current practice details(eg: skin specialist)"}
-          handleChange={this.handleChange}
-        />
-        
-         <Input
-          inputType={"text"}
-          title={"Specializations"}
-          name={"specializations"}
-          value={this.state.specializations}
-          placeholder={"Enter your current specialization area or areas. (comma separated eg: neurology)"}
-          handleChange={this.handleChange}
-        required
         />
         
           <Input
@@ -198,7 +173,7 @@ export default class RegisterDoctor extends Component {
           name={"address"}
           handleChange={this.handleTextArea}
           placeholder={"Enter your address with city and pincode"}
-        required
+         required
         />
         
         <Input
@@ -210,7 +185,9 @@ export default class RegisterDoctor extends Component {
           handleChange={this.handleChange}
         required
         />
-          <button type="submit">Register</button>
+        
+
+          <button type="submit">Update</button>
         <br />
         </form>
       </div>

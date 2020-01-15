@@ -4,7 +4,7 @@ import Input from "./Input";
 import TextArea from "./TextArea";
 
 
-export default class RegisterDoctor extends Component {
+export default class EditProfileDoctor extends Component {
   constructor(props) {
     super(props);
 
@@ -77,7 +77,7 @@ export default class RegisterDoctor extends Component {
   render() {
     return (
       <div>
-        <h1> Register as a Doctor.</h1>
+        <h1> Edit your profile.</h1>
         <form onSubmit={this.handleSubmit}>
           <input
             type="email"
@@ -210,7 +210,7 @@ export default class RegisterDoctor extends Component {
           handleChange={this.handleChange}
         required
         />
-          <button type="submit">Register</button>
+          <button type="submit">Update</button>
         <br />
         </form>
       </div>

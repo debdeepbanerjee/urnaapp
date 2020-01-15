@@ -50,6 +50,7 @@ export default class PatientLogin extends Component {
   render() {
     return (
       <div>
+        <h1> Patient Login.</h1>
         <form onSubmit={this.handleSubmit}>
           <input
             type="email"

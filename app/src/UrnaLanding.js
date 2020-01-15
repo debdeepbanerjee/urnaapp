@@ -24,6 +24,7 @@ export default function UrnaLanding() {
          &nbsp;&nbsp;&nbsp;&nbsp;
         <Link to="/RegisterPatient">Patient Registration  </Link>
         </nav>
+        <br />
         <Route 
         path="/PatientLogin"
         component = {PatientLogin}

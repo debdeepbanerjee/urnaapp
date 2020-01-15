@@ -46,6 +46,7 @@ export default class DoctorLogin extends Component  {
   render() {
     return (
       <div>
+        <h1> Doctor Login.</h1>
         <form onSubmit={this.handleSubmit}>
           <input
             type="email"
