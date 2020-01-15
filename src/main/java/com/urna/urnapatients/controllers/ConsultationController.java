@@ -47,17 +47,17 @@ public class ConsultationController {
 	    return consultationRepository.save(consultation);
 	}
 	
-	@PutMapping("/patient")
+	@PutMapping("/consultation")
 	public Consultation updateConsultation(@Valid @RequestBody Consultation consultation) {
 	    return consultationRepository.save(consultation);
 	}
 	
-	@DeleteMapping("/patient")
+	@DeleteMapping("/consultation")
 	public void deleteConsultation(@Valid @RequestBody Consultation consultation) {
 		consultationRepository.delete(consultation);
 	}
 	
-	@DeleteMapping("/patient/id")
+	@DeleteMapping("/consultation/id")
 	public void deleteConsultationById(@Valid @RequestBody Consultation consultation) {
 		consultationRepository.deleteById(consultation.getId());;
 	}
