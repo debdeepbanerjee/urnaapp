@@ -16,49 +16,51 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.urna.urnapatients.models.Consultation;
-import com.urna.urnapatients.models.Patient;
-import com.urna.urnapatients.repo.ConsultationRepository;
+import com.urna.urnapatients.services.ConsultationService;
 
 @CrossOrigin
 @RestController
 @RequestMapping("/rest/urna/consultation")
 public class ConsultationController {
-	ConsultationRepository consultationRepository;
+	ConsultationService consultationService;
 	
 	@Autowired
-	public void setConsultationRepository(ConsultationRepository consultationRepository) {
-		this.consultationRepository = consultationRepository;
+	public void setConsultationService(ConsultationService consultationService) {
+		this.consultationService = consultationService;
 	}
-	
+
 	@GetMapping("/consultations")
 	public @ResponseBody Iterable<Consultation> getAllConsultations() {
-	    return consultationRepository.findAll();
+	    return consultationService.findAll();
 	  }
 	
 	@GetMapping("/consultation")
 	public @ResponseBody Optional<Consultation> getConsultationById(@Valid @RequestBody Consultation consultation) {
-	    return consultationRepository.findById(consultation.getId());
+	    return consultationService.findById(consultation.getId());
 	  }
 	
 	
 	
 	@PostMapping("/consultation")
 	public Consultation createConsultation(@Valid @RequestBody Consultation consultation) {
-	    return consultationRepository.save(consultation);
+		return consultationService.insert(consultation);
 	}
+	
 	
 	@PutMapping("/consultation")
 	public Consultation updateConsultation(@Valid @RequestBody Consultation consultation) {
-	    return consultationRepository.save(consultation);
+		return consultationService.update(consultation);
 	}
 	
+	
+
 	@DeleteMapping("/consultation")
 	public void deleteConsultation(@Valid @RequestBody Consultation consultation) {
-		consultationRepository.delete(consultation);
+		consultationService.delete(consultation);
 	}
 	
 	@DeleteMapping("/consultation/id")
 	public void deleteConsultationById(@Valid @RequestBody Consultation consultation) {
-		consultationRepository.deleteById(consultation.getId());;
+		consultationService.deleteById(consultation.getId());
 	}
 }

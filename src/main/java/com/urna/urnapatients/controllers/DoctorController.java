@@ -16,49 +16,49 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.urna.urnapatients.models.Doctor;
-import com.urna.urnapatients.repo.DoctorRepository;
+import com.urna.urnapatients.services.DoctorService;
 
 @CrossOrigin
 @RestController
 @RequestMapping("/rest/urna/doctors")
 public class DoctorController {
  
-	DoctorRepository doctorRepository;
-	
+	DoctorService doctorService;
+
 	@Autowired
-	public void setDoctorRepository(DoctorRepository doctorRepository) {
-		this.doctorRepository = doctorRepository;
+	public void setDoctorService(DoctorService doctorService) {
+		this.doctorService = doctorService;
 	}
 
 	@GetMapping("/doctors")
 	public @ResponseBody Iterable<Doctor> getAllDoctors() {
-	    return doctorRepository.findAll();
+	    return doctorService.findAll();
 	  }
 	
 	@GetMapping("/doctor")
 	public @ResponseBody Optional<Doctor> getDoctorById(@Valid @RequestBody Doctor doctor) {
-	    return doctorRepository.findById(doctor.getId());
+	    return doctorService.findById(doctor.getId());
 	  }
 	
 	
 	
 	@PostMapping("/doctor")
 	public Doctor createDoctor(@Valid @RequestBody Doctor doctor) {
-	    return doctorRepository.save(doctor);
+	    return doctorService.save(doctor);
 	}
 	
 	@PutMapping("/doctor")
 	public Doctor updateDoctor(@Valid @RequestBody Doctor doctor) {
-	    return doctorRepository.save(doctor);
+	    return doctorService.save(doctor);
 	}
 	
 	@DeleteMapping("/doctor")
 	public void deleteDoctor(@Valid @RequestBody Doctor doctor) {
-	     doctorRepository.delete(doctor);
+		doctorService.delete(doctor);
 	}
 	
 	@DeleteMapping("/doctor/id")
 	public void deleteDoctorById(@Valid @RequestBody Doctor doctor) {
-	     doctorRepository.deleteById(doctor.getId());;
+		doctorService.deleteById(doctor.getId());;
 	}
 }
