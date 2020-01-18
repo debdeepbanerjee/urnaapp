@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.urna.urnapatients.controllers.utils.ConsultationUtil;
+import com.urna.urnapatients.dto.ConsultationDto;
 import com.urna.urnapatients.models.Consultation;
 import com.urna.urnapatients.services.ConsultationService;
 
@@ -42,20 +44,25 @@ public class ConsultationController {
 	
 	
 	@PostMapping("/consultation")
-	public Consultation createConsultation(@Valid @RequestBody Consultation consultation) {
+	public Consultation createConsultation(@Valid @RequestBody ConsultationDto consultationDto) {
+		Consultation consultation = ConsultationUtil.transformFromDto(consultationDto);
 		return consultationService.insert(consultation);
 	}
+
+	
 	
 	
 	@PutMapping("/consultation")
-	public Consultation updateConsultation(@Valid @RequestBody Consultation consultation) {
+	public Consultation updateConsultation(@Valid @RequestBody ConsultationDto consultationDto) {
+		Consultation consultation = ConsultationUtil.transformFromDto(consultationDto);
 		return consultationService.update(consultation);
 	}
 	
 	
 
 	@DeleteMapping("/consultation")
-	public void deleteConsultation(@Valid @RequestBody Consultation consultation) {
+	public void deleteConsultation(@Valid @RequestBody ConsultationDto consultationDto) {
+		Consultation consultation = ConsultationUtil.transformFromDto(consultationDto);
 		consultationService.delete(consultation);
 	}
 	
