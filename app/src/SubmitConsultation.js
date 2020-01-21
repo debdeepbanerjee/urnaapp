@@ -34,22 +34,19 @@ export default class RegisterPatient extends Component {
       .post(
         "http://localhost:8080/rest/urna/consultation/consultation",
        {
-        "address": address,
-        "dob": dob,
-        "email": email,
-        "firstName": firstName,
-        "fullName": fullName,
-        "languageSpoken": languageSpoken,
-        "lastName": lastName,
-        "middleName": middleName,
-        "mobile": mobile,
-        "phone": phone,
-        "qualifications": qualifications,
-        "secretPasscode": password
+        
+        "additionalQuery": additionalQuery,
+        "consultationFor": consultationFor,
+        "consultationResponse": "",
+        "durationOfHealthIssue": durationOfHealthIssue,
+        "healthIssue": healthIssue,
+        "speciality": speciality,
+        "status": "Created"
+
         }
       )
       .then(response => {
-        if (response.data.status === "created") {
+        if (response.data.status === "Created") {
           this.props.handleSuccessfulAuth(response.data);
         }
       })

@@ -2,6 +2,8 @@ package com.urna.urnapatients.controllers;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,16 @@ public class ConsultationController {
 	    return consultationService.findAll();
 	  }
 	
+	@GetMapping("/consultations/patient")
+	public @ResponseBody Iterable<Consultation> getAllConsultationsForPatient(@Valid @RequestBody Integer patientId) {
+	    return consultationService.findAllConsultationByPatientId(patientId);
+	  }
+	
+	@GetMapping("/consultations/doctor")
+	public @ResponseBody Iterable<Consultation> getAllConsultationsForDoctor(@Valid @RequestBody Integer doctorId) {
+	    return consultationService.findAllConsultationByPatientId(doctorId);
+	  }
+	
 	@GetMapping("/consultation")
 	public @ResponseBody Optional<Consultation> getConsultationById(@Valid @RequestBody Consultation consultation) {
 	    return consultationService.findById(consultation.getId());
@@ -44,8 +56,9 @@ public class ConsultationController {
 	
 	
 	@PostMapping("/consultation")
-	public Consultation createConsultation(@Valid @RequestBody ConsultationDto consultationDto) {
+	public Consultation createConsultation(@Valid @RequestBody ConsultationDto consultationDto,HttpSession session) {
 		Consultation consultation = ConsultationUtil.transformFromDto(consultationDto);
+		ConsultationUtil.setPatientIdFromSession(session, consultation);
 		return consultationService.insert(consultation);
 	}
 
@@ -53,10 +66,12 @@ public class ConsultationController {
 	
 	
 	@PutMapping("/consultation")
-	public Consultation updateConsultation(@Valid @RequestBody ConsultationDto consultationDto) {
+	public Consultation updateConsultation(@Valid @RequestBody ConsultationDto consultationDto,HttpSession session) {
 		Consultation consultation = ConsultationUtil.transformFromDto(consultationDto);
 		return consultationService.update(consultation);
 	}
+
+	
 	
 	
 

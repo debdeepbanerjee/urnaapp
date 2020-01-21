@@ -1,7 +1,10 @@
 package com.urna.urnapatients.controllers.utils;
 
+import javax.servlet.http.HttpSession;
+
 import com.urna.urnapatients.dto.ConsultationDto;
 import com.urna.urnapatients.models.Consultation;
+import com.urna.urnapatients.models.Patient;
 
 public class ConsultationUtil {
 	public static  Consultation transformFromDto(ConsultationDto consultationDto) {
@@ -17,5 +20,10 @@ public class ConsultationUtil {
 		consultation.setSpeciality(consultationDto.getSpeciality());
 		consultation.setStatus(consultationDto.getStatus());
 		return consultation;
+	}
+	public static void setPatientIdFromSession(HttpSession session, Consultation consultation) {
+		Patient p=(Patient) session.getAttribute("patient");
+		Integer cratedByPatientId=p.getId();
+		consultation.setCratedByPatientId(cratedByPatientId);
 	}
 }

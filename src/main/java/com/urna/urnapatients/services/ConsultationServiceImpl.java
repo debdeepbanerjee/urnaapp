@@ -71,4 +71,14 @@ public class ConsultationServiceImpl implements ConsultationService{
 		consultation.setLastRespondedOn(lastRespondedOn);
 	}
 
+	@Override
+	public Iterable<Consultation> findAllConsultationByPatientId(Integer cratedByPatientId) {
+		return consultationRepository.findAllConsultationByPatientId(cratedByPatientId);
+	}
+
+	@Override
+	public Iterable<Consultation> findAllConsultationByRespondedDoctorId(Integer lastrespondedByDocId) {
+		return consultationRepository.findAllConsultationByRespondedDoctorId(lastrespondedByDocId);
+	}
+
 }
