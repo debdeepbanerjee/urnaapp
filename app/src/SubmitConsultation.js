@@ -4,7 +4,7 @@ import Input from "./Input";
 import TextArea from "./TextArea";
 
 
-export default class RegisterPatient extends Component {
+export default class SubmitConsultation extends Component {
   constructor(props) {
     super(props);
 
