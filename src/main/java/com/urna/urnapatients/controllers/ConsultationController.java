@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.urna.urnapatients.controllers.utils.ConsultationUtil;
 import com.urna.urnapatients.dto.ConsultationDto;
 import com.urna.urnapatients.models.Consultation;
+import com.urna.urnapatients.models.Doctor;
+import com.urna.urnapatients.models.Patient;
 import com.urna.urnapatients.services.ConsultationService;
 
 @CrossOrigin
@@ -47,6 +49,21 @@ public class ConsultationController {
 	public @ResponseBody Iterable<Consultation> getAllConsultationsForDoctor(@Valid @RequestBody Integer doctorId) {
 	    return consultationService.findAllConsultationByPatientId(doctorId);
 	  }
+	
+	@GetMapping("/consultations/secure/patient")
+	public @ResponseBody Iterable<Consultation> getAllConsultationsForPatientSecure(HttpSession session) {
+		Patient p = (Patient) session.getAttribute("patient");
+		Integer patientId = p.getId(); 
+	    return consultationService.findAllConsultationByPatientId(patientId);
+	  }
+	
+	@GetMapping("/consultations/secure/doctor")
+	public @ResponseBody Iterable<Consultation> getAllConsultationsForDoctorSecure(HttpSession session) {
+		Doctor d = (Doctor) session.getAttribute("doctor");
+		Integer doctorId = d.getId(); 
+		return consultationService.findAllConsultationByRespondedDoctorId(doctorId);
+	  }
+	
 	
 	@GetMapping("/consultation")
 	public @ResponseBody Optional<Consultation> getConsultationById(@Valid @RequestBody Consultation consultation) {
