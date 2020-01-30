@@ -2,6 +2,7 @@ package com.urna.urnapatients.controllers;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,22 +38,30 @@ public class LoginController {
 	}
 
 	@PostMapping("/doctor")
-	public @ResponseBody Optional<Doctor> getDoctorByLoginId(@Valid @RequestBody Doctor doctor) {
-	    return doctorService.findDoctorByLoginIds(doctor.getMobile(), doctor.getSecretPasscode());
+	public @ResponseBody Optional<Doctor> getDoctorByLoginId(@Valid @RequestBody Doctor doctor, HttpSession sess) {
+	    Optional<Doctor> doctorByLoginIds = doctorService.findDoctorByLoginIds(doctor.getMobile(), doctor.getSecretPasscode());
+		sess.setAttribute("doctor", doctorByLoginIds);
+	    return doctorByLoginIds;
 	  }
 	
 	@PostMapping("/doctor/email")
-	public @ResponseBody Optional<Doctor> getDoctorByLoginIdEmail(@Valid @RequestBody Doctor doctor) {
-	    return doctorService.findDoctorByLoginIdsEmail(doctor.getEmail(), doctor.getSecretPasscode());
+	public @ResponseBody Optional<Doctor> getDoctorByLoginIdEmail(@Valid @RequestBody Doctor doctor, HttpSession sess) {
+	    Optional<Doctor> doctorByLoginIdsEmail = doctorService.findDoctorByLoginIdsEmail(doctor.getEmail(), doctor.getSecretPasscode());
+	    sess.setAttribute("doctor", doctorByLoginIdsEmail);
+	    return doctorByLoginIdsEmail;
 	  }
 	
 	@PostMapping("/patient")
-	public @ResponseBody Optional<Patient> getPatientByLoginId(@Valid @RequestBody Patient patient) {
-	    return patientService.findPatientByLoginIds(patient.getMobile(), patient.getSecretPasscode());
+	public @ResponseBody Optional<Patient> getPatientByLoginId(@Valid @RequestBody Patient patient, HttpSession sess ) {
+	    Optional<Patient> patientByLoginIds = patientService.findPatientByLoginIds(patient.getMobile(), patient.getSecretPasscode());
+		sess.setAttribute("patient", patientByLoginIds);
+	    return patientByLoginIds;
 	  }
 	
 	@PostMapping("/patient/emial")
-	public @ResponseBody Optional<Patient> getPatientByLoginIdEmail(@Valid @RequestBody Patient patient) {
-	    return patientService.findPatientByLoginIdsEmail(patient.getEmail(), patient.getSecretPasscode());
+	public @ResponseBody Optional<Patient> getPatientByLoginIdEmail(@Valid @RequestBody Patient patient, HttpSession sess) {
+	    Optional<Patient> patientByLoginIdsEmail = patientService.findPatientByLoginIdsEmail(patient.getEmail(), patient.getSecretPasscode());
+		sess.setAttribute("patient", patientByLoginIdsEmail);
+	    return patientByLoginIdsEmail;
 	  }
 }
