@@ -34,7 +34,8 @@ export default class DoctorLogin extends Component  {
       )
       .then(response => {
         if (response.data != null ) {
-          console.log("logged in ");
+           this.props.history.push("/UrnaLandingSecuredDoctor");
+           // return <Redirect to='/UrnaLandingSecuredDoctor' />
         }
       })
       .catch(error => {
