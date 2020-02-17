@@ -36,5 +36,5 @@ export default function UrnaLandingSecuredDoctor() {
     </div>  
     </Router>    
     )
-    ReactDOM.render(element, document.getElementById('root'));
+   
 }

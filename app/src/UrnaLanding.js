@@ -9,12 +9,14 @@ import PatientLogin from './PatientLogin';
 import DoctorLogin from './DoctorLogin';
 import RegisterDoctor from './RegisterDoctor';
 import RegisterPatient from './RegisterPatient';
-
+import UrnaLandingSecuredDoctor from './UrnaLandingSecuredDoctor';
+window.$isLoggedin = 'false'
 export default function UrnaLanding() {
-    
+     if(window.$isLoggedin == 'false') {
     return (
     <Router>
-     <div class="container">
+     <div class="container"> 
+        
         <nav>
         <Link to="/PatientLogin">Patient Login  </Link>
         &nbsp;&nbsp;&nbsp;&nbsp;
@@ -25,6 +27,8 @@ export default function UrnaLanding() {
         <Link to="/RegisterPatient">Patient Registration  </Link>
         </nav>
         <br />
+       
+        
         <Route 
         path="/PatientLogin"
         component = {PatientLogin}
@@ -45,7 +49,47 @@ export default function UrnaLanding() {
         component = {RegisterPatient}
         exact
         />
+        <Route 
+        path="/UrnaLandingSecuredDoctor"
+        component = {UrnaLandingSecuredDoctor}
+        exact
+        />
     </div>  
     </Router>    
     )
+     } else { return (
+         
+          <Router>
+     <div class="container"> 
+       
+        
+        <Route 
+        path="/PatientLogin"
+        component = {PatientLogin}
+        exact
+        />
+        <Route 
+        path="/DoctorLogin"
+        component = {DoctorLogin}
+        exact
+        />
+        <Route 
+        path="/RegisterDoctor"
+        component = {RegisterDoctor}
+        exact
+        />
+        <Route 
+        path="/RegisterPatient"
+        component = {RegisterPatient}
+        exact
+        />
+        <Route 
+        path="/UrnaLandingSecuredDoctor"
+        component = {UrnaLandingSecuredDoctor}
+        exact
+        />
+    </div>  
+    </Router>    
+     )
+    }
 }

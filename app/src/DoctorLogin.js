@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import UrnaLandingSecuredDoctor from './UrnaLandingSecuredDoctor';
 
 export default class DoctorLogin extends Component  {
     constructor(props) {
@@ -34,6 +35,7 @@ export default class DoctorLogin extends Component  {
       )
       .then(response => {
         if (response.data != null ) {
+            window.$isLoggedin = 'true';
            this.props.history.push("/UrnaLandingSecuredDoctor");
            // return <Redirect to='/UrnaLandingSecuredDoctor' />
         }
