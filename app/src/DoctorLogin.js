@@ -24,10 +24,17 @@ export default class DoctorLogin extends Component  {
 
   handleSubmit(event) {
     const { email, password } = this.state;
+    let origin;
 
+    if (!window.location.origin) {
+      origin = window.location.protocol + "//" + window.location.hostname + 
+         (window.location.port ? ':' + window.location.port: '');
+    }
+    alert(origin);
+    origin = window.location.origin;
     axios
       .post(
-        "http://localhost:8080/rest/urna/login/doctor/email",
+        origin+"/rest/urna/login/doctor/email",
             {
             "email": email,
            "secretPasscode": password
