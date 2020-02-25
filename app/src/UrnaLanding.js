@@ -12,7 +12,6 @@ import RegisterPatient from './RegisterPatient';
 import UrnaLandingSecuredDoctor from './UrnaLandingSecuredDoctor';
 window.$isLoggedin = 'false'
 export default function UrnaLanding() {
-    alert(window.$isLoggedin);
      if(window.$isLoggedin == 'false') {
     return (
     <Router>
