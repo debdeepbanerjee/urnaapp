@@ -41,10 +41,16 @@ export default class RegisterDoctor extends Component {
   handleSubmit(event) {
     fullName = firstName + ' ' + middleName + ' '+ lastName;
     const { email, password, password_confirmation,firstName,lastName,middleName,fullName,speciality,qualifications,practice,specializations,languageSpoken,phone,mobile,address,dob } = this.state;
+    let origin;
 
+    if (!window.location.origin) {
+      origin = window.location.protocol + "//" + window.location.hostname + 
+         (window.location.port ? ':' + window.location.port: '');
+    }
+    origin = window.location.origin;
     axios
       .post(
-        "http://localhost:8080/rest/urna/doctors/doctor",
+        origin+"/rest/urna/doctors/doctor",
         {
         "address": address,
         "dob": dob,
@@ -65,7 +71,8 @@ export default class RegisterDoctor extends Component {
       )
       .then(response => {
         if (response.data.status === "created") {
-          this.props.handleSuccessfulAuth(response.data);
+           window.$isLoggedin = 'true';
+           this.props.history.push("/UrnaLandingSecuredDoctor");
         }
       })
       .catch(error => {

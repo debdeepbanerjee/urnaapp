@@ -31,7 +31,6 @@ export default class DoctorLogin extends Component  {
          (window.location.port ? ':' + window.location.port: '');
     }
     origin = window.location.origin;
-    alert(origin);
 
     axios
       .post(

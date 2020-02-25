@@ -59,7 +59,8 @@ export default class RegisterPatient extends Component {
       )
       .then(response => {
         if (response.data.status === "created") {
-          this.props.handleSuccessfulAuth(response.data);
+           window.$isLoggedin = 'true';
+           this.props.history.push("/UrnaLandingSecuredPatient");
         }
       })
       .catch(error => {
