@@ -30,8 +30,9 @@ export default class DoctorLogin extends Component  {
       origin = window.location.protocol + "//" + window.location.hostname + 
          (window.location.port ? ':' + window.location.port: '');
     }
-    alert(origin);
     origin = window.location.origin;
+    alert(origin);
+
     axios
       .post(
         origin+"/rest/urna/login/doctor/email",
