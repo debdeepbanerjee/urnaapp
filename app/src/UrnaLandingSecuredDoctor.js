@@ -24,7 +24,7 @@ export default function UrnaLandingSecuredDoctor() {
 
         </nav>
         
-        <a href="#" onClick={() => logout();this.props.history.push("/UrnaLanding");}}>Logout</a>
+        <a href="#" onClick={function(){ logout();this.props.history.push("/UrnaLanding"); }}>Logout</a>
         <br />
         <Route 
         path="/EditProfileDoctor"
