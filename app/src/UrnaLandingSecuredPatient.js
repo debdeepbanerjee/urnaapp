@@ -21,9 +21,10 @@ export default function UrnaLandingSecuredPatient() {
         <Link to="/SubmitConsultation">Submit a Consultation Request </Link>       
         &nbsp;&nbsp;&nbsp;&nbsp;
         
-        <a href="#" onClick={this.logout()}>Logout</a>
 
         </nav>
+        <a href="#" onClick={this.logout()}>Logout</a>
+
         <br />
         <Route 
         path="/EditProfile"
