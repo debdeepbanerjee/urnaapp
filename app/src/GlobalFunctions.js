@@ -14,9 +14,7 @@ export function logout() {
         origin+"/rest/urna/logout/logout")
       .then(response => {
         if (response.data != null ) {
-            window.$isLoggedin = 'true';
-           this.props.history.push("/UrnaLanding");
-           // return <Redirect to='/UrnaLandingSecuredDoctor' />
+            window.$isLoggedin = 'false';
         }
       })
       .catch(error => {
