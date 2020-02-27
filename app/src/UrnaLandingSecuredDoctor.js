@@ -24,7 +24,7 @@ export default function UrnaLandingSecuredDoctor() {
 
         </nav>
         
-        <a href="#" onClick={this.logout()}>Logout</a>
+        <a href="#" onClick={logout()}>Logout</a>
         <br />
         <Route 
         path="/EditProfileDoctor"
