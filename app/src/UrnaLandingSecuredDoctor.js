@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   BrowserRouter as Router,
+  useHistory,    
   Switch,
   Route,
   Link
@@ -8,6 +9,7 @@ import {
 import EditProfileDoctor from './EditProfileDoctor';
 import RespondToConsultation from './RespondToConsultation';
 import {logout} from './GlobalFunctions';
+import UrnaLanding from './UrnaLanding';
 
 
 export default function UrnaLandingSecuredDoctor() {
@@ -24,7 +26,7 @@ export default function UrnaLandingSecuredDoctor() {
 
         </nav>
         
-        <a href="#" onClick={function(){ logout();history.push("/UrnaLanding"); }}>Logout</a>
+        <a href="#" onClick={function(){ logout();useHistory().push("/UrnaLanding"); }}>Logout</a>
         <br />
         <Route 
         path="/EditProfileDoctor"
@@ -36,6 +38,12 @@ export default function UrnaLandingSecuredDoctor() {
         component = {RespondToConsultation}
         exact
         />
+            
+         <Route 
+        path="/UrnaLanding"
+        component = {UrnaLanding}
+        exact
+        />    
       
     </div>  
     </Router>    
