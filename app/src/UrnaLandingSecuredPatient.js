@@ -1,11 +1,11 @@
 import React from 'react';
 import {
   BrowserRouter as Router,
-  useHistory,    
   Switch,
   Route,
   Link
 } from "react-router-dom";
+import { hashHistory } from 'react-router';
 import EditProfile from './EditProfile';
 import SubmitConsultation from './SubmitConsultation';
 import {logout} from './GlobalFunctions';
