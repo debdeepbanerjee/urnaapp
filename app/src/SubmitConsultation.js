@@ -85,7 +85,7 @@ export default class SubmitConsultation extends Component {
         />
         
         <TextArea
-          title={"Health issue}
+          title={"Health issue"}
           rows={10}
           value={this.state.healthIssue}
           name={"healthIssue"}
