@@ -7,6 +7,8 @@ import {
 } from "react-router-dom";
 import EditProfile from './EditProfile';
 import SubmitConsultation from './SubmitConsultation';
+import {logout} from './GlobalFunctions';
+
 
 export default function UrnaLandingSecuredPatient() {
     
@@ -18,7 +20,9 @@ export default function UrnaLandingSecuredPatient() {
         &nbsp;&nbsp;&nbsp;&nbsp;
         <Link to="/SubmitConsultation">Submit a Consultation Request </Link>       
         &nbsp;&nbsp;&nbsp;&nbsp;
-      
+        
+        <a href="#" onClick={this.logout()}>Logout</a>
+
         </nav>
         <br />
         <Route 
