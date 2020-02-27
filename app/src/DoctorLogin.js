@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import UrnaLandingSecuredDoctor from './UrnaLandingSecuredDoctor';
+import {logout} from './GlobalFunctions';
 
 export default class DoctorLogin extends Component  {
     constructor(props) {
