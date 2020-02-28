@@ -205,7 +205,6 @@ export default class RegisterDoctor extends Component {
           name={"address"}
           handleChange={this.handleChange}
           placeholder={"Enter your address with city and pincode"}
-        required
         />
         
         <Input
