@@ -203,7 +203,7 @@ export default class RegisterDoctor extends Component {
           rows={10}
           value={this.state.address}
           name={"address"}
-          handleChange={this.handleTextArea}
+          handleChange={this.handleChange}
           placeholder={"Enter your address with city and pincode"}
         required
         />
