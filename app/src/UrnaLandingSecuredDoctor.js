@@ -5,7 +5,6 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import { hashHistory } from 'react-router';
 import EditProfileDoctor from './EditProfileDoctor';
 import RespondToConsultation from './RespondToConsultation';
 import {logout} from './GlobalFunctions';
@@ -26,7 +25,7 @@ export default function UrnaLandingSecuredDoctor() {
 
         </nav>
         
-        <a href="#" onClick={function(){ logout();hashHistory.push("/UrnaLanding"); }}>Logout</a>
+        <a href="#" onClick={function(){ logout(); }}>Logout</a>
         <br />
         <Route 
         path="/EditProfileDoctor"
