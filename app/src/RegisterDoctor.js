@@ -39,8 +39,8 @@ export default class RegisterDoctor extends Component {
   }
 
   handleSubmit(event) {
-    fullName = firstName + ' ' + middleName + ' '+ lastName;
-    const { email, password, password_confirmation,firstName,lastName,middleName,fullName,speciality,qualifications,practice,specializations,languageSpoken,phone,mobile,address,dob } = this.state;
+    let fullName1 = firstName + ' ' + middleName + ' '+ lastName;
+    const { email, password, password_confirmation,firstName,lastName,middleName,fullName1,speciality,qualifications,practice,specializations,languageSpoken,phone,mobile,address,dob } = this.state;
     let origin;
 
     if (!window.location.origin) {
