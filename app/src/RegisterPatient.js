@@ -37,7 +37,7 @@ export default class RegisterPatient extends Component {
 
   handleSubmit(event) {
     fullName = firstName + ' ' + middleName + ' '+ lastName;
-    const { email, password, password_confirmation,firstName,lastName,middleName,fullName,qualifications,languageSpoken,phone,mobile,address,dob } = this.state;
+    var { email, password, password_confirmation,firstName,lastName,middleName,fullName,qualifications,languageSpoken,phone,mobile,address,dob } = this.state;
 
     axios
       .post(

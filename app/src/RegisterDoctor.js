@@ -39,7 +39,8 @@ export default class RegisterDoctor extends Component {
   }
 
   handleSubmit(event) {
-    const { email, password, password_confirmation,firstName,lastName,middleName,fullName,speciality,qualifications,practice,specializations,languageSpoken,phone,mobile,address,dob } = this.state;
+    fullName = firstName + ' ' + middleName + ' '+ lastName;
+    var { email, password, password_confirmation,firstName,lastName,middleName,fullName,speciality,qualifications,practice,specializations,languageSpoken,phone,mobile,address,dob } = this.state;
     let origin;
 
     if (!window.location.origin) {
@@ -204,6 +205,7 @@ export default class RegisterDoctor extends Component {
           name={"address"}
           handleChange={this.handleChange}
           placeholder={"Enter your address with city and pincode"}
+        required
         />
         
         <Input
