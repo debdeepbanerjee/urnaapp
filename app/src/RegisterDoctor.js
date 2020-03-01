@@ -70,7 +70,7 @@ export default class RegisterDoctor extends Component {
         }
       )
       .then(response => {
-        if (response.data.status === "created") {
+        if (response.data.status != null) {
            window.$isLoggedin = 'true';
            this.props.history.push("/UrnaLandingSecuredDoctor");
         }
