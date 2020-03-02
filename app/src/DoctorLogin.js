@@ -49,6 +49,7 @@ export default class DoctorLogin extends Component  {
         }
       })
       .catch(error => {
+        alert("Cannot login.Incorrect credentials or the site may be unavailable.");
         console.log("login error", error);
       });
     event.preventDefault();

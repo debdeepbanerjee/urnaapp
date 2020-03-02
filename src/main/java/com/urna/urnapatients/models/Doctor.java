@@ -1,5 +1,6 @@
 package com.urna.urnapatients.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +20,7 @@ public class Doctor implements java.io.Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id ;
 	
+	@Column(unique = true)
 	private String email;
 	
 	private String firstName;

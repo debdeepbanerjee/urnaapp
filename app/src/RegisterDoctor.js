@@ -77,6 +77,7 @@ export default class RegisterDoctor extends Component {
         }
       })
       .catch(error => {
+        alert("Cannot create the profile ,may be duplicate username or the site is unavailable. Please change the username and try again.");
         console.log("registration error", error);
       });
     event.preventDefault();
