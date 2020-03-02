@@ -2,6 +2,7 @@ package com.urna.urnapatients.services;
 
 import java.util.Optional;
 
+
 import com.urna.urnapatients.models.Patient;
 
 public interface PatientService {
@@ -12,5 +13,6 @@ public interface PatientService {
 	public void deleteById(Integer id);
 	public Optional<Patient> findPatientByLoginIds(String mobile,String secretPasscode);
 	public Optional<Patient> findPatientByLoginIdsEmail(String email,String secretPasscode);
-
+	public Optional<Patient> findPatientByEmail(String email);	
+	public Optional<Patient> findPatientByMoble(String mobile);
 }

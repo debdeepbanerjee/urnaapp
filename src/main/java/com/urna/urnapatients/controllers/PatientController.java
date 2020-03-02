@@ -44,7 +44,15 @@ public class PatientController {
 	
 	@PostMapping("/patient")
 	public Patient createPatient(@Valid @RequestBody Patient patient) {
-	    return patientService.save(patient);
+		Optional<Patient> patientr = patientService.findPatientByEmail(patient.getEmail());
+	    if(patientr.isPresent()) {
+	    	return null;
+	    }
+	    patientr = patientService.findPatientByMoble(patient.getMobile());
+	    if(patientr.isPresent()) {
+	    	return null;
+	    }
+		return patientService.save(patient);
 	}
 	
 	@PutMapping("/patient")

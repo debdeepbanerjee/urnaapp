@@ -2,6 +2,8 @@ package com.urna.urnapatients.services;
 
 import java.util.Optional;
 
+import org.springframework.data.jpa.repository.Query;
+
 import com.urna.urnapatients.models.Doctor;
 
 
@@ -14,5 +16,6 @@ public interface DoctorService {
 	public void deleteById(Integer id);
 	public Optional<Doctor> findDoctorByLoginIds(String mobile,String secretPasscode);
 	public Optional<Doctor> findDoctorByLoginIdsEmail(String email,String secretPasscode);
-
+	public Optional<Doctor> findDoctorByEmail(String email);
+	public Optional<Doctor> findDoctorByMobile(String mobile);
 }

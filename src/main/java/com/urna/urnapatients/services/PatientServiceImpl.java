@@ -53,4 +53,14 @@ public class PatientServiceImpl implements PatientService {
 		return patientRepository.findPatientByLoginIdsEmail(email, secretPasscode);
 	}
 
+	@Override
+	public Optional<Patient> findPatientByEmail(String email) {
+		return patientRepository.findPatientByEmail(email);
+	}
+
+	@Override
+	public Optional<Patient> findPatientByMoble(String mobile) {
+		return patientRepository.findPatientByMoble(mobile);
+	}
+
 }

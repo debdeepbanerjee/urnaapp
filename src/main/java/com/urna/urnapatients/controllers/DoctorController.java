@@ -44,7 +44,15 @@ public class DoctorController {
 	
 	@PostMapping("/doctor")
 	public Doctor createDoctor(@Valid @RequestBody Doctor doctor) {
-	    return doctorService.save(doctor);
+		Optional<Doctor> doctorr = doctorService.findDoctorByEmail(doctor.getEmail());
+	    if(doctorr.isPresent()) {    	
+	    	return null;    	
+	    }
+		doctorr = doctorService.findDoctorByMobile(doctor.getMobile());
+		if(doctorr.isPresent()) {    	
+		    	return null;    	
+		    }
+		return doctorService.save(doctor);
 	}
 	
 	@PutMapping("/doctor")

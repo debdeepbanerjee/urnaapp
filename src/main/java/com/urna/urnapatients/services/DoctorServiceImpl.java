@@ -48,5 +48,13 @@ public class DoctorServiceImpl implements DoctorService {
 	public Optional<Doctor> findDoctorByLoginIdsEmail(String email, String secretPasscode) {
 		return doctorRepository.findDoctorByLoginIdsEmail(email, secretPasscode);
 	}
+	@Override
+	public Optional<Doctor> findDoctorByEmail(String email) {
+		return doctorRepository.findDoctorByEmail(email);
+	}
+	@Override
+	public Optional<Doctor> findDoctorByMobile(String mobile) {
+		return doctorRepository.findDoctorByMobile(mobile);
+	}
 
 }

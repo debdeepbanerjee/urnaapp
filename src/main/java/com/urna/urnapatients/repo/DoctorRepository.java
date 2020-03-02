@@ -13,4 +13,10 @@ public interface  DoctorRepository extends CrudRepository<Doctor, Integer> {
 	
 	@Query("SELECT u FROM Doctor u where u.email=?1 and u.secretPasscode=?2")
 	public Optional<Doctor> findDoctorByLoginIdsEmail(String email,String secretPasscode);
+	
+	@Query("SELECT u FROM Doctor u where u.email=?1")
+	public Optional<Doctor> findDoctorByEmail(String email);
+	
+	@Query("SELECT u FROM Doctor u where u.mobile=?1")
+	public Optional<Doctor> findDoctorByMobile(String mobile);
 }
