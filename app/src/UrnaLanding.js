@@ -10,86 +10,51 @@ import DoctorLogin from './DoctorLogin';
 import RegisterDoctor from './RegisterDoctor';
 import RegisterPatient from './RegisterPatient';
 import UrnaLandingSecuredDoctor from './UrnaLandingSecuredDoctor';
-window.$isLoggedin = 'false'
+window.$isLoggedin = false;
+	
+
 export default function UrnaLanding() {
-     if(window.$isLoggedin == 'false') {
-    return (
-    <Router>
-     <div class="container"> 
-        
-        <nav>
+    // nav only exists for logged out users
+    const nav = window.$isLoggedin ? (null) : (<nav style={{marginBottom: '10px'}}>
         <Link to="/PatientLogin">Patient Login  </Link>
         &nbsp;&nbsp;&nbsp;&nbsp;
         <Link to="/DoctorLogin">Doctor Login  </Link>       
         &nbsp;&nbsp;&nbsp;&nbsp;
         <Link to="/RegisterDoctor">Register as a Doctor </Link>
-         &nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;
         <Link to="/RegisterPatient">Patient Registration  </Link>
-        </nav>
-        <br />
-       
-        
-        <Route 
-        path="/PatientLogin"
-        component = {PatientLogin}
-        exact
-        />
-        <Route 
-        path="/DoctorLogin"
-        component = {DoctorLogin}
-        exact
-        />
-        <Route 
-        path="/RegisterDoctor"
-        component = {RegisterDoctor}
-        exact
-        />
-        <Route 
-        path="/RegisterPatient"
-        component = {RegisterPatient}
-        exact
-        />
-        <Route 
-        path="/UrnaLandingSecuredDoctor"
-        component = {UrnaLandingSecuredDoctor}
-        exact
-        />
-    </div>  
-    </Router>    
-    )
-     } else { return (
-         
-          <Router>
-     <div class="container"> 
-       
-        
-        <Route 
-        path="/PatientLogin"
-        component = {PatientLogin}
-        exact
-        />
-        <Route 
-        path="/DoctorLogin"
-        component = {DoctorLogin}
-        exact
-        />
-        <Route 
-        path="/RegisterDoctor"
-        component = {RegisterDoctor}
-        exact
-        />
-        <Route 
-        path="/RegisterPatient"
-        component = {RegisterPatient}
-        exact
-        />
-        <Route 
-        path="/UrnaLandingSecuredDoctor"
-        component = {UrnaLandingSecuredDoctor}
-        exact
-        />
-    </div>  
-    </Router>    
-     )
-    }
+    </nav>);
+
+    return (<Router>
+	    <div class="container"> 
+	
+	    {nav}
+	
+	    <Route 
+	    path="/PatientLogin"
+	    	component = {PatientLogin}
+	    exact
+	    />
+	    <Route 
+	    path="/DoctorLogin"
+	    	component = {DoctorLogin}
+	    exact
+	    />
+	    <Route 
+	    path="/RegisterDoctor"
+	    	component = {RegisterDoctor}
+	    exact
+	    />
+	    <Route 
+	    path="/RegisterPatient"
+	    	component = {RegisterPatient}
+	    exact
+	    />
+	    <Route 
+	    path="/UrnaLandingSecuredDoctor"
+	    	component = {UrnaLandingSecuredDoctor}
+	    exact
+	    />
+	    </div>  
+    </Router>);
 }
