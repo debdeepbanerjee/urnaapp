@@ -3,12 +3,15 @@ import axios from "axios";
 import UrnaLandingSecuredDoctor from './UrnaLandingSecuredDoctor';
 import {logout} from './GlobalFunctions';
 import appContext from './appContext';
+import { useHistory } from "react-router-dom";
 
 const DoctorLogin = () => {
 	const [email, setEmail] = React.useState('');
 	const [password, setPassword] = React.useState('');
 	const [loginErrors, setLoginErrors] = React.useState('');
-	
+	const {loggedIn, setLoggedIn} = React.useContext(appContext);
+	const history = useHistory();
+
 	const submit = (event) => {
 		let origin;
 
@@ -28,8 +31,8 @@ const DoctorLogin = () => {
 	      )
 	      .then(response => {
 	        if (response.data != null ) {
-	            window.$isLoggedin = 'true';
-	           this.props.history.push("/UrnaLandingSecuredDoctor");
+	        	setLoggedIn(true);
+	        	history.push("/UrnaLandingSecuredDoctor");
 	           // return <Redirect to='/UrnaLandingSecuredDoctor' />
 	        }
 	      })
