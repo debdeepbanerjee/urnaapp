@@ -43,7 +43,7 @@ const DoctorLogin = () => {
     return (
     	      <div>
     	        <h1> Doctor Login.</h1>
-    	        <form>
+    	        <form onSubmit={submit}>
     	          <input
     	            type="email"
     	            name="email"
