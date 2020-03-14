@@ -1,4 +1,6 @@
 import axios from "axios";
+import {Redirect} from 'react-router-dom';
+import UrnaLanding from './UrnaLanding';
 
 export function logout() {
      let origin;
@@ -15,6 +17,7 @@ export function logout() {
       .then(response => {
         if (response.data != null ) {
             window.$isLoggedin = 'false';
+            return <Redirect to="/UrnaLanding"
         }
       })
       .catch(error => {
