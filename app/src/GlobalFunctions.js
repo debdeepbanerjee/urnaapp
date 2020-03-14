@@ -17,7 +17,7 @@ export function logout() {
       .then(response => {
         if (response.data != null ) {
             window.$isLoggedin = 'false';
-            return <Redirect to="/UrnaLanding"
+            return <Redirect to="/UrnaLanding";
         }
       })
       .catch(error => {
