@@ -12,7 +12,7 @@ const DoctorLogin = () => {
 	const {loggedIn, setLoggedIn} = React.useContext(appContext);
 	const history = useHistory();
 
-	const submit = (event) => {
+	const submit = async (event) => {
 		let origin;
 
 	    if (!window.location.origin) {
@@ -20,26 +20,28 @@ const DoctorLogin = () => {
 	         (window.location.port ? ':' + window.location.port: '');
 	    }
 	    origin = window.location.origin;
-
-	    axios
-	      .post(
-	        origin+"/rest/urna/login/doctor/email",
-	            {
-	            "email": email,
-	           "secretPasscode": password
-	            }
-	      )
-	      .then(response => {
-	        if (response.data != null ) {
+	    
+	    try {
+		    const {data} = await axios.post(
+		    		origin+"/rest/urna/login/doctor/email",
+		            {
+		    			"email": email,
+		    			"secretPasscode": password
+		            }
+		      );
+		    
+		    if (data != null ) {
 	        	setLoggedIn(true);
 	        	history.push("/UrnaLandingSecuredDoctor");
 	           // return <Redirect to='/UrnaLandingSecuredDoctor' />
 	        }
-	      })
-	      .catch(error => {
+	        else {
+	        	throw new Error('login failed');
+	        }
+	    } catch (e) {
 	        alert("Cannot login.Incorrect credentials or the site may be unavailable.");
 	        console.log("login error", error);
-	      });
+	    }
 		event.preventDefault();
 	};
 	
