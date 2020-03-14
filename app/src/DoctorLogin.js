@@ -38,7 +38,7 @@ const DoctorLogin = () => {
 	        else {
 	        	throw new Error('login failed');
 	        }
-	    } catch (e) {
+	    } catch (error) {
 	        alert("Cannot login.Incorrect credentials or the site may be unavailable.");
 	        console.log("login error", error);
 	    }
