@@ -10,12 +10,15 @@ import DoctorLogin from './DoctorLogin';
 import RegisterDoctor from './RegisterDoctor';
 import RegisterPatient from './RegisterPatient';
 import UrnaLandingSecuredDoctor from './UrnaLandingSecuredDoctor';
+import appContext from './appContext';
 window.$isLoggedin = false;
 	
 
 export default function UrnaLanding() {
+	const {loggedIn, setLoggedIn} = React.useContext(appContext);
+	
     // nav only exists for logged out users
-    const nav = window.$isLoggedin ? (null) : (<nav style={{marginBottom: '10px'}}>
+    const nav = loggedIn ? (null) : (<nav style={{marginBottom: '10px'}}>
         <Link to="/PatientLogin">Patient Login  </Link>
         &nbsp;&nbsp;&nbsp;&nbsp;
         <Link to="/DoctorLogin">Doctor Login  </Link>       
@@ -29,6 +32,8 @@ export default function UrnaLanding() {
 	    <div class="container"> 
 	
 	    {nav}
+	    
+	    {/*<button onClick={() => { setLoggedIn(true); }}>Remove Nav</button>*/}
 	
 	    <Route 
 	    path="/PatientLogin"
