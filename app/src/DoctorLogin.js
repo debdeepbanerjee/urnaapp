@@ -13,6 +13,8 @@ const DoctorLogin = () => {
 	const history = useHistory();
 
 	const submit = async (event) => {
+		event.preventDefault();
+		
 		let origin;
 
 	    if (!window.location.origin) {
@@ -28,7 +30,7 @@ const DoctorLogin = () => {
 		    			"email": email,
 		    			"secretPasscode": password
 		            }
-		      );
+		      ).then();
 		    
 		    if (data != null ) {
 	        	setLoggedIn(true);
@@ -42,7 +44,6 @@ const DoctorLogin = () => {
 	        alert("Cannot login.Incorrect credentials or the site may be unavailable.");
 	        console.log("login error", error);
 	    }
-		event.preventDefault();
 	};
 	
     return (
