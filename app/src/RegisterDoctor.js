@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import Input from "./Input";
 import TextArea from "./TextArea";
-
+import appContext from './appContext';
 
 export default class RegisterDoctor extends Component {
   constructor(props) {
@@ -30,6 +30,8 @@ export default class RegisterDoctor extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+	const {loggedIn, setLoggedIn} = React.useContext(appContext);
+
   }
 
   handleChange(event) {
@@ -72,7 +74,10 @@ export default class RegisterDoctor extends Component {
       .then(response => {
         if (response.data != null) {
            alert("Profile created , you will now be logged in.");
+           
            window.$isLoggedin = 'true';
+       	   setLoggedIn(true);
+
            this.props.history.push("/UrnaLandingSecuredDoctor");
         }
       })
