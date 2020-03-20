@@ -1,8 +1,10 @@
 import axios from "axios";
 import {Redirect} from 'react-router-dom';
 import UrnaLanding from './UrnaLanding';
+import appContext from './appContext';
 
 export function logout(history) {
+	const {loggedIn, setLoggedIn} = React.useContext(appContext);
      let origin;
 
     if (!window.location.origin) {
@@ -16,6 +18,7 @@ export function logout(history) {
         origin+"/rest/urna/logout/logout")
       .then(response => {
         if (response.data != null ) {
+        	setLoggedIn(false);
             window.$isLoggedin = 'false';
             history.push('/UrnaLanding');
 //            return <Redirect to="/UrnaLanding">
