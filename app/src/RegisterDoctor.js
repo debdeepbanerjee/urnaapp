@@ -3,6 +3,7 @@ import axios from "axios";
 import Input from "./Input";
 import TextArea from "./TextArea";
 import appContext from './appContext';
+import { useHistory } from "react-router-dom";
 
 export default function RegisterDoctor(){
 	const {loggedIn, setLoggedIn} = React.useContext(appContext);
@@ -23,7 +24,8 @@ export default function RegisterDoctor(){
 	const [address, setAddress] = React.useState('');
 	const [dob, setDob] = React.useState('');
 	const [registrationErrors, setRegistrationErrors] = React.useState('');
- 
+	const history = useHistory();
+
 	const submit = handleSubmit(event) {
 	    event.preventDefault();
 	    fullName = firstName + ' ' + middleName + ' '+ lastName;
@@ -63,7 +65,7 @@ export default function RegisterDoctor(){
 	           window.$isLoggedin = 'true';
 	       	   setLoggedIn(true);
 
-	           this.props.history.push("/UrnaLandingSecuredDoctor");
+	           history.push("/UrnaLandingSecuredDoctor");
 	        }
 	      })
 	      .catch(error => {
