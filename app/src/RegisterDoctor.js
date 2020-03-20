@@ -13,7 +13,7 @@ export default function RegisterDoctor(){
 	const [firstName, setFirstName] = React.useState('');
 	const [lastName, setLastName] = React.useState('');
 	const [middleName, setMiddleName] = React.useState('');
-	const [fullName, setFullName] = React.useState('');
+	var [fullName, setFullName] = React.useState('');
 	const [speciality, setSpeciality] = React.useState('');
 	const [qualifications, setQualifications] = React.useState('');
 	const [practice, setPractice] = React.useState('');
