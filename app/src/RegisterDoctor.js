@@ -9,7 +9,7 @@ export default function RegisterDoctor(){
 	const {loggedIn, setLoggedIn} = React.useContext(appContext);
 	const [email, setEmail] = React.useState('');
 	const [password, setPassword] = React.useState('');
-	const [password, setPasswordConfirmation] = React.useState('');
+	const [passwordConfirmation, setPasswordConfirmation] = React.useState('');
 	const [firstName, setFirstName] = React.useState('');
 	const [lastName, setLastName] = React.useState('');
 	const [middleName, setMiddleName] = React.useState('');
