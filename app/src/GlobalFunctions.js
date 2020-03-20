@@ -1,8 +1,7 @@
+import React, { Component } from "react";
 import axios from "axios";
-import {Redirect} from 'react-router-dom';
 import UrnaLanding from './UrnaLanding';
 import appContext from './appContext';
-import React, { Component } from "react";
 
 export function logout(history) {
 	const {loggedIn, setLoggedIn} = React.useContext(appContext);
@@ -22,7 +21,6 @@ export function logout(history) {
         	setLoggedIn(false);
             window.$isLoggedin = 'false';
             history.push('/UrnaLanding');
-//            return <Redirect to="/UrnaLanding">
         }
       })
       .catch(error => {
