@@ -29,7 +29,6 @@ export default function RegisterDoctor(){
 	const submit = handleSubmit(event) {
 	    event.preventDefault();
 	    fullName = firstName + ' ' + middleName + ' '+ lastName;
-	    var { email, password, passwordConfirmation,firstName,lastName,middleName,fullName,speciality,qualifications,practice,specializations,languageSpoken,phone,mobile,address,dob } = this.state;
 	    let origin;
 
 	    if (!window.location.origin) {
