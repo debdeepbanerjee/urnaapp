@@ -4,101 +4,85 @@ import Input from "./Input";
 import TextArea from "./TextArea";
 import appContext from './appContext';
 
-export default class RegisterDoctor extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      email: "",
-      password: "",
-      password_confirmation: "",
-      firstName: "",
-      lastName: "",
-      middleName: "",
-      fullName: "",
-      speciality: "",
-      qualifications: "",
-      practice: "",
-      specializations: "",
-      languageSpoken: "",
-      phone: "",
-      mobile: "",
-      address: "",
-      dob: "",    
-      registrationErrors: ""
-    };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+export default function RegisterDoctor(){
 	const {loggedIn, setLoggedIn} = React.useContext(appContext);
+	const [email, setEmail] = React.useState('');
+	const [password, setPassword] = React.useState('');
+	const [password, setPasswordConfirmation] = React.useState('');
+	const [firstName, setFirstName] = React.useState('');
+	const [lastName, setLastName] = React.useState('');
+	const [middleName, setMiddleName] = React.useState('');
+	const [fullName, setFullName] = React.useState('');
+	const [speciality, setSpeciality] = React.useState('');
+	const [qualifications, setQualifications] = React.useState('');
+	const [practice, setPractice] = React.useState('');
+	const [specializations, setSpecializations] = React.useState('');
+	const [languageSpoken, setLanguageSpoken] = React.useState('');
+	const [phone, setPhone] = React.useState('');
+	const [mobile, setMobile] = React.useState('');
+	const [address, setAddress] = React.useState('');
+	const [dob, setDob] = React.useState('');
+	const [registrationErrors, setRegistrationErrors] = React.useState('');
+ 
+	const submit = handleSubmit(event) {
+	    event.preventDefault();
+	    fullName = firstName + ' ' + middleName + ' '+ lastName;
+	    var { email, password, passwordConfirmation,firstName,lastName,middleName,fullName,speciality,qualifications,practice,specializations,languageSpoken,phone,mobile,address,dob } = this.state;
+	    let origin;
 
-  }
+	    if (!window.location.origin) {
+	      origin = window.location.protocol + "//" + window.location.hostname + 
+	         (window.location.port ? ':' + window.location.port: '');
+	    }
+	    origin = window.location.origin;
+	    axios
+	      .post(
+	        origin+"/rest/urna/doctors/doctor",
+	        {
+	        "address": address,
+	        "dob": dob,
+	        "email": email,
+	        "firstName": firstName,
+	        "fullName": fullName,
+	        "languageSpoken": languageSpoken,
+	        "lastName": lastName,
+	        "middleName": middleName,
+	        "mobile": mobile,
+	        "phone": phone,
+	        "practice": practice,
+	        "qualifications": qualifications,
+	        "secretPasscode": password,
+	        "speciality": speciality,
+	        "specializations": specializations
+	        }
+	      )
+	      .then(response => {
+	        if (response.data != null) {
+	           alert("Profile created , you will now be logged in.");
+	           
+	           window.$isLoggedin = 'true';
+	       	   setLoggedIn(true);
 
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  }
+	           this.props.history.push("/UrnaLandingSecuredDoctor");
+	        }
+	      })
+	      .catch(error => {
+	        alert("Cannot create the profile ,may be duplicate username/email or mobile or the site is unavailable. Please change the username and try again.");
+	        console.log("registration error", error);
+	      });
+	  }
 
-  handleSubmit(event) {
-    fullName = firstName + ' ' + middleName + ' '+ lastName;
-    var { email, password, password_confirmation,firstName,lastName,middleName,fullName,speciality,qualifications,practice,specializations,languageSpoken,phone,mobile,address,dob } = this.state;
-    let origin;
 
-    if (!window.location.origin) {
-      origin = window.location.protocol + "//" + window.location.hostname + 
-         (window.location.port ? ':' + window.location.port: '');
-    }
-    origin = window.location.origin;
-    axios
-      .post(
-        origin+"/rest/urna/doctors/doctor",
-        {
-        "address": address,
-        "dob": dob,
-        "email": email,
-        "firstName": firstName,
-        "fullName": fullName,
-        "languageSpoken": languageSpoken,
-        "lastName": lastName,
-        "middleName": middleName,
-        "mobile": mobile,
-        "phone": phone,
-        "practice": practice,
-        "qualifications": qualifications,
-        "secretPasscode": password,
-        "speciality": speciality,
-        "specializations": specializations
-        }
-      )
-      .then(response => {
-        if (response.data != null) {
-           alert("Profile created , you will now be logged in.");
-           
-           window.$isLoggedin = 'true';
-       	   setLoggedIn(true);
-
-           this.props.history.push("/UrnaLandingSecuredDoctor");
-        }
-      })
-      .catch(error => {
-        alert("Cannot create the profile ,may be duplicate username/email or mobile or the site is unavailable. Please change the username and try again.");
-        console.log("registration error", error);
-      });
-    event.preventDefault();
-  }
-
-  render() {
     return (
       <div>
         <h1> Register as a Doctor.</h1>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={submit}>
           <input
             type="email"
             name="email"
             placeholder="Email"
-            value={this.state.email}
-            onChange={this.handleChange}
+            value={email}
+            onChange={({target}) => setEmail(target.value)}
             required
           />
 
@@ -106,26 +90,26 @@ export default class RegisterDoctor extends Component {
             type="password"
             name="password"
             placeholder="Password"
-            value={this.state.password}
-            onChange={this.handleChange}
+            value={password}
+            onChange={({target}) => setPassword(target.value)}
             required
           />
 
           <input
             type="password"
-            name="password_confirmation"
+            name="passwordConfirmation"
             placeholder="Password confirmation"
-            value={this.state.password_confirmation}
-            onChange={this.handleChange}
+            value={passwordConfirmation}
+            onChange={({target}) => setPasswordConfirmation(target.value)}
             required
           />
          <Input
           inputType={"text"}
           title={"First Name"}
           name={"firstName"}
-          value={this.state.firstName}
+          value={firstName}
           placeholder={"Enter your first name"}
-          handleChange={this.handleChange}
+          handleChange={({target}) => setFirstName(target.value)}
         required
         />
         
@@ -133,18 +117,18 @@ export default class RegisterDoctor extends Component {
           inputType={"text"}
           title={"Middle Name"}
           name={"middleName"}
-          value={this.state.middleName}
+          value={middleName}
           placeholder={"Enter your middle name"}
-          handleChange={this.handleChange}
+          handleChange={({target}) => setMiddleName(target.value)}
         />
         
          <Input
           inputType={"text"}
           title={"Last Name"}
           name={"lastName"}
-          value={this.state.lastName}
+          value={lastName}
           placeholder={"Enter your last name"}
-          handleChange={this.handleChange}
+          handleChange={({target}) => setLastName(target.value)}
         required
         />
 
@@ -152,9 +136,9 @@ export default class RegisterDoctor extends Component {
           inputType={"text"}
           title={"Qualifications"}
           name={"qualifications"}
-          value={this.state.qualifications}
+          value={qualifications}
           placeholder={"Enter your qualifications"}
-          handleChange={this.handleChange}
+          handleChange={({target}) => setQualifications(target.value)}
         required
         />
         
@@ -162,18 +146,18 @@ export default class RegisterDoctor extends Component {
           inputType={"text"}
           title={"Practice"}
           name={"practice"}
-          value={this.state.practice}
+          value={practice}
           placeholder={"Enter your current practice details(eg: skin specialist)"}
-          handleChange={this.handleChange}
+          handleChange={({target}) => setPractice(target.value)}
         />
         
          <Input
           inputType={"text"}
           title={"Specializations"}
           name={"specializations"}
-          value={this.state.specializations}
+          value={specializations}
           placeholder={"Enter your current specialization area or areas. (comma separated eg: neurology)"}
-          handleChange={this.handleChange}
+          handleChange={({target}) => setSpecializations(target.value)}
         required
         />
         
@@ -181,36 +165,36 @@ export default class RegisterDoctor extends Component {
           inputType={"text"}
           title={"Languages Spoken"}
           name={"languageSpoken"}
-          value={this.state.languageSpoken}
+          value={languageSpoken}
           placeholder={"Languages spoken (separated by commas)"}
-          handleChange={this.handleChange}
+          handleChange={({target}) => setLanguageSpoken(target.value)}
         />
         
          <Input
           inputType={"number"}
           title={"Phone"}
           name={"phone"}
-          value={this.state.phone}
+          value={phone}
           placeholder={"Work Phone"}
-          handleChange={this.handleChange}
+          handleChange={({target}) => setPhone(target.value)}
         />
         
           <Input
           inputType={"number"}
           title={"Mobile"}
           name={"mobile"}
-          value={this.state.mobile}
+          value={mobile}
           placeholder={"Cell Phone"}
-          handleChange={this.handleChange}
+          handleChange={({target}) => setMobile(target.value)}
         required
         />
         
         <TextArea
           title={"Address"}
           rows={10}
-          value={this.state.address}
+          value={address}
           name={"address"}
-          handleChange={this.handleChange}
+          handleChange={({target}) => setAddress(target.value)}
           placeholder={"Enter your address with city and pincode"}
         required
         />
@@ -219,9 +203,9 @@ export default class RegisterDoctor extends Component {
           inputType={"text"}
           title={"Date of birth"}
           name={"dob"}
-          value={this.state.dob}
+          value={dob}
           placeholder={"Date of birth(dd/mm/yyyy)"}
-          handleChange={this.handleChange}
+          handleChange={({target}) => setDob(target.value)}
         required
         />
           <button type="submit">Register</button>
@@ -229,5 +213,5 @@ export default class RegisterDoctor extends Component {
         </form>
       </div>
     );
-  }
-}
+};
+export default  RegisterDoctor;
