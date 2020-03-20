@@ -5,7 +5,7 @@ import TextArea from "./TextArea";
 import appContext from './appContext';
 import { useHistory } from "react-router-dom";
 
-export default function RegisterDoctor(){
+const RegisterDoctor  = () => {
 	const {loggedIn, setLoggedIn} = React.useContext(appContext);
 	const [email, setEmail] = React.useState('');
 	const [password, setPassword] = React.useState('');
