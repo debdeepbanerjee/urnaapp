@@ -26,8 +26,7 @@ export default function RegisterDoctor(){
 	const [registrationErrors, setRegistrationErrors] = React.useState('');
 	const history = useHistory();
 
-	const submit = async (event) =>
-	    event.preventDefault();
+	const submit = async (event) => {
 	    fullName = firstName + ' ' + middleName + ' '+ lastName;
 	    let origin;
 
@@ -71,6 +70,8 @@ export default function RegisterDoctor(){
 	        alert("Cannot create the profile ,may be duplicate username/email or mobile or the site is unavailable. Please change the username and try again.");
 	        console.log("registration error", error);
 	      });
+	    event.preventDefault();
+
 	  }
 
 
