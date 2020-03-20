@@ -26,7 +26,7 @@ export default function RegisterDoctor(){
 	const [registrationErrors, setRegistrationErrors] = React.useState('');
 	const history = useHistory();
 
-	const submit = handleSubmit(event) {
+	const submit = async (event) =>
 	    event.preventDefault();
 	    fullName = firstName + ' ' + middleName + ' '+ lastName;
 	    let origin;
