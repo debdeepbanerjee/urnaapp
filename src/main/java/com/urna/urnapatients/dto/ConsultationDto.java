@@ -1,15 +1,8 @@
 package com.urna.urnapatients.dto;
 
-import java.sql.Timestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "consultation")
+
 public class ConsultationDto implements java.io.Serializable {
 	
 	/**
@@ -17,8 +10,7 @@ public class ConsultationDto implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Id 
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	
 	private Long id ;
 	
 	private String  consultationFor;

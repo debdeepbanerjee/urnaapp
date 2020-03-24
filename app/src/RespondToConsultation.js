@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import Input from "./Input";
 import TextArea from "./TextArea";
-
+import ConsultationListDoctor from './ConsultationListDoctor';
 
 export default class RespondToConsultation extends Component {
   constructor(props) {
@@ -57,8 +57,9 @@ export default class RespondToConsultation extends Component {
   }
 
   render() {
-    return (
+    return (   		    	
       <div>
+      <ConsultationListDoctor/>	
         <h1> Submit yor consultation.</h1>
         <form onSubmit={this.handleSubmit}>
          
