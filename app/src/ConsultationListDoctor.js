@@ -4,6 +4,7 @@ import Input from "./Input";
 import TextArea from "./TextArea";
 
 export default function ConsultationListDoctor() {
+	const consultationsarr = consultations;
 	
 	const consultations = async(event) =>  {
 		let origin;
@@ -49,7 +50,7 @@ export default function ConsultationListDoctor() {
 	</tr>
 	</thead>
 	<tbody>
-	{consultations.map(consultationsListRender)}
+	{consultationsarr.map(consultationsListRender)}
 	</tbody>
 	</table>	
 	); 
