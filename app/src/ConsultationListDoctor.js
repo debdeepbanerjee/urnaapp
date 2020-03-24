@@ -37,6 +37,7 @@ export default function ConsultationListDoctor() {
 	}
 	
 	return (
+	<table>		
 	<thead>
 	<tr>
 	<th>Name of the Patient</th>
@@ -50,6 +51,6 @@ export default function ConsultationListDoctor() {
 	<tbody>
 	{consultations.map(consultationsListRender)}
 	</tbody>
+	</table>	
 	); 
 };
-export default  ConsultationListDoctor;
