@@ -32,7 +32,7 @@ export default class RespondToConsultation extends Component {
 
     axios
       .post(
-        "http://localhost:8080/rest/urna/consultation/consultation",
+        "/rest/urna/consultation/consultation",
        {
         
         "additionalQuery": additionalQuery,
