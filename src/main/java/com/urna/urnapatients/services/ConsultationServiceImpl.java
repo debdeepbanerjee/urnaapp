@@ -81,4 +81,9 @@ public class ConsultationServiceImpl implements ConsultationService{
 		return consultationRepository.findAllConsultationByRespondedDoctorId(lastrespondedByDocId);
 	}
 
+	@Override
+	public Iterable<Consultation> findAllConsultationBySpecialization(String specialization) {
+		return consultationRepository.findAllConsultationBySpecialization(specialization);
+	}
+
 }

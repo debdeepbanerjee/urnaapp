@@ -12,5 +12,9 @@ public interface ConsultationRepository extends CrudRepository<Consultation, Lon
 	
 	@Query("SELECT c FROM Consultation c where c.lastrespondedByDocId=?1")
 	public Iterable<Consultation> findAllConsultationByRespondedDoctorId(Integer lastrespondedByDocId);
+	
+	
+	@Query("SELECT c FROM Consultation c where c.speciality=?1")
+	public Iterable<Consultation> findAllConsultationBySpecialization(String speciality);
 
 }

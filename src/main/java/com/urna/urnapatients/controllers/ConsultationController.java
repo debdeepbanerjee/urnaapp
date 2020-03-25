@@ -47,7 +47,7 @@ public class ConsultationController {
 	
 	@GetMapping("/consultations/doctor")
 	public @ResponseBody Iterable<Consultation> getAllConsultationsForDoctor(@Valid @RequestBody Integer doctorId) {
-	    return consultationService.findAllConsultationByPatientId(doctorId);
+	    return consultationService.findAllConsultationByRespondedDoctorId(doctorId);
 	  }
 	
 	@GetMapping("/consultations/secure/patient")
@@ -76,6 +76,12 @@ public class ConsultationController {
 	public Consultation createConsultation(@Valid @RequestBody ConsultationDto consultationDto,HttpSession session) {
 		Consultation consultation = ConsultationUtil.transformFromDto(consultationDto);
 		ConsultationUtil.setPatientIdFromSession(session, consultation);
+		return consultationService.insert(consultation);
+	}
+	
+	@PostMapping("/nosession/consultation")
+	public Consultation createConsultationNoSession(@Valid @RequestBody ConsultationDto consultationDto) {
+		Consultation consultation = ConsultationUtil.transformFromDto(consultationDto);
 		return consultationService.insert(consultation);
 	}
 
