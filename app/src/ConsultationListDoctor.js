@@ -4,7 +4,8 @@ import Input from "./Input";
 import TextArea from "./TextArea";
 
 export default function ConsultationListDoctor() {
-	const consultationsarr = consultations;
+	const consultationsarr = [ {consultationFor:"abc",healthIssue:"dsa",durationOfHealthIssue:"28 days",additionalQuery:"jjag",consultationResponse:"hhga",status:"responded"},
+		 {consultationFor:"abc",healthIssue:"dsa",durationOfHealthIssue:"28 days",additionalQuery:"jjag",consultationResponse:"hhga",status:"responded"}];
 	
 	const consultations = async(event) =>  {
 		let origin;
