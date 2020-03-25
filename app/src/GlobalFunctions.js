@@ -1,10 +1,24 @@
 import React, { Component } from "react";
 import axios from "axios";
 import UrnaLanding from './UrnaLanding';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useHistory,
+} from "react-router-dom";
 import appContext from './appContext';
 
-export function logout(history) {
-	const {loggedIn, setLoggedIn} = React.useContext(appContext);
+export function useLogout() {
+    let history = useHistory();
+    const {setLoggedIn} = React.useContext(appContext);
+
+    // return wrapper function for hook consumer
+    return () => logout(history, setLoggedIn);
+}
+
+export function logout(history, setLoggedIn) {
      let origin;
 
     if (!window.location.origin) {

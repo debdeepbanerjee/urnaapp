@@ -1,58 +1,79 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import axios from "axios";
 import Input from "./Input";
 import TextArea from "./TextArea";
 
-export default function ConsultationListDoctor() {
-	const consultationsarr = [ {consultationFor:"abc",healthIssue:"dsa",durationOfHealthIssue:"28 days",additionalQuery:"jjag",consultationResponse:"hhga",status:"responded"},
-		 {consultationFor:"abc",healthIssue:"dsa",durationOfHealthIssue:"28 days",additionalQuery:"jjag",consultationResponse:"hhga",status:"responded"}];
-	
-	const consultations = async(event) =>  {
-		let origin;
+const ConsultationRow = ({
+                             consultationFor,
+                             healthIssue,
+                             durationOfHealthIssue,
+                             additionalQuery,
+                             consultationResponse,
+                             status,
+                         }) => {
+    return (
+        <tr>
+            <td>{consultationFor}</td>
+            <td>{healthIssue}</td>
+            <td>{durationOfHealthIssue}</td>
+            <td>{additionalQuery}</td>
+            <td>{consultationResponse}</td>
+            <td>{status}</td>
+        </tr>
+    );
+};
 
-	    if (!window.location.origin) {
-	      origin = window.location.protocol + "//" + window.location.hostname + 
-	         (window.location.port ? ':' + window.location.port: '');
-	    }
-	    origin = window.location.origin;
-	    axios
-	      .get(
-	        origin+"/rest/urna/consultation/consultations",
-	      )
-	      .then(response => {
-	    	  return response.data;
-	      })
-	      
-	}
-	
-	const consultationsListRender = (consultations, index) => {
-		return (
-				<tr key={index}>
-				<td>{consultations.consultationFor}</td>
-				<td>{consultations.healthIssue}</td>
-				<td>{consultations.durationOfHealthIssue}</td>
-				<td>{consultations.additionalQuery}</td>
-				<td>{consultations.consultationResponse}</td>
-				<td>{consultations.status}</td>
-				</tr>
-				)
-	}
-	
-	return (
-	<table>		
-	<thead>
-	<tr>
-	<th>Name of the Patient</th>
-	<th>Health Issue</th>
-	<th>Duration of the issue</th>
-	<th>Additional query</th>
-	<th>Response from the doctor</th>
-	<th>Status</th>
-	</tr>
-	</thead>
-	<tbody>
-	{consultationsarr.map(consultationsListRender)}
-	</tbody>
-	</table>	
-	); 
+const useConsultationList = () => {
+    const [error, setError] = React.useState(false);
+    const [loading, setLoading] = React.useState(true);
+    const [consultationsList, setConsultations] = React.useState([]);
+
+    // useEffect with empty dependencies list `[]` is equivalent to `componentDidMount()`
+    React.useEffect(function loadData() {
+        axios
+            .get("/rest/urna/consultation/consultations")
+            .then(response => setConsultations(response.data))
+            .catch(() => setError(true))
+            .finally(() => setLoading(false));
+    }, []);
+
+    return {
+        loading,
+        error,
+        consultationsList
+    };
+};
+
+export default function ConsultationListDoctor() {
+    const {
+        loading,
+        error,
+        consultationsList,
+    } = useConsultationList();
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>An error occurred...</div>;
+    }
+
+    return (
+        <table>
+            <thead>
+            <tr>
+                <th>Name of the Patient</th>
+                <th>Health Issue</th>
+                <th>Duration of the issue</th>
+                <th>Additional query</th>
+                <th>Response from the doctor</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            {consultationsList.map((consultation, index) => <ConsultationRow key={index} {...consultation} />)}
+            </tbody>
+        </table>
+    );
 };
