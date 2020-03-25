@@ -91,6 +91,7 @@ public class ConsultationController {
 	@PutMapping("/consultation")
 	public Consultation updateConsultation(@Valid @RequestBody ConsultationDto consultationDto,HttpSession session) {
 		Consultation consultation = ConsultationUtil.transformFromDto(consultationDto);
+		ConsultationUtil.setDoctorIdFromSession(session, consultation);
 		return consultationService.update(consultation);
 	}
 

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import Input from "./Input";
 import TextArea from "./TextArea";
+import ConsultationListPatient from './ConsultationListPatient';
 
 
 export default class SubmitConsultation extends Component {
@@ -32,7 +33,7 @@ export default class SubmitConsultation extends Component {
 
     axios
       .post(
-        "http://localhost:8080/rest/urna/consultation/consultation",
+        "/rest/urna/consultation/consultation",
        {
         
         "additionalQuery": additionalQuery,
@@ -59,6 +60,7 @@ export default class SubmitConsultation extends Component {
   render() {
     return (
       <div>
+      <ConsultationListPatient/>
         <h1> Submit yor consultation.</h1>
         <form onSubmit={this.handleSubmit}>
          

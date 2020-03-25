@@ -10,6 +10,7 @@ import DoctorLogin from './DoctorLogin';
 import RegisterDoctor from './RegisterDoctor';
 import RegisterPatient from './RegisterPatient';
 import UrnaLandingSecuredDoctor from './UrnaLandingSecuredDoctor';
+import UrnaLandingSecuredPatient from './UrnaLandingSecuredPatient';
 import appContext from './appContext';
 window.$isLoggedin = false;
 	
@@ -58,6 +59,11 @@ export default function UrnaLanding() {
 	    <Route 
 	    path="/UrnaLandingSecuredDoctor"
 	    	component = {UrnaLandingSecuredDoctor}
+	    exact
+	    />
+	    <Route 
+	    path="/UrnaLandingSecuredPatient"
+	    	component = {UrnaLandingSecuredPatient}
 	    exact
 	    />
 	    </div>  

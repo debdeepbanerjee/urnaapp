@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import com.urna.urnapatients.dto.ConsultationDto;
 import com.urna.urnapatients.models.Consultation;
+import com.urna.urnapatients.models.Doctor;
 import com.urna.urnapatients.models.Patient;
 
 public class ConsultationUtil {
@@ -25,5 +26,10 @@ public class ConsultationUtil {
 		Patient p=(Patient) session.getAttribute("patient");
 		Integer cratedByPatientId=p.getId();
 		consultation.setCratedByPatientId(cratedByPatientId);
+	}
+	public static void setDoctorIdFromSession(HttpSession session, Consultation consultation) {
+		Doctor d=(Doctor) session.getAttribute("doctor");
+		Integer respondedByDoctorId=d.getId();
+		consultation.setLastrespondedByDocId(respondedByDoctorId);
 	}
 }

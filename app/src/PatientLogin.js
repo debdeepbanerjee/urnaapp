@@ -1,80 +1,77 @@
 import React, { Component } from "react";
 import axios from "axios";
-import {logout} from './GlobalFunctions';
 import UrnaLandingSecuredPatient from './UrnaLandingSecuredPatient';
+import {logout} from './GlobalFunctions';
+import appContext from './appContext';
+import { useHistory } from "react-router-dom";
 
-export default class PatientLogin extends Component {
-    constructor(props){
-    super(props);
+const PatientLogin = () => {
+	const [email, setEmail] = React.useState('');
+	const [password, setPassword] = React.useState('');
+	const [loginErrors, setLoginErrors] = React.useState('');
+	const {loggedIn, setLoggedIn} = React.useContext(appContext);
+	const history = useHistory();
 
-    this.state = {
-      email: "",
-      password: "",
-      loginErrors: ""
-    };
+	const submit = async (event) => {
+		event.preventDefault();
+		
+		let origin;
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  }
-
-  handleSubmit(event) {
-    const { email, password } = this.state;
-
-    axios
-      .post(
-        "http://localhost:8080/rest/urna/login/patient/email",
-        {
-          user: {
-            email: email,
-            password: password
-          }
-        },
-        { withCredentials: true }
-      )
-      .then(response => {
-        if (response.data != null ) {
-          this.props.handleSuccessfulAuth(response.data);
-        }
-      })
-      .catch(error => {
-        console.log("login error", error);
-      });
-    event.preventDefault();
-  }
-
-  render() {
+	    if (!window.location.origin) {
+	      origin = window.location.protocol + "//" + window.location.hostname + 
+	         (window.location.port ? ':' + window.location.port: '');
+	    }
+	    origin = window.location.origin;
+	    
+	    try {
+		    const {data} = await axios.post(
+		    		origin+"/rest/urna/login/patient/email",
+		            {
+		    			"email": email,
+		    			"secretPasscode": password
+		            }
+		      ).then();
+		    
+		    if (data != null ) {
+	        	setLoggedIn(true);
+	        	history.push("/UrnaLandingSecuredDoctor");
+	           // return <Redirect to='/UrnaLandingSecuredDoctor' />
+	        }
+	        else {
+	        	throw new Error('login failed');
+	        }
+	    } catch (error) {
+	        alert("Cannot login.Incorrect credentials or the site may be unavailable.");
+	        console.log("login error", error);
+	    }
+	};
+	
     return (
-      <div>
-        <h1> Patient Login.</h1>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={this.state.email}
-            onChange={this.handleChange}
-            required
-          />
+    	      <div>
+    	        <h1> Doctor Login.</h1>
+    	        <form onSubmit={submit}>
+    	          <input
+    	            type="email"
+    	            name="email"
+    	            placeholder="Email"
+    	            value={email}
+    	            onChange={({target}) => setEmail(target.value)}
+    	            required
+    	          />
 
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={this.state.password}
-            onChange={this.handleChange}
-            required
-          />
+    	          <input
+    	            type="password"
+    	            name="password"
+    	            placeholder="Password"
+    	            value={password}
+    	            onChange={({target}) => setPassword(target.value)}
+    	            required
+    	          />
 
-          <button type="submit">Login</button>
-        </form>
-      </div>
-    );
-  }
+    	          <button type="submit">Login</button>
+    	        </form>
+    	      </div>
+    	    );
+};
 
-}
+export default PatientLogin;

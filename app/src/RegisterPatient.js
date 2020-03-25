@@ -2,46 +2,43 @@ import React, { Component } from "react";
 import axios from "axios";
 import Input from "./Input";
 import TextArea from "./TextArea";
+import appContext from './appContext';
+import { useHistory } from "react-router-dom";
 
 
-export default class RegisterPatient extends Component {
-  constructor(props) {
-    super(props);
+const RegisterPatient = () => {
+	const {loggedIn, setLoggedIn} = React.useContext(appContext);
+	const [email, setEmail] = React.useState('');
+	const [password, setPassword] = React.useState('');
+	const [passwordConfirmation, setPasswordConfirmation] = React.useState('');
+	const [firstName, setFirstName] = React.useState('');
+	const [lastName, setLastName] = React.useState('');
+	const [middleName, setMiddleName] = React.useState('');
+	var [fullName, setFullName] = React.useState('');
+	const [qualifications, setQualifications] = React.useState('');
+	const [languageSpoken, setLanguageSpoken] = React.useState('');
+	const [phone, setPhone] = React.useState('');
+	const [mobile, setMobile] = React.useState('');
+	const [address, setAddress] = React.useState('');
+	const [dob, setDob] = React.useState('');
+	const [registrationErrors, setRegistrationErrors] = React.useState('');
+	const history = useHistory();
 
-    this.state = {
-      email: "",
-      password: "",
-      password_confirmation: "",
-      firstName: "",
-      lastName: "",
-      middleName: "",
-      fullName: "",
-      qualifications: "",
-      languageSpoken: "",
-      phone: "",
-      mobile: "",
-      address: "",
-      dob: "",    
-      registrationErrors: ""
-    };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
 
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  }
+	const submit = async (event) => {
+	    fullName = firstName + ' ' + middleName + ' '+ lastName;
+	    let origin;
 
-  handleSubmit(event) {
-    fullName = firstName + ' ' + middleName + ' '+ lastName;
-    var { email, password, password_confirmation,firstName,lastName,middleName,fullName,qualifications,languageSpoken,phone,mobile,address,dob } = this.state;
-
+	    if (!window.location.origin) {
+	      origin = window.location.protocol + "//" + window.location.hostname + 
+	         (window.location.port ? ':' + window.location.port: '');
+	    }
+	    origin = window.location.origin;
+	    
     axios
       .post(
-        "http://localhost:8080/rest/urna/patients/patient",
+    	origin+"/rest/urna/patients/patient",
        {
         "address": address,
         "dob": dob,
@@ -70,7 +67,7 @@ export default class RegisterPatient extends Component {
     event.preventDefault();
   }
 
-  render() {
+  
     return (
       <div>
         <h1> Patient Registration.</h1>
@@ -79,8 +76,8 @@ export default class RegisterPatient extends Component {
             type="email"
             name="email"
             placeholder="Email"
-            value={this.state.email}
-            onChange={this.handleChange}
+            value={email}
+            onChange={({target}) => setEmail(target.value)}
             required
           />
 
@@ -88,27 +85,27 @@ export default class RegisterPatient extends Component {
             type="password"
             name="password"
             placeholder="Password"
-            value={this.state.password}
-            onChange={this.handleChange}
+            value={password}
+            onChange={({target}) => setPassword(target.value)}
             required
           />
 
           <input
-            type="password"
-            name="password_confirmation"
-            placeholder="Password confirmation"
-            value={this.state.password_confirmation}
-            onChange={this.handleChange}
-            required
-          />
+          type="password"
+          name="passwordConfirmation"
+          placeholder="Password confirmation"
+          value={passwordConfirmation}
+          onChange={({target}) => setPasswordConfirmation(target.value)}
+          required
+         />
         
-        <Input
+          <Input
           inputType={"text"}
           title={"First Name"}
           name={"firstName"}
-          value={this.state.firstName}
+          value={firstName}
           placeholder={"Enter your first name"}
-          handleChange={this.handleChange}
+          handleChange={({target}) => setFirstName(target.value)}
         required
         />
         
@@ -116,18 +113,18 @@ export default class RegisterPatient extends Component {
           inputType={"text"}
           title={"Middle Name"}
           name={"middleName"}
-          value={this.state.middleName}
+          value={middleName}
           placeholder={"Enter your middle name"}
-          handleChange={this.handleChange}
+          handleChange={({target}) => setMiddleName(target.value)}
         />
         
          <Input
           inputType={"text"}
           title={"Last Name"}
           name={"lastName"}
-          value={this.state.lastName}
+          value={lastName}
           placeholder={"Enter your last name"}
-          handleChange={this.handleChange}
+          handleChange={({target}) => setLastName(target.value)}
         required
         />
 
@@ -135,64 +132,64 @@ export default class RegisterPatient extends Component {
           inputType={"text"}
           title={"Qualifications"}
           name={"qualifications"}
-          value={this.state.qualifications}
+          value={qualifications}
           placeholder={"Enter your qualifications"}
-          handleChange={this.handleChange}
+          handleChange={({target}) => setQualifications(target.value)}
+        required
         />
         
           <Input
           inputType={"text"}
           title={"Languages Spoken"}
           name={"languageSpoken"}
-          value={this.state.languageSpoken}
+          value={languageSpoken}
           placeholder={"Languages spoken (separated by commas)"}
-          handleChange={this.handleChange}
+          handleChange={({target}) => setLanguageSpoken(target.value)}
         />
         
          <Input
           inputType={"number"}
           title={"Phone"}
           name={"phone"}
-          value={this.state.phone}
+          value={phone}
           placeholder={"Work Phone"}
-          handleChange={this.handleChange}
+          handleChange={({target}) => setPhone(target.value)}
         />
         
           <Input
           inputType={"number"}
           title={"Mobile"}
           name={"mobile"}
-          value={this.state.mobile}
+          value={mobile}
           placeholder={"Cell Phone"}
-          handleChange={this.handleChange}
+          handleChange={({target}) => setMobile(target.value)}
         required
         />
         
         <TextArea
           title={"Address"}
           rows={10}
-          value={this.state.address}
+          value={address}
           name={"address"}
-          handleChange={this.handleTextArea}
+          handleChange={({target}) => setAddress(target.value)}
           placeholder={"Enter your address with city and pincode"}
-         required
+        required
         />
         
         <Input
           inputType={"text"}
           title={"Date of birth"}
           name={"dob"}
-          value={this.state.dob}
+          value={dob}
           placeholder={"Date of birth(dd/mm/yyyy)"}
-          handleChange={this.handleChange}
+          handleChange={({target}) => setDob(target.value)}
         required
         />
-        
-
           <button type="submit">Register</button>
         <br />
         </form>
       </div>
     );
-  }
-}
+  
+};
+export default  RegisterPatient;

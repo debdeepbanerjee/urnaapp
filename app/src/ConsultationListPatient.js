@@ -1,74 +1,79 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, {Component} from "react";
 import axios from "axios";
+import Input from "./Input";
+import TextArea from "./TextArea";
 
-import Table from "./Table";
-import "./App.css";
-
-const Genres = ({ values }) => {
-  return (
-    <>
-      {values.map((genre, idx) => {
-        return (
-          <span key={idx} className="badge">
-            {genre}
-          </span>
-        );
-      })}
-    </>
-  );
+const ConsultationRow = ({
+                             consultationFor,
+                             healthIssue,
+                             durationOfHealthIssue,
+                             additionalQuery,
+                             consultationResponse,
+                             status,
+                         }) => {
+    return (
+        <tr>
+            <td>{consultationFor}</td>
+            <td>{healthIssue}</td>
+            <td>{durationOfHealthIssue}</td>
+            <td>{additionalQuery}</td>
+            <td>{consultationResponse}</td>
+            <td>{status}</td>
+        </tr>
+    );
 };
 
-function ConsultationListPatient() {
-  const columns = useMemo(
-    () => [
-      {
-        Header: "Consultation Details",
-        columns: [
-          {
-            Header: "Name",
-            accessor: "show.name"
-          },
-          {
-            Header: "Type",
-            accessor: "show.type"
-          }
-        ]
-      },
-      {
-        Header: "Details",
-        columns: [
-          {
-            Header: "Language",
-            accessor: "show.language"
-          },
-          {
-            Header: "Genre(s)",
-            accessor: "show.genres",
-            Cell: ({ cell: { value } }) => <Genres values={value} />
-          },
-          
-          {
-            Header: "Status",
-            accessor: "show.status"
-          }
-        ]
-      }
-    ],
-    []
-  );
+const useConsultationList = () => {
+    const [error, setError] = React.useState(false);
+    const [loading, setLoading] = React.useState(true);
+    const [consultationsList, setConsultations] = React.useState([]);
 
-  const [data, setData] = useState([]);
+    // useEffect with empty dependencies list `[]` is equivalent to `componentDidMount()`
+    React.useEffect(function loadData() {
+        axios
+            .get("/rest/urna/consultation/consultations/secure/patient")
+            .then(response => setConsultations(response.data))
+            .catch(() => setError(true))
+            .finally(() => setLoading(false));
+    }, []);
 
-  useEffect(() => {
-    (async () => {
-      const result = await axios("https://api.tvmaze.com/search/shows?q=snow");
-      setData(result.data);
-    })();
-  }, []);
+    return {
+        loading,
+        error,
+        consultationsList
+    };
+};
 
-  return (
-    <div className="App">
-      <Table columns={columns} data={data} />
-    </div>
-  );
-}
+export default function ConsultationListPatient() {
+    const {
+        loading,
+        error,
+        consultationsList,
+    } = useConsultationList();
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>An error occurred...</div>;
+    }
+
+    return (
+        <table>
+            <thead>
+            <tr>
+                <th>Name of the Patient</th>
+                <th>Health Issue</th>
+                <th>Duration of the issue</th>
+                <th>Additional query</th>
+                <th>Response from the doctor</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            {consultationsList.map((consultation, index) => <ConsultationRow key={index} {...consultation} />)}
+            </tbody>
+        </table>
+    );
+};
