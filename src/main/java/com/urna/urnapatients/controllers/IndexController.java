@@ -1,4 +1,4 @@
-package com.javadeveloperzone.controller;
+package com.urna.urnapatients.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
