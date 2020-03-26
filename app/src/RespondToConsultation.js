@@ -31,7 +31,7 @@ export default class RespondToConsultation extends Component {
     const { consultationFor, speciality, healthIssue,durationOfHealthIssue,additionalQuery } = this.state;
 
     axios
-      .post(
+      .put(
         "/rest/urna/consultation/consultation",
        {
         
