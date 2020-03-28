@@ -24,15 +24,47 @@ export default class EditProfileDoctor extends Component {
       phone: "",
       mobile: "",
       address: "",
-      registrationNumber : "";
+      registrationNumber : "",
       dob: "",    
-      registrationErrors: ""
+      registrationErrors: "",
+      isLoading: true
+ 	  
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.getProfile = this.getProfile.bind(this);
   }
-
+  getProfile(event) {
+	  axios
+      .get(
+        "/rest/urna/doctors/loggedin/doctor"       
+      )
+      .then(response => {
+        if (response.data != null) {
+        	this.state.isLoading = false;
+        	this.state.email = response.data.email;
+        	this.state.firstName= response.data.firstName;
+        	this.state.lastName= response.data.lastName;
+        	this.state.middleName= response.data.middleName;
+        	this.state.speciality= response.data.speciality;
+        	this.state.qualifications= response.data.speciality;
+        	this.state.practice= response.data.practice;
+        	this.state.specializations= response.data.specializations;
+        	this.state.languageSpoken= response.data.languageSpoken;
+        	this.state.phone= response.data.phone;
+        	this.state.mobile= response.data.mobile;
+        	this.state.address= response.data.address;
+        	this.state.registrationNumber = response.data.registrationNumber;
+        	this.state.dob= response.data.dob;   
+        }
+      })
+      .catch(error => {
+        console.log("registration error", error);
+      });
+    event.preventDefault();
+  }
+  
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value
@@ -44,7 +76,7 @@ export default class EditProfileDoctor extends Component {
     const { email, password, password_confirmation,firstName,lastName,middleName,fullName,speciality,qualifications,practice,specializations,languageSpoken,phone,mobile,address,dob,registrationNumber } = this.state;
 
     axios
-      .post(
+      .put(
         "http://localhost:8080/rest/urna/doctors/doctor",
         {
         "address": address,
@@ -66,8 +98,8 @@ export default class EditProfileDoctor extends Component {
         }
       )
       .then(response => {
-        if (response.data.status === "created") {
-          this.props.handleSuccessfulAuth(response.data);
+        if (response.data != null) {
+        	alert("Profile updated sucessfully.");
         }
       })
       .catch(error => {
@@ -216,9 +248,9 @@ export default class EditProfileDoctor extends Component {
         inputType={"text"}
         title={"Registration Number"}
         name={"registrationNumber"}
-        value={registrationNumber}
+        value={this.state.registrationNumber}
         placeholder={"Registration Number (licence no)"}
-        handleChange={({target}) => setDob(target.value)}
+        handleChange={this.handleChange}
       required
       />
           <button type="submit">Update</button>

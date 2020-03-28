@@ -2,6 +2,7 @@ package com.urna.urnapatients.controllers;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,12 @@ public class PatientController {
 	@GetMapping("/patient")
 	public @ResponseBody Optional<Patient> getPatientById(@Valid @RequestBody Patient patient) {
 	    return patientService.findById(patient.getId());
+	  }
+	
+	@GetMapping("/loggedin/patient")
+	public @ResponseBody Patient getPatientLoginInfo(HttpSession sess) {
+		Patient p=(Patient) sess.getAttribute("patient");
+		return p;
 	  }
 	
 	
