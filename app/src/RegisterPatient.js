@@ -71,7 +71,7 @@ const RegisterPatient = () => {
     return (
       <div>
         <h1> Patient Registration.</h1>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={submit}>
           <input
             type="email"
             name="email"
