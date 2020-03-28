@@ -33,6 +33,7 @@ public class Doctor implements java.io.Serializable{
 	
 	private String speciality;
 	
+	
 	private String qualifications;
 	
 	private String practice;
@@ -51,6 +52,9 @@ public class Doctor implements java.io.Serializable{
 	private String dob;
 	
 	private String secretPasscode;
+	
+	private String registrationNumber;
+
 
 	public Integer getId() {
 		return id;
@@ -178,6 +182,14 @@ public class Doctor implements java.io.Serializable{
 
 	public void setSecretPasscode(String secretPin) {
 		this.secretPasscode = secretPin;
+	}
+
+	public String getRegistrationNumber() {
+		return registrationNumber;
+	}
+
+	public void setRegistrationNumber(String registrationNumber) {
+		this.registrationNumber = registrationNumber;
 	}
 	
 	

@@ -22,6 +22,7 @@ const RegisterDoctor  = () => {
 	const [phone, setPhone] = React.useState('');
 	const [mobile, setMobile] = React.useState('');
 	const [address, setAddress] = React.useState('');
+	const [registrationNumber,setRegistrationNumber] = React.useState('');
 	const [dob, setDob] = React.useState('');
 	const [registrationErrors, setRegistrationErrors] = React.useState('');
 	const history = useHistory();
@@ -53,7 +54,8 @@ const RegisterDoctor  = () => {
 	        "qualifications": qualifications,
 	        "secretPasscode": password,
 	        "speciality": speciality,
-	        "specializations": specializations
+	        "specializations": specializations,
+	        "registrationNumber" : registrationNumber
 	        }
 	      )
 	      .then(response => {
@@ -200,6 +202,16 @@ const RegisterDoctor  = () => {
           placeholder={"Enter your address with city and pincode"}
         required
         />
+        
+        <Input
+        inputType={"text"}
+        title={"Registration Number"}
+        name={"registrationNumber"}
+        value={registrationNumber}
+        placeholder={"Registration Number (licence no)"}
+        handleChange={({target}) => setDob(target.value)}
+      required
+      />
         
         <Input
           inputType={"text"}
