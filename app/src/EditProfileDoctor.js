@@ -24,6 +24,7 @@ export default class EditProfileDoctor extends Component {
       phone: "",
       mobile: "",
       address: "",
+      registrationNumber : "";
       dob: "",    
       registrationErrors: ""
     };
@@ -40,7 +41,7 @@ export default class EditProfileDoctor extends Component {
 
   handleSubmit(event) {
     fullName = firstName + ' ' + middleName + ' '+ lastName;
-    const { email, password, password_confirmation,firstName,lastName,middleName,fullName,speciality,qualifications,practice,specializations,languageSpoken,phone,mobile,address,dob } = this.state;
+    const { email, password, password_confirmation,firstName,lastName,middleName,fullName,speciality,qualifications,practice,specializations,languageSpoken,phone,mobile,address,dob,registrationNumber } = this.state;
 
     axios
       .post(
@@ -60,7 +61,8 @@ export default class EditProfileDoctor extends Component {
         "qualifications": qualifications,
         "secretPasscode": password,
         "speciality": speciality,
-        "specializations": specializations
+        "specializations": specializations,
+        "registrationNumber" : registrationNumber
         }
       )
       .then(response => {
@@ -210,6 +212,15 @@ export default class EditProfileDoctor extends Component {
           handleChange={this.handleChange}
         required
         />
+        <Input
+        inputType={"text"}
+        title={"Registration Number"}
+        name={"registrationNumber"}
+        value={registrationNumber}
+        placeholder={"Registration Number (licence no)"}
+        handleChange={({target}) => setDob(target.value)}
+      required
+      />
           <button type="submit">Update</button>
         <br />
         </form>
