@@ -209,7 +209,7 @@ const RegisterDoctor  = () => {
         name={"registrationNumber"}
         value={registrationNumber}
         placeholder={"Registration Number (licence no)"}
-        handleChange={({target}) => setDob(target.value)}
+        handleChange={({target}) => setRegistrationNumber(target.value)}
       required
       />
         

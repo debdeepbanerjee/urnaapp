@@ -48,7 +48,7 @@ const PatientLogin = () => {
 	
     return (
     	      <div>
-    	        <h1> Doctor Login.</h1>
+    	        <h1> Patient Login.</h1>
     	        <form onSubmit={submit}>
     	          <input
     	            type="email"
