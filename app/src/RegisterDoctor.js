@@ -138,7 +138,7 @@ const RegisterDoctor  = () => {
         required
         />
          <label>Gender
-         <select value={gender} onChange={({target => setGender(target.value)})}>
+         <select value={gender} onChange={({target}) => setGender(target.value)}>
          <option value="Male">Male</option>
          <option value="Female">Female</option>
          <option value="Other">Other</option>

@@ -67,7 +67,7 @@ export default class EditProfile extends Component {
 
   handleSubmit(event) {
     fullName = firstName + ' ' + middleName + ' '+ lastName;
-    const { email, password, password_confirmation,firstName,lastName,middleName,fullName,qualifications,languageSpoken,phone,mobile,address,dob } = this.state;
+    const { email, password, password_confirmation,firstName,lastName,gender,middleName,fullName,qualifications,languageSpoken,phone,mobile,address,dob } = this.state;
 
     axios
       .put(
@@ -161,7 +161,7 @@ export default class EditProfile extends Component {
         />
          
         <label>Gender
-        <select value={gender} onChange={({target => setGender(target.value)})}>
+        <select value={this.state.gender} onChange={this.handleChange}>
         <option value="Male">Male</option>
         <option value="Female">Female</option>
         <option value="Other">Other</option>
