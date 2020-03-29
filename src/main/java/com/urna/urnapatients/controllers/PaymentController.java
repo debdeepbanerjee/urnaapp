@@ -25,7 +25,7 @@ public class PaymentController {
 	@Autowired
 	private Environment env;
 	
-	@GetMapping("/")
+	@GetMapping("/home")
 	public String home() {
 		return "home";
 	}

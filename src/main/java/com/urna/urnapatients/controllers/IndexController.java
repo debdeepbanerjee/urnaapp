@@ -1,12 +1,20 @@
 package com.urna.urnapatients.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class IndexController {
-    @RequestMapping(value = {"/","/RespondToConsultation"})
-    public String index() {
-        return "forward:index.html"; // can't get this to work
-    }
+	@GetMapping(value = {
+        "/",
+        "/PatientLogin",
+        "/DoctorLogin",
+        "/RegisterDoctor",
+        "/RegisterPatient",
+        "/UrnaLandingSecuredDoctor",
+        "/UrnaLandingSecuredPatient"
+	})
+	public String index() {
+		return "index";
+	}
 }
