@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "watch": "nodemon --watch src --exec \"npm run build && npm run copy\"",
+    "watch": "nodemon --watch src --exec \"npm run build && npm run copy && echo Restart the Spring server to see UI changes.\"",
     "build": "react-scripts build",
     "copy": "shx cp -R build/* ../target/classes/public/",
     "test": "react-scripts test",
