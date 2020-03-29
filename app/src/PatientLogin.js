@@ -14,38 +14,29 @@ const PatientLogin = () => {
 
 	const submit = async (event) => {
 		event.preventDefault();
-		
-		let origin;
 
-	    if (!window.location.origin) {
-	      origin = window.location.protocol + "//" + window.location.hostname + 
-	         (window.location.port ? ':' + window.location.port: '');
-	    }
-	    origin = window.location.origin;
-	    
-	    try {
-		    const {data} = await axios.post(
-		    		origin+"/rest/urna/login/patient/email",
-		            {
-		    			"email": email,
-		    			"secretPasscode": password
-		            }
-		      ).then();
-		    
-		    if (data != null ) {
-	        	setLoggedIn(true);
-	        	history.push("/UrnaLandingSecuredPatient");
-	           // return <Redirect to='/UrnaLandingSecuredDoctor' />
-	        }
-	        else {
-	        	throw new Error('login failed');
-	        }
-	    } catch (error) {
-	        alert("Cannot login.Incorrect credentials or the site may be unavailable.");
-	        console.log("login error", error);
-	    }
+        try {
+            const {data} = await axios.post("/rest/urna/login/patient/email",
+                {
+                    email,
+                    secretPasscode: password
+                }
+            );
+
+            if (data !== null) {
+                setLoggedIn(true);
+                history.push("/UrnaLandingSecuredPatient");
+            }
+            else {
+                alert("Cannot login.Incorrect credentials or the site may be unavailable.");
+                console.error("login error");
+            }
+        } catch (error) {
+            alert("PatientLogin.js error occurred: " + JSON.stringify(error));
+            console.error("login error", error);
+        }
 	};
-	
+
     return (
     	      <div>
     	        <h1> Patient Login.</h1>
