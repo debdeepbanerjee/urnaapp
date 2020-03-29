@@ -14,6 +14,7 @@ const RegisterPatient = () => {
 	const [firstName, setFirstName] = React.useState('');
 	const [lastName, setLastName] = React.useState('');
 	const [middleName, setMiddleName] = React.useState('');
+	const [gender, setGender] = React.useState('');
 	var [fullName, setFullName] = React.useState('');
 	const [qualifications, setQualifications] = React.useState('');
 	const [languageSpoken, setLanguageSpoken] = React.useState('');
@@ -51,7 +52,8 @@ const RegisterPatient = () => {
         "mobile": mobile,
         "phone": phone,
         "qualifications": qualifications,
-        "secretPasscode": password
+        "secretPasscode": password,
+        "gender": gender
         }
       )
       .then(response => {
@@ -128,7 +130,12 @@ const RegisterPatient = () => {
           handleChange={({target}) => setLastName(target.value)}
         required
         />
-
+         <label>Gender
+         <select value={gender} onChange={({target => setGender(target.value)})}>
+         <option value="Male">Male</option>
+         <option value="Female">Female</option>
+         <option value="Other">Other</option>
+         </select></label>
           <Input
           inputType={"text"}
           title={"Qualifications"}

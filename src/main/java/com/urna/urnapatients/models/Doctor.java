@@ -54,6 +54,8 @@ public class Doctor implements java.io.Serializable{
 	private String secretPasscode;
 	
 	private String registrationNumber;
+	
+	private String gender;
 
 
 	public Integer getId() {
@@ -190,6 +192,14 @@ public class Doctor implements java.io.Serializable{
 
 	public void setRegistrationNumber(String registrationNumber) {
 		this.registrationNumber = registrationNumber;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 	
 	

@@ -14,6 +14,7 @@ export default class EditProfile extends Component {
       password_confirmation: "",
       firstName: "",
       lastName: "",
+      gender: "",
       middleName: "",
       fullName: "",
       qualifications: "",
@@ -27,8 +28,37 @@ export default class EditProfile extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.getProfile = this.getProfile.bind(this);
+
   }
 
+  getProfile(event) {
+	  axios
+      .get(
+        "/rest/urna/patients/loggedin/patient"       
+      )
+      .then(response => {
+        if (response.data != null) {
+        	this.state.isLoading = false;
+        	this.state.email = response.data.email;
+        	this.state.firstName= response.data.firstName;
+        	this.state.lastName= response.data.lastName;
+        	this.state.gender= response.data.gender;
+        	this.state.middleName= response.data.middleName;
+        	this.state.qualifications= response.data.speciality;
+        	this.state.languageSpoken= response.data.languageSpoken;
+        	this.state.phone= response.data.phone;
+        	this.state.mobile= response.data.mobile;
+        	this.state.address= response.data.address;
+        	this.state.dob= response.data.dob;   
+        }
+      })
+      .catch(error => {
+        console.log("registration error", error);
+      });
+    event.preventDefault();
+  }
+  
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value
@@ -40,8 +70,8 @@ export default class EditProfile extends Component {
     const { email, password, password_confirmation,firstName,lastName,middleName,fullName,qualifications,languageSpoken,phone,mobile,address,dob } = this.state;
 
     axios
-      .post(
-        "http://localhost:8080/rest/urna/patients/patient",
+      .put(
+        "/rest/urna/patients/patient",
        {
         "address": address,
         "dob": dob,
@@ -54,13 +84,14 @@ export default class EditProfile extends Component {
         "mobile": mobile,
         "phone": phone,
         "qualifications": qualifications,
-        "secretPasscode": password
+        "secretPasscode": password,
+        "gender" : gender
         }
       )
       .then(response => {
-        if (response.data.status === "created") {
-          this.props.handleSuccessfulAuth(response.data);
-        }
+    	  if (response.data != null) {
+          	alert("Profile updated sucessfully.");
+          }
       })
       .catch(error => {
         console.log("registration error", error);
@@ -128,6 +159,13 @@ export default class EditProfile extends Component {
           handleChange={this.handleChange}
         required
         />
+         
+        <label>Gender
+        <select value={gender} onChange={({target => setGender(target.value)})}>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+        </select></label>
 
           <Input
           inputType={"text"}
@@ -171,7 +209,7 @@ export default class EditProfile extends Component {
           rows={10}
           value={this.state.address}
           name={"address"}
-          handleChange={this.handleTextArea}
+          handleChange={this.handleChange}
           placeholder={"Enter your address with city and pincode"}
          required
         />

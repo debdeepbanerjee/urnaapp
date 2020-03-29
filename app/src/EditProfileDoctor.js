@@ -14,6 +14,7 @@ export default class EditProfileDoctor extends Component {
       password_confirmation: "",
       firstName: "",
       lastName: "",
+      gender: "",
       middleName: "",
       fullName: "",
       speciality: "",
@@ -46,6 +47,7 @@ export default class EditProfileDoctor extends Component {
         	this.state.email = response.data.email;
         	this.state.firstName= response.data.firstName;
         	this.state.lastName= response.data.lastName;
+        	this.state.gender= response.data.gender;
         	this.state.middleName= response.data.middleName;
         	this.state.speciality= response.data.speciality;
         	this.state.qualifications= response.data.speciality;
@@ -73,11 +75,11 @@ export default class EditProfileDoctor extends Component {
 
   handleSubmit(event) {
     fullName = firstName + ' ' + middleName + ' '+ lastName;
-    const { email, password, password_confirmation,firstName,lastName,middleName,fullName,speciality,qualifications,practice,specializations,languageSpoken,phone,mobile,address,dob,registrationNumber } = this.state;
+    const { email, password, password_confirmation,firstName,lastName,gender,middleName,fullName,speciality,qualifications,practice,specializations,languageSpoken,phone,mobile,address,dob,registrationNumber } = this.state;
 
     axios
       .put(
-        "http://localhost:8080/rest/urna/doctors/doctor",
+        "/rest/urna/doctors/doctor",
         {
         "address": address,
         "dob": dob,
@@ -94,7 +96,8 @@ export default class EditProfileDoctor extends Component {
         "secretPasscode": password,
         "speciality": speciality,
         "specializations": specializations,
-        "registrationNumber" : registrationNumber
+        "registrationNumber" : registrationNumber,
+        "gender": gender
         }
       )
       .then(response => {
@@ -167,7 +170,13 @@ export default class EditProfileDoctor extends Component {
           handleChange={this.handleChange}
         required
         />
-
+         <label>Gender
+         <select value={this.state.gender} onChange={this.handleChange}>
+         <option value="Male">Male</option>
+         <option value="Female">Female</option>
+         <option value="Other">Other</option>
+         </select></label>
+         
           <Input
           inputType={"text"}
           title={"Qualifications"}
