@@ -110,7 +110,9 @@ export default class EditProfileDoctor extends Component {
       });
     event.preventDefault();
   }
-
+  componentDidMount() {
+	    this.getPosts();
+	  }
   render() {
     return (
       <div>
