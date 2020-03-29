@@ -57,8 +57,9 @@ const RegisterPatient = () => {
       .then(response => {
         if (response.data != null) {
             alert("Profile created , you will now be logged in.");
-           window.$isLoggedin = 'true';
-           this.props.history.push("/UrnaLandingSecuredPatient");
+            setLoggedIn(true);
+
+	        history.push("/UrnaLandingSecuredDoctor");
         }
       })
       .catch(error => {
