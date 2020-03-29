@@ -91,7 +91,7 @@ export default class SubmitConsultation extends Component {
           rows={10}
           value={this.state.healthIssue}
           name={"healthIssue"}
-          handleChange={this.handleTextArea}
+          handleChange={this.handleChange}
           placeholder={"Health issue"}
          required
         />
@@ -112,7 +112,7 @@ export default class SubmitConsultation extends Component {
           rows={10}
           value={this.state.additionalQuery}
           name={"additionalQuery"}
-          handleChange={this.handleTextArea}
+          handleChange={this.handleChange}
           placeholder={"Enter any other Additional query"}
          
         />
