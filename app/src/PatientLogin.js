@@ -34,7 +34,7 @@ const PatientLogin = () => {
 		    
 		    if (data != null ) {
 	        	setLoggedIn(true);
-	        	history.push("/UrnaLandingSecuredDoctor");
+	        	history.push("/UrnaLandingSecuredPatient");
 	           // return <Redirect to='/UrnaLandingSecuredDoctor' />
 	        }
 	        else {
