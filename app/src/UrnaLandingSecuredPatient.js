@@ -7,12 +7,13 @@ import {
 } from "react-router-dom";
 import EditProfile from './EditProfile';
 import SubmitConsultation from './SubmitConsultation';
-import {logout} from './GlobalFunctions';
+import {useLogout} from './GlobalFunctions';
 import UrnaLanding from './UrnaLanding';
 
 
 export default function UrnaLandingSecuredPatient() {
-    
+    const logout = useLogout();
+
     return (
      <Router>
      <div class="container">
