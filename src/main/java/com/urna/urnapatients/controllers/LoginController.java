@@ -58,7 +58,7 @@ public class LoginController {
 	    return patientByLoginIds;
 	  }
 	
-	@PostMapping("/patient/emial")
+	@PostMapping("/patient/email")
 	public @ResponseBody Optional<Patient> getPatientByLoginIdEmail(@Valid @RequestBody Patient patient, HttpSession sess) {
 	    Optional<Patient> patientByLoginIdsEmail = patientService.findPatientByLoginIdsEmail(patient.getEmail(), patient.getSecretPasscode());
 		sess.setAttribute("patient", patientByLoginIdsEmail);
