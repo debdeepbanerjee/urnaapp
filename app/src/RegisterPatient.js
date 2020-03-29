@@ -59,7 +59,7 @@ const RegisterPatient = () => {
             alert("Profile created , you will now be logged in.");
             setLoggedIn(true);
 
-	        history.push("/UrnaLandingSecuredDoctor");
+	        history.push("/UrnaLandingSecuredPatient");
         }
       })
       .catch(error => {
