@@ -99,8 +99,8 @@ export default class EditProfile extends Component {
     event.preventDefault();
   }
   
-  componentDidMount() {
-	    this.getPosts();
+  componentDidMount(event) {
+	    this.getPosts(event);
 	  }
 	  
 
