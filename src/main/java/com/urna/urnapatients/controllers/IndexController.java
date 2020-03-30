@@ -12,7 +12,9 @@ public class IndexController {
         "/RegisterDoctor",
         "/RegisterPatient",
         "/UrnaLandingSecuredDoctor",
-        "/UrnaLandingSecuredPatient"
+        "/UrnaLandingSecuredPatient",
+        "/EditProfile",
+        "/SubmitConsultation"
 	})
 	public String index() {
 		return "index";
