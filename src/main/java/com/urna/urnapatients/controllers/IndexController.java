@@ -14,7 +14,9 @@ public class IndexController {
         "/UrnaLandingSecuredDoctor",
         "/UrnaLandingSecuredPatient",
         "/EditProfile",
-        "/SubmitConsultation"
+        "/SubmitConsultation",
+        "/EditProfileDoctor",
+        "/RespondToConsultation"
 	})
 	public String index() {
 		return "index";
