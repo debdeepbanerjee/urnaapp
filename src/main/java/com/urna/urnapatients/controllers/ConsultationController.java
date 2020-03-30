@@ -53,7 +53,9 @@ public class ConsultationController {
 	public @ResponseBody Iterable<Consultation> getAllConsultationsForPatientSecure(HttpSession session) {
 		Integer patientId=0;
 		Patient p = (Patient) session.getAttribute("patient");
+		if(p != null) {
 		patientId = p.getId(); 
+		}
 	    return consultationService.findAllConsultationByPatientId(patientId);
 	  }
 	
