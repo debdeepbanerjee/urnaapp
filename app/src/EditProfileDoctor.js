@@ -111,7 +111,7 @@ export default class EditProfileDoctor extends Component {
     event.preventDefault();
   }
   componentDidMount(event) {
-	    this.getPosts(event);
+	    this.getProfile(event);
 	  }
   render() {
     return (
