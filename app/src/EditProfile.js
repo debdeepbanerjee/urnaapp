@@ -32,7 +32,7 @@ export default class EditProfile extends Component {
 
   }
 
-  getProfile(event) {
+  getProfile() {
 	  axios
       .get(
         "/rest/urna/patients/loggedin/patient"       
@@ -56,7 +56,6 @@ export default class EditProfile extends Component {
       .catch(error => {
         console.log("registration error", error);
       });
-    event.preventDefault();
   }
   
   handleChange(event) {
@@ -98,11 +97,10 @@ export default class EditProfile extends Component {
       });
     event.preventDefault();
   }
-  
-  componentDidMount(event) {
-	    this.getPosts(event);
-	  }
-	  
+
+  componentDidMount() {
+      this.getProfile();
+  }
 
   render() {
     return (

@@ -38,12 +38,6 @@ export default function UrnaLandingSecuredDoctor() {
         component = {RespondToConsultation}
         exact
         />
-            
-         <Route 
-        path="/UrnaLanding"
-        component = {UrnaLanding}
-        exact
-        />    
       
     </div>  
     </Router>    
