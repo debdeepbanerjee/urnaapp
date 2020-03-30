@@ -51,8 +51,9 @@ public class ConsultationController {
 	
 	@GetMapping("/consultations/secure/patient")
 	public @ResponseBody Iterable<Consultation> getAllConsultationsForPatientSecure(HttpSession session) {
+		Integer patientId=0;
 		Patient p = (Patient) session.getAttribute("patient");
-		Integer patientId = p.getId(); 
+		patientId = p.getId(); 
 	    return consultationService.findAllConsultationByPatientId(patientId);
 	  }
 	
