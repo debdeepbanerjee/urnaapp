@@ -46,6 +46,12 @@ public class Patient implements java.io.Serializable {
 	private String secretPasscode;
 	
 	private String gender;
+	
+	private String height;
+	
+	
+
+	private String weight;
 
 
 
@@ -161,5 +167,20 @@ public class Patient implements java.io.Serializable {
 		this.gender = gender;
 	}
 	
+	public String getHeight() {
+		return height;
+	}
+
+	public void setHeight(String height) {
+		this.height = height;
+	}
+
+	public String getWeight() {
+		return weight;
+	}
+
+	public void setWeight(String weight) {
+		this.weight = weight;
+	}
 	
 }

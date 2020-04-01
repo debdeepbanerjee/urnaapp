@@ -23,6 +23,8 @@ export default class EditProfile extends Component {
       mobile: "",
       address: "",
       dob: "",    
+      height : "",
+      weight : "",
       registrationErrors: ""
     };
 
@@ -50,7 +52,9 @@ export default class EditProfile extends Component {
         	this.state.phone= response.data.phone;
         	this.state.mobile= response.data.mobile;
         	this.state.address= response.data.address;
-        	this.state.dob= response.data.dob;   
+        	this.state.dob= response.data.dob; 
+        	this.state.height = response.data.height;
+        	this.state.weight = response.data.weight;
         }
       })
       .catch(error => {
@@ -66,7 +70,7 @@ export default class EditProfile extends Component {
 
   handleSubmit(event) {
     fullName = firstName + ' ' + middleName + ' '+ lastName;
-    const { email, password, password_confirmation,firstName,lastName,gender,middleName,fullName,qualifications,languageSpoken,phone,mobile,address,dob } = this.state;
+    const { email, password, password_confirmation,firstName,lastName,gender,middleName,fullName,qualifications,languageSpoken,phone,mobile,address,dob,height,weight } = this.state;
 
     axios
       .put(
@@ -84,7 +88,9 @@ export default class EditProfile extends Component {
         "phone": phone,
         "qualifications": qualifications,
         "secretPasscode": password,
-        "gender" : gender
+        "gender" : gender,
+        "height": height,
+        "weight": weight
         }
       )
       .then(response => {
@@ -162,7 +168,25 @@ export default class EditProfile extends Component {
           handleChange={this.handleChange}
         required
         />
-         
+        <Input
+        inputType={"text"}
+        title={"Height in feet and inches (eg 5ft10in)"}
+        name={"height"}
+        value={this.state.height}
+        placeholder={"Enter your last name"}
+        handleChange={this.handleChange}
+        required
+        />
+	     <Input
+	      inputType={"text"}
+	      title={"Weight in kgs"}
+	      name={"weight"}
+	      value={this.state.weight}
+	      placeholder={"Enter your weight"}
+	      handleChange={this.handleChange}
+	      required
+	     />
+     
         <label>Gender
         <select value={this.state.gender} onChange={this.handleChange}>
         <option value="Male">Male</option>

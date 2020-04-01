@@ -56,6 +56,10 @@ public class Doctor implements java.io.Serializable{
 	private String registrationNumber;
 	
 	private String gender;
+	
+	private String consultationFee;
+	
+	
 
 
 	public Integer getId() {
@@ -200,6 +204,14 @@ public class Doctor implements java.io.Serializable{
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public String getConsultationFee() {
+		return consultationFee;
+	}
+
+	public void setConsultationFee(String consultationFee) {
+		this.consultationFee = consultationFee;
 	}
 	
 	

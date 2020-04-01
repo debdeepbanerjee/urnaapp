@@ -25,6 +25,7 @@ const RegisterDoctor  = () => {
 	const [address, setAddress] = React.useState('');
 	const [registrationNumber,setRegistrationNumber] = React.useState('');
 	const [dob, setDob] = React.useState('');
+	const [consultationFee, setConsultationFee] = React.useState('700');
 	const [registrationErrors, setRegistrationErrors] = React.useState('');
 	const history = useHistory();
 
@@ -57,7 +58,8 @@ const RegisterDoctor  = () => {
 	        "speciality": speciality,
 	        "specializations": specializations,
 	        "registrationNumber" : registrationNumber,
-	        "gender": gender
+	        "gender": gender,
+	        "consultationFee": consultationFee
 	        }
 	      )
 	      .then(response => {

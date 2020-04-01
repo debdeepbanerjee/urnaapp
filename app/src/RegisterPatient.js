@@ -22,6 +22,8 @@ const RegisterPatient = () => {
 	const [mobile, setMobile] = React.useState('');
 	const [address, setAddress] = React.useState('');
 	const [dob, setDob] = React.useState('');
+	const [height, setHeight] = React.useState('');
+	const [weight, setWeight] = React.useState('');
 	const [registrationErrors, setRegistrationErrors] = React.useState('');
 	const history = useHistory();
 
@@ -53,7 +55,9 @@ const RegisterPatient = () => {
         "phone": phone,
         "qualifications": qualifications,
         "secretPasscode": password,
-        "gender": gender
+        "gender": gender,
+        "height": height,
+        "weight": weight
         }
       )
       .then(response => {
