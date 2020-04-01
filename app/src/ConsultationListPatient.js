@@ -31,7 +31,7 @@ const useConsultationList = () => {
     // useEffect with empty dependencies list `[]` is equivalent to `componentDidMount()`
     React.useEffect(function loadData() {
         axios
-            .get("/rest/urna/consultation/consultations/secure/patient")
+            .get("/rest/urna/consultation/consultations/secure/patient/id/"+window.$pid  )
             .then(response => setConsultations(response.data))
             .catch(() => setError(true))
             .finally(() => setLoading(false));
