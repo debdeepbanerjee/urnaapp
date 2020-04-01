@@ -33,7 +33,7 @@ export default class SubmitConsultation extends Component {
 
     axios
       .post(
-        "/rest/urna/consultation/consultation",
+        "/rest/urna/consultation/nosession/consultation/"+window.$pid,
        {
         
         "additionalQuery": additionalQuery,
@@ -47,12 +47,12 @@ export default class SubmitConsultation extends Component {
         }
       )
       .then(response => {
-        if (response.data.status === "Created") {
+        if (response.data != null) {
           this.props.handleSuccessfulAuth(response.data);
         }
       })
       .catch(error => {
-        console.log("registration error", error);
+        console.log("Error submitting the consultation", error);
       });
     event.preventDefault();
   }

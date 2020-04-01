@@ -87,9 +87,10 @@ public class ConsultationController {
 		return consultationService.insert(consultation);
 	}
 	
-	@PostMapping("/nosession/consultation")
-	public Consultation createConsultationNoSession(@Valid @RequestBody ConsultationDto consultationDto) {
+	@PostMapping("/nosession/consultation/{id}")
+	public Consultation createConsultationNoSession(@Valid @RequestBody ConsultationDto consultationDto,@PathVariable String id) {
 		Consultation consultation = ConsultationUtil.transformFromDto(consultationDto);
+		consultation.setCratedByPatientId(Integer.parseInt(id));
 		return consultationService.insert(consultation);
 	}
 
@@ -100,6 +101,14 @@ public class ConsultationController {
 	public Consultation updateConsultation(@Valid @RequestBody ConsultationDto consultationDto,HttpSession session) {
 		Consultation consultation = ConsultationUtil.transformFromDto(consultationDto);
 		ConsultationUtil.setDoctorIdFromSession(session, consultation);
+		return consultationService.update(consultation);
+	}
+	
+
+	@PutMapping("/nosession/consultation/{id}")
+	public Consultation updateConsultationNoSession(@Valid @RequestBody ConsultationDto consultationDto,@PathVariable String id) {
+		Consultation consultation = ConsultationUtil.transformFromDto(consultationDto);
+		consultation.setLastrespondedByDocId(Integer.parseInt(id));
 		return consultationService.update(consultation);
 	}
 

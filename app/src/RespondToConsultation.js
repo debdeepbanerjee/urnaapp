@@ -32,7 +32,7 @@ export default class RespondToConsultation extends Component {
 
     axios
       .put(
-        "/rest/urna/consultation/consultation",
+    	"/rest/urna/consultation/nosession/consultation/"+window.$pid,
        {
         
         "additionalQuery": additionalQuery,
