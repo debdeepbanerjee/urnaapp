@@ -134,6 +134,24 @@ const RegisterPatient = () => {
           handleChange={({target}) => setLastName(target.value)}
         required
         />
+        <Input
+        inputType={"text"}
+        title={"Height in feet and inches (eg 5ft10in)"}
+        name={"height"}
+        value={height}
+        placeholder={"Enter your last name"}
+        handleChange={({target}) => setHeight(target.value)}
+        required
+        />
+	     <Input
+	      inputType={"text"}
+	      title={"Weight in kgs"}
+	      name={"weight"}
+	      value={weight}
+	      placeholder={"Enter your weight"}
+	      handleChange={({target}) => setWeight(target.value)}
+	      required
+	     />
          <label>Gender
          <select value={gender} onChange={({target}) => setGender(target.value)}>
          <option value="Male">Male</option>
