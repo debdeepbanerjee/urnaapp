@@ -25,7 +25,7 @@ const PatientLogin = () => {
 
             if (data !== null) {
                 setLoggedIn(true);
-                window.$pid= response.data.id;
+                window.$pid= data.id;
                 history.push("/UrnaLandingSecuredPatient");
             }
             else {
