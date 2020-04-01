@@ -139,7 +139,7 @@ const RegisterPatient = () => {
         title={"Height in feet and inches (eg 5ft10in)"}
         name={"height"}
         value={height}
-        placeholder={"Enter your last name"}
+        placeholder={"Enter your height"}
         handleChange={({target}) => setHeight(target.value)}
         required
         />
