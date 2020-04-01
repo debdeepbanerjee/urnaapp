@@ -34,6 +34,7 @@ export function logout(history, setLoggedIn) {
         if (response.data != null ) {
         	setLoggedIn(false);
             window.$isLoggedin = 'false';
+            window.$pid= '';
             history.push('/UrnaLanding');
         }
       })

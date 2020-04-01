@@ -35,7 +35,7 @@ export default class EditProfile extends Component {
   getProfile() {
 	  axios
       .get(
-        "/rest/urna/patients/loggedin/patient"       
+        "/rest/urna/patients/patient/"+window.$pid       
       )
       .then(response => {
         if (response.data != null) {

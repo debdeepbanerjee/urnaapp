@@ -60,7 +60,7 @@ const RegisterPatient = () => {
         if (response.data != null) {
             alert("Profile created , you will now be logged in.");
             setLoggedIn(true);
-
+            window.$pid= response.data.id;
 	        history.push("/UrnaLandingSecuredPatient");
         }
       })

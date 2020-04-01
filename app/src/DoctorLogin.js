@@ -34,6 +34,7 @@ const DoctorLogin = () => {
 		    
 		    if (data != null ) {
 	        	setLoggedIn(true);
+	        	window.$pid= response.data.id;
 	        	history.push("/UrnaLandingSecuredDoctor");
 	           // return <Redirect to='/UrnaLandingSecuredDoctor' />
 	        }

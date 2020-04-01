@@ -13,6 +13,7 @@ import UrnaLandingSecuredDoctor from './UrnaLandingSecuredDoctor';
 import UrnaLandingSecuredPatient from './UrnaLandingSecuredPatient';
 import appContext from './appContext';
 window.$isLoggedin = false;
+window.$pid="";
 	
 
 export default function UrnaLanding() {

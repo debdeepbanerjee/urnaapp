@@ -65,6 +65,7 @@ const RegisterDoctor  = () => {
 	           alert("Profile created , you will now be logged in.");
 	           
 	           window.$isLoggedin = 'true';
+	           window.$pid= response.data.id;
 	       	   setLoggedIn(true);
 
 	           history.push("/UrnaLandingSecuredDoctor");
