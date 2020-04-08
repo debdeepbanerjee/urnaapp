@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container } from '@material-ui/core';
 import UrnaLanding from './UrnaLanding';
 import appContext from './appContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -8,7 +9,9 @@ const App = () => {
 	const {Provider} = appContext;
 	
 	return (<Provider value={{loggedIn, setLoggedIn}}>
-		<UrnaLanding/>
+		<Container>
+			<UrnaLanding/>
+		</Container>
 	</Provider>);
 }
 
