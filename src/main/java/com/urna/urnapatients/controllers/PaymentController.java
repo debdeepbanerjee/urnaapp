@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -11,11 +12,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.paytm.pg.merchant.CheckSumServiceHelper;
 import com.urna.urnapatients.dto.PaytmDetails;
+import com.urna.urnapatients.models.Patient;
+import com.urna.urnapatients.models.Payment;
+import com.urna.urnapatients.repo.PaymentRepository;
 
 @Controller
 public class PaymentController {
@@ -24,6 +30,9 @@ public class PaymentController {
 	private PaytmDetails paytmDetails;
 	@Autowired
 	private Environment env;
+	
+	@Autowired
+	private PaymentRepository paymentRepository;
 	
 	@GetMapping("/home")
 	public String home() {
@@ -93,7 +102,22 @@ public class PaymentController {
 	private String getCheckSum(TreeMap<String, String> parameters) throws Exception {
 		return CheckSumServiceHelper.getCheckSumServiceHelper().genrateCheckSum(paytmDetails.getMerchantKey(), parameters);
 	}
+	@PostMapping("/internal/payment")
+	public @Valid Payment createPayment(@Valid @RequestBody Payment payment) {
+	    return paymentRepository.save(payment);
+	}
+	@PutMapping("/internal/payment")
+	public @Valid Payment updatePayment(@Valid @RequestBody Payment payment) {
+	    return paymentRepository.save(payment);
+	}
+	@GetMapping("/internal/patient/payment")
+	public @Valid Iterable<Payment> getAllPaymentsForPatient(@Valid @RequestBody Payment payment) {
+	    return paymentRepository.findAllPaymentsByPatientId(payment.getPatientId());
+	}
 	
-	
+	@GetMapping("/internal/doctor/payment")
+	public @Valid Iterable<Payment> getAllPaymentsForDoctor(@Valid @RequestBody Payment payment) {
+	    return paymentRepository.findAllPaymentsByDoctorId(payment.getDoctorId());
+	}
 	
 }
