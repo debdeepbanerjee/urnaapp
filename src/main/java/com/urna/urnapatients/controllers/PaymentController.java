@@ -11,6 +11,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -110,9 +111,14 @@ public class PaymentController {
 	public @Valid Payment updatePayment(@Valid @RequestBody Payment payment) {
 	    return paymentRepository.save(payment);
 	}
-	@GetMapping("/internal/patient/payment")
-	public @Valid Iterable<Payment> getAllPaymentsForPatient(@Valid @RequestBody Payment payment) {
-	    return paymentRepository.findAllPaymentsByPatientId(payment.getPatientId());
+	@GetMapping("/internal/patient/{patientId}")
+	public @Valid Iterable<Payment> getAllPaymentsForPatient(@PathVariable String patientId) {
+	    return paymentRepository.findAllPaymentsByPatientId(Integer.parseInt(patientId));
+	}
+	
+	@GetMapping("/internal/patient/active/{patientId}")
+	public @Valid Iterable<Payment> getAllActivePaymentsForPatient(@PathVariable String patientId) {
+	    return paymentRepository.findAllActivePaymentsByPatientId(Integer.parseInt(patientId), true);
 	}
 	
 	@GetMapping("/internal/doctor/payment")

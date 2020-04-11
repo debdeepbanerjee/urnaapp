@@ -26,7 +26,7 @@ public class Payment implements java.io.Serializable  {
 	
 	private BigDecimal paymentAmount;
 	
-	private Boolean paymentUsed=false;
+	private Boolean paymentActive=true;
 	
 	public Long getId() {
 		return id;
@@ -62,12 +62,12 @@ public class Payment implements java.io.Serializable  {
 		this.paymentAmount = paymentAmount;
 	}
 
-	public Boolean getPaymentUsed() {
-		return paymentUsed;
+	public Boolean getPaymentActive() {
+		return paymentActive;
 	}
 
-	public void setPaymentUsed(Boolean paymentUsed) {
-		this.paymentUsed = paymentUsed;
+	public void setPaymentActive(Boolean paymentUsed) {
+		this.paymentActive = paymentUsed;
 	}
 	
 }
