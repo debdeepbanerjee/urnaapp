@@ -87,6 +87,7 @@ const useHomeStyles = makeStyles((theme) => ({
     separator: {
         margin: '20px 40px',
         borderColor: 'white',
+        width: '70%',
     },
 }));
 const useCardStyles = makeStyles((theme) => ({
@@ -131,7 +132,7 @@ const useLandingStyles = makeStyles((theme) => ({
     },
     rightNavLinks: {
         display: 'flex',
-        minWidth: '245px',
+        width: '250px',
     },
 }));
 
@@ -143,8 +144,23 @@ const Card = ({children, ...otherProps}) => <Box flexDirection="column"
     {children}
 </Box>;
 
+const RightSection = () => <Box flexDirection="column" justifyContent="center" alignItems="center" style={{zIndex: 1, display: 'flex', flexGrow: 1,}}>
+    <Card>
+        <Typography variant="body1" color="primary" className={useHomeStyles().italic}>UrnaCare</Typography>
+        <Typography variant="h3" color="primary">Primary Care</Typography>
+    </Card>
+    <Card>
+        <Calendar color="primary" style={{ fontSize: '3.5em', marginTop:'70px' }}/>
+        <Typography variant="h5" color="primary" style={{margin: '20px 0 10px 0'}}>Book an Appointment</Typography>
+        <Typography variant="body1" color="primary" style={{maxWidth: '250px'}}>Remote visits are available for all appointment types.</Typography>
+        <Link to="/RegisterPatient" component={RouteLink}>
+            <Button color="primary" variant="contained" style={{margin:'20px'}}>Book Appointment</Button>
+        </Link>
+    </Card>
+</Box>;
+
 const Home = () => {
-    const {root, right, left, italic, separator,} = useHomeStyles();
+    const {root, right, left, separator,} = useHomeStyles();
 
     return <ThemeProvider theme={homeTheme}>
         <Grid container className={root}>
@@ -152,14 +168,15 @@ const Home = () => {
             <Hidden mdUp>
                 <Grid item xs={12} className={right}>
                     <div className="bg" />
+                    <RightSection />
                 </Grid>
             </Hidden>
 
             {/*Desktop / Tablet View*/}
             <Hidden smDown>
-                <Grid item xs={3} className={left} direction="column" justify="center">
+                <Grid item xs={3} className={left}>
                     <div className="bg" />
-                    <Box flexDirection="column" alignItems="center" style={{zIndex: 1}}>
+                    <Box flexDirection="column" justifyContent="center" alignItems="center" style={{zIndex: 1, display: 'flex', flexGrow: 1,}}>
                         <Card>
                             <Typography variant="h3" color="primary">Chat With a Doctor Now</Typography>
                             <IconButton color="secondary">
@@ -170,7 +187,7 @@ const Home = () => {
                         <Card>
                             <AddAppointment color="primary" style={{ fontSize: '3.5em', marginTop:'20px' }}/>
                             <Typography variant="h5" color="primary" style={{margin: '20px 0 10px 0'}}>New Patients</Typography>
-                            <Typography variant="body" color="primary">We are accepting new patients for Remote Visits</Typography>
+                            <Typography variant="body1" color="primary">We are accepting new patients for Remote Visits</Typography>
                             <Link to="/RegisterPatient" component={RouteLink}>
                                 <Button color="primary" variant="contained" style={{margin:'20px'}}>Register</Button>
                             </Link>
@@ -179,21 +196,7 @@ const Home = () => {
                 </Grid>
                 <Grid item xs={9} className={right}>
                     <div className="bg" />
-
-                    <Box flexDirection="column" justifyContent="center" alignItems="center" style={{zIndex: 1, display: 'flex', flexGrow: 1,}}>
-                        <Card>
-                            <Typography variant="body" color="primary" className={italic}>UrnaCare</Typography>
-                            <Typography variant="h3" color="primary">Primary Care</Typography>
-                        </Card>
-                        <Card>
-                            <Calendar color="primary" style={{ fontSize: '3.5em', marginTop:'70px' }}/>
-                            <Typography variant="h5" color="primary" style={{margin: '20px 0 10px 0'}}>Book an Appointment</Typography>
-                            <Typography variant="body" color="primary" style={{maxWidth: '250px'}}>Remote visits are available for all appointment types.</Typography>
-                            <Link to="/RegisterPatient" component={RouteLink}>
-                                <Button color="primary" variant="contained" style={{margin:'20px'}}>Book Appointment</Button>
-                            </Link>
-                        </Card>
-                    </Box>
+                    <RightSection />
                 </Grid>
             </Hidden>
         </Grid>
@@ -214,7 +217,7 @@ export default function UrnaLanding() {
                             <Typography variant="h6" className={classes.title}>UrnaCare</Typography>
                         </Link>
 
-                        <Grid container spacing={3} class={classes.rightNavLinks}>
+                        <Grid container spacing={3} className={classes.rightNavLinks}>
                             <Grid item xs={6}>
                                 <Link component={RouteLink} to="/PatientLogin" color="secondary">
                                     <Typography noWrap={true}>Patient Portal</Typography>
