@@ -1,19 +1,27 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import axios from "axios";
+import {
+    Link,
+    Button,
+} from '@material-ui/core';
+import {
+    Link as RouteLink
+} from "react-router-dom";
+
 import UrnaLandingSecuredPatient from './UrnaLandingSecuredPatient';
 import {logout} from './GlobalFunctions';
 import appContext from './appContext';
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 const PatientLogin = () => {
-	const [email, setEmail] = React.useState('');
-	const [password, setPassword] = React.useState('');
-	const [loginErrors, setLoginErrors] = React.useState('');
-	const {loggedIn, setLoggedIn} = React.useContext(appContext);
-	const history = useHistory();
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    const [loginErrors, setLoginErrors] = React.useState('');
+    const {loggedIn, setLoggedIn} = React.useContext(appContext);
+    const history = useHistory();
 
-	const submit = async (event) => {
-		event.preventDefault();
+    const submit = async (event) => {
+        event.preventDefault();
 
         try {
             const {data} = await axios.post("/rest/urna/login/patient/email",
@@ -25,7 +33,7 @@ const PatientLogin = () => {
 
             if (data !== null) {
                 setLoggedIn(true);
-                window.$pid= data.id;
+                window.$pid = data.id;
                 history.push("/UrnaLandingSecuredPatient");
             }
             else {
@@ -36,34 +44,38 @@ const PatientLogin = () => {
             alert("PatientLogin.js error occurred: " + JSON.stringify(error));
             console.error("login error", error);
         }
-	};
+    };
 
     return (
-    	      <div>
-    	        <h1> Patient Login.</h1>
-    	        <form onSubmit={submit}>
-    	          <input
-    	            type="email"
-    	            name="email"
-    	            placeholder="Email"
-    	            value={email}
-    	            onChange={({target}) => setEmail(target.value)}
-    	            required
-    	          />
+        <div>
+            <h1> Patient Login.</h1>
+            <form onSubmit={submit}>
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={({target}) => setEmail(target.value)}
+                    required
+                />
 
-    	          <input
-    	            type="password"
-    	            name="password"
-    	            placeholder="Password"
-    	            value={password}
-    	            onChange={({target}) => setPassword(target.value)}
-    	            required
-    	          />
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={({target}) => setPassword(target.value)}
+                    required
+                />
 
-    	          <button type="submit">Login</button>
-    	        </form>
-    	      </div>
-    	    );
+                <button type="submit">Login</button>
+            </form>
+
+            New Patient? <Link to="/RegisterPatient" component={RouteLink} style={{color: '#0093ff'}}>
+                Register
+            </Link>
+        </div>
+    );
 };
 
 export default PatientLogin;

@@ -1,78 +1,89 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import axios from "axios";
+import {
+    Link,
+    Button,
+} from '@material-ui/core';
+import {
+    Link as RouteLink
+} from "react-router-dom";
 import UrnaLandingSecuredDoctor from './UrnaLandingSecuredDoctor';
 import {logout} from './GlobalFunctions';
 import appContext from './appContext';
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 const DoctorLogin = () => {
-	const [email, setEmail] = React.useState('');
-	const [password, setPassword] = React.useState('');
-	const [loginErrors, setLoginErrors] = React.useState('');
-	const {loggedIn, setLoggedIn} = React.useContext(appContext);
-	const history = useHistory();
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    const [loginErrors, setLoginErrors] = React.useState('');
+    const {loggedIn, setLoggedIn} = React.useContext(appContext);
+    const history = useHistory();
 
-	const submit = async (event) => {
-		event.preventDefault();
-		
-		let origin;
+    const submit = async (event) => {
+        event.preventDefault();
 
-	    if (!window.location.origin) {
-	      origin = window.location.protocol + "//" + window.location.hostname + 
-	         (window.location.port ? ':' + window.location.port: '');
-	    }
-	    origin = window.location.origin;
-	    
-	    try {
-		    const {data} = await axios.post(
-		    		origin+"/rest/urna/login/doctor/email",
-		            {
-		    			"email": email,
-		    			"secretPasscode": password
-		            }
-		      ).then();
-		    
-		    if (data != null ) {
-	        	setLoggedIn(true);
-	        	window.$pid= data.id;
-	        	history.push("/UrnaLandingSecuredDoctor");
-	           // return <Redirect to='/UrnaLandingSecuredDoctor' />
-	        }
-	        else {
-	        	throw new Error('login failed');
-	        }
-	    } catch (error) {
-	        alert("Cannot login.Incorrect credentials or the site may be unavailable.");
-	        console.log("login error", error);
-	    }
-	};
-	
+        let origin;
+
+        if (!window.location.origin) {
+            origin = window.location.protocol + "//" + window.location.hostname +
+                (window.location.port ? ':' + window.location.port : '');
+        }
+        origin = window.location.origin;
+
+        try {
+            const {data} = await axios.post(
+                origin + "/rest/urna/login/doctor/email",
+                {
+                    "email": email,
+                    "secretPasscode": password
+                }
+            ).then();
+
+            if (data != null) {
+                setLoggedIn(true);
+                window.$pid = data.id;
+                history.push("/UrnaLandingSecuredDoctor");
+                // return <Redirect to='/UrnaLandingSecuredDoctor' />
+            }
+            else {
+                throw new Error('login failed');
+            }
+        } catch (error) {
+            alert("Cannot login.Incorrect credentials or the site may be unavailable.");
+            console.log("login error", error);
+        }
+    };
+
     return (
-    	      <div>
-    	        <h1> Doctor Login.</h1>
-    	        <form onSubmit={submit}>
-    	          <input
-    	            type="email"
-    	            name="email"
-    	            placeholder="Email"
-    	            value={email}
-    	            onChange={({target}) => setEmail(target.value)}
-    	            required
-    	          />
+        <div>
+            <h1> Doctor Login.</h1>
+            <form onSubmit={submit}>
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={({target}) => setEmail(target.value)}
+                    required
+                />
 
-    	          <input
-    	            type="password"
-    	            name="password"
-    	            placeholder="Password"
-    	            value={password}
-    	            onChange={({target}) => setPassword(target.value)}
-    	            required
-    	          />
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={({target}) => setPassword(target.value)}
+                    required
+                />
 
-    	          <button type="submit">Login</button>
-    	        </form>
-    	      </div>
-    	    );
+                <button type="submit">Login</button>
+            </form>
+
+            <Link to="/RegisterDoctor" component={RouteLink} style={{color: '#0093ff'}}>
+                Register
+            </Link>
+        </div>
+    );
 };
 
 export default DoctorLogin;
