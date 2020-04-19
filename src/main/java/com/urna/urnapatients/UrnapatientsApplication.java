@@ -8,6 +8,8 @@ import com.urna.urnapatients.services.ConsultationService;
 import com.urna.urnapatients.services.ConsultationServiceImpl;
 import com.urna.urnapatients.services.DoctorService;
 import com.urna.urnapatients.services.DoctorServiceImpl;
+import com.urna.urnapatients.services.OtpService;
+import com.urna.urnapatients.services.OtpServiceImpl;
 import com.urna.urnapatients.services.PatientService;
 import com.urna.urnapatients.services.PatientServiceImpl;
 
@@ -31,5 +33,9 @@ public class UrnapatientsApplication {
 	@Bean
 	public PatientService getPatientService() {
 		return new PatientServiceImpl();
+	}
+	@Bean
+	public OtpService getOtpService() {
+		return new OtpServiceImpl();
 	}
 }
