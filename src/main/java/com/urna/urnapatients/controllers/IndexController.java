@@ -21,4 +21,11 @@ public class IndexController {
 	public String index() {
 		return "index";
 	}
+
+	@GetMapping(value = {
+        "/chat"
+	})
+	public String chat() {
+		return "chat";
+	}
 }
