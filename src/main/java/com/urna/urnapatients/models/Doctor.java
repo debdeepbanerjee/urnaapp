@@ -18,7 +18,7 @@ public class Doctor implements java.io.Serializable{
 
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id ;
+	private Long id ;
 	
 	@Column(unique = true)
 	private String email;
@@ -59,14 +59,97 @@ public class Doctor implements java.io.Serializable{
 	
 	private String consultationFee;
 	
+	private String bankAcctNo;
+	
+	private String bankIfscRoutingNo;
+	
+	private String creditCardNo;
+	
+	private String cerditCardExpDate;
+	
+	private String creditcardSecurityCode;
+	
+	private String debitCardNo;
+	
+	private String debitCardExpDate;
+	
+	private String debitcardSecurityCode;
+	
+	public String getBankAcctNo() {
+		return bankAcctNo;
+	}
+
+	public void setBankAcctNo(String bankAcctNo) {
+		this.bankAcctNo = bankAcctNo;
+	}
+
+	public String getBankIfscRoutingNo() {
+		return bankIfscRoutingNo;
+	}
+
+	public void setBankIfscRoutingNo(String bankIfscRoutingNo) {
+		this.bankIfscRoutingNo = bankIfscRoutingNo;
+	}
+
+	public String getCreditCardNo() {
+		return creditCardNo;
+	}
+
+	public void setCreditCardNo(String creditCardNo) {
+		this.creditCardNo = creditCardNo;
+	}
+
+	public String getCerditCardExpDate() {
+		return cerditCardExpDate;
+	}
+
+	public void setCerditCardExpDate(String cerditCardExpDate) {
+		this.cerditCardExpDate = cerditCardExpDate;
+	}
+
+	public String getCreditcardSecurityCode() {
+		return creditcardSecurityCode;
+	}
+
+	public void setCreditcardSecurityCode(String creditcardSecurityCode) {
+		this.creditcardSecurityCode = creditcardSecurityCode;
+	}
+
+	public String getDebitCardNo() {
+		return debitCardNo;
+	}
+
+	public void setDebitCardNo(String debitCardNo) {
+		this.debitCardNo = debitCardNo;
+	}
+
+	public String getDebitCardExpDate() {
+		return debitCardExpDate;
+	}
+
+	public void setDebitCardExpDate(String debitCardExpDate) {
+		this.debitCardExpDate = debitCardExpDate;
+	}
+
+	public String getDebitcardSecurityCode() {
+		return debitcardSecurityCode;
+	}
+
+	public void setDebitcardSecurityCode(String debitcardSecurityCode) {
+		this.debitcardSecurityCode = debitcardSecurityCode;
+	}
+
+	
+	
+	
 	
 
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

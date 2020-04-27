@@ -5,7 +5,7 @@ import java.util.Random;
 public class RandomPasswordOtpUtil {
 	
 	
-    static char[] getGeneratedPassword(int len) 
+    public static char[] getGeneratedPassword(int len) 
     { 
       
         // A strong password has Cap_chars, Lower_chars, 
@@ -36,7 +36,7 @@ public class RandomPasswordOtpUtil {
         return password; 
     } 
 	
-	static char[] getGeneratedOTP(int len) 
+	public static char[] getGeneratedOTP(int len) 
     { 
         
         // Using numeric values 

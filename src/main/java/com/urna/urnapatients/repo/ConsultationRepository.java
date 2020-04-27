@@ -8,10 +8,10 @@ import com.urna.urnapatients.models.Consultation;
 public interface ConsultationRepository extends CrudRepository<Consultation, Long> {
 	
 	@Query("SELECT c FROM Consultation c where c.cratedByPatientId=?1")
-	public Iterable<Consultation> findAllConsultationByPatientId(Integer cratedByPatientId);
+	public Iterable<Consultation> findAllConsultationByPatientId(Long cratedByPatientId);
 	
 	@Query("SELECT c FROM Consultation c where c.lastrespondedByDocId=?1")
-	public Iterable<Consultation> findAllConsultationByRespondedDoctorId(Integer lastrespondedByDocId);
+	public Iterable<Consultation> findAllConsultationByRespondedDoctorId(Long lastrespondedByDocId);
 	
 	
 	@Query("SELECT c FROM Consultation c where c.speciality=?1")

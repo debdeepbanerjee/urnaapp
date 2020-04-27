@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.urna.urnapatients.models.Patient;
 
-public interface PatientRepository extends CrudRepository<Patient, Integer>  {
+public interface PatientRepository extends CrudRepository<Patient, Long>  {
 	@Query("SELECT u FROM Patient u where u.mobile=?1 and u.secretPasscode=?2")
 	public Optional<Patient> findPatientByLoginIds(String mobile,String secretPasscode);
 	

@@ -72,12 +72,12 @@ public class ConsultationServiceImpl implements ConsultationService{
 	}
 
 	@Override
-	public Iterable<Consultation> findAllConsultationByPatientId(Integer cratedByPatientId) {
+	public Iterable<Consultation> findAllConsultationByPatientId(Long cratedByPatientId) {
 		return consultationRepository.findAllConsultationByPatientId(cratedByPatientId);
 	}
 
 	@Override
-	public Iterable<Consultation> findAllConsultationByRespondedDoctorId(Integer lastrespondedByDocId) {
+	public Iterable<Consultation> findAllConsultationByRespondedDoctorId(Long lastrespondedByDocId) {
 		return consultationRepository.findAllConsultationByRespondedDoctorId(lastrespondedByDocId);
 	}
 

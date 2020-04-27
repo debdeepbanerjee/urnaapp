@@ -41,18 +41,18 @@ public class ConsultationController {
 	  }
 	
 	@GetMapping("/consultations/patient")
-	public @ResponseBody Iterable<Consultation> getAllConsultationsForPatient(@Valid @RequestBody Integer patientId) {
+	public @ResponseBody Iterable<Consultation> getAllConsultationsForPatient(@Valid @RequestBody Long patientId) {
 	    return consultationService.findAllConsultationByPatientId(patientId);
 	  }
 	
 	@GetMapping("/consultations/doctor")
-	public @ResponseBody Iterable<Consultation> getAllConsultationsForDoctor(@Valid @RequestBody Integer doctorId) {
+	public @ResponseBody Iterable<Consultation> getAllConsultationsForDoctor(@Valid @RequestBody Long doctorId) {
 	    return consultationService.findAllConsultationByRespondedDoctorId(doctorId);
 	  }
 	
 	@GetMapping("/consultations/secure/patient")
 	public @ResponseBody Iterable<Consultation> getAllConsultationsForPatientSecure(HttpSession session) {
-		Integer patientId=0;
+		Long patientId=0l;
 		Patient p = (Patient) session.getAttribute("patient");
 		if(p != null) {
 		patientId = p.getId(); 
@@ -62,13 +62,13 @@ public class ConsultationController {
 	
 	@GetMapping("/consultations/secure/patient/id/{id}")
 	public @ResponseBody Iterable<Consultation> getAllConsultationsForPatientSecureById(@PathVariable String id) {	
-	    return consultationService.findAllConsultationByPatientId(Integer.parseInt(id));
+	    return consultationService.findAllConsultationByPatientId(Long.parseLong(id));
 	  }
 	
 	@GetMapping("/consultations/secure/doctor")
 	public @ResponseBody Iterable<Consultation> getAllConsultationsForDoctorSecure(HttpSession session) {
 		Doctor d = (Doctor) session.getAttribute("doctor");
-		Integer doctorId = d.getId(); 
+		Long doctorId = d.getId(); 
 		return consultationService.findAllConsultationByRespondedDoctorId(doctorId);
 	  }
 	
@@ -90,7 +90,7 @@ public class ConsultationController {
 	@PostMapping("/nosession/consultation/{id}")
 	public Consultation createConsultationNoSession(@Valid @RequestBody ConsultationDto consultationDto,@PathVariable String id) {
 		Consultation consultation = ConsultationUtil.transformFromDto(consultationDto);
-		consultation.setCratedByPatientId(Integer.parseInt(id));
+		consultation.setCratedByPatientId(Long.parseLong(id));
 		return consultationService.insert(consultation);
 	}
 
@@ -108,7 +108,7 @@ public class ConsultationController {
 	@PutMapping("/nosession/consultation/{id}")
 	public Consultation updateConsultationNoSession(@Valid @RequestBody ConsultationDto consultationDto,@PathVariable String id) {
 		Consultation consultation = ConsultationUtil.transformFromDto(consultationDto);
-		consultation.setLastrespondedByDocId(Integer.parseInt(id));
+		consultation.setLastrespondedByDocId(Long.parseLong(id));
 		return consultationService.update(consultation);
 	}
 

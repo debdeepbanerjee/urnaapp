@@ -24,12 +24,12 @@ public class ConsultationUtil {
 	}
 	public static void setPatientIdFromSession(HttpSession session, Consultation consultation) {
 		Patient p=(Patient) session.getAttribute("patient");
-		Integer cratedByPatientId=p.getId();
+		Long cratedByPatientId=p.getId();
 		consultation.setCratedByPatientId(cratedByPatientId);
 	}
 	public static void setDoctorIdFromSession(HttpSession session, Consultation consultation) {
 		Doctor d=(Doctor) session.getAttribute("doctor");
-		Integer respondedByDoctorId=d.getId();
+		Long respondedByDoctorId=d.getId();
 		consultation.setLastrespondedByDocId(respondedByDoctorId);
 	}
 }

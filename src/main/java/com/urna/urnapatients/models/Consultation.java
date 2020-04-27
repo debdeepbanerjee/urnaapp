@@ -28,8 +28,8 @@ public class Consultation implements java.io.Serializable {
 	private String 	durationOfHealthIssue;
 	private String  additionalQuery;
 	private String  consultationResponse;
-	private Integer lastrespondedByDocId;
-	private Integer cratedByPatientId;
+	private Long lastrespondedByDocId;
+	private Long cratedByPatientId;
 	
 	private String status;
 	private Timestamp createdOn;
@@ -76,16 +76,16 @@ public class Consultation implements java.io.Serializable {
 	public void setConsultationResponse(String consultationResponse) {
 		this.consultationResponse = consultationResponse;
 	}
-	public Integer getLastrespondedByDocId() {
+	public Long getLastrespondedByDocId() {
 		return lastrespondedByDocId;
 	}
-	public void setLastrespondedByDocId(Integer lastrespondedByDocId) {
+	public void setLastrespondedByDocId(Long lastrespondedByDocId) {
 		this.lastrespondedByDocId = lastrespondedByDocId;
 	}
-	public Integer getCratedByPatientId() {
+	public Long getCratedByPatientId() {
 		return cratedByPatientId;
 	}
-	public void setCratedByPatientId(Integer cratedByPatientId) {
+	public void setCratedByPatientId(Long cratedByPatientId) {
 		this.cratedByPatientId = cratedByPatientId;
 	}
 	public String getStatus() {

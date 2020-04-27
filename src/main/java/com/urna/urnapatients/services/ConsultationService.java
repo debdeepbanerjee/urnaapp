@@ -11,7 +11,7 @@ public interface ConsultationService {
 	public Consultation update(Consultation consultation);
 	public void delete(Consultation consultation);
 	public void deleteById(Long id);
-	public Iterable<Consultation> findAllConsultationByPatientId(Integer cratedByPatientId);
-	public Iterable<Consultation> findAllConsultationByRespondedDoctorId(Integer lastrespondedByDocId);
+	public Iterable<Consultation> findAllConsultationByPatientId(Long cratedByPatientId);
+	public Iterable<Consultation> findAllConsultationByRespondedDoctorId(Long lastrespondedByDocId);
 	public Iterable<Consultation> findAllConsultationBySpecialization (String specialization);
 }

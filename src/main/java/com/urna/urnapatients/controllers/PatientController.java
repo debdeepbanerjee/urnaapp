@@ -45,7 +45,7 @@ public class PatientController {
 	
 	@GetMapping("/patient/{id}")
 	public @ResponseBody Optional<Patient> getPatientByIdStr(@PathVariable String id) {	    
-		return patientService.findById(Integer.parseInt(id));
+		return patientService.findById(Long.parseLong(id));
 	  }
 	
 	@GetMapping("/loggedin/patient")

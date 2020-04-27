@@ -20,7 +20,7 @@ public class DoctorServiceImpl implements DoctorService {
 	}
 
 	@Override
-	public Optional<Doctor> findById(Integer id) {
+	public Optional<Doctor> findById(Long id) {
 		return doctorRepository.findById(id);
 	}
 
@@ -35,7 +35,7 @@ public class DoctorServiceImpl implements DoctorService {
 	}
 
 	@Override
-	public void deleteById(Integer id) {
+	public void deleteById(Long id) {
 		doctorRepository.deleteById(id);
 		
 	}
