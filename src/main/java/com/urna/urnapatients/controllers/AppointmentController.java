@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.urna.urnapatients.controllers.utils.RandomPasswordOtpUtil;
 import com.urna.urnapatients.models.Appointment;
+import com.urna.urnapatients.models.Consultation;
 import com.urna.urnapatients.repo.AppointmentRepository;
 
 @CrossOrigin
@@ -43,5 +44,29 @@ public class AppointmentController {
 		return appointment;
 		
 	}
+	
+	
+	@PostMapping("/inquire/appointment")
+	public Iterable<Appointment> getValidateAppointment(@Valid @RequestBody Appointment appointment) {
+		
+		Iterable<Appointment> appointmentByUniquieKey = appointmentRepository.getAppointmentByUniquieKey(appointment.getUniquieKey());
+		
+		Calendar cal= Calendar.getInstance();
+		cal.setTime(new Date());
+		cal.add(Calendar.HOUR,24);
+		Timestamp timeStampNow= new Timestamp(cal.getTimeInMillis());
+		appointmentByUniquieKey.forEach((app)->{
+			Timestamp timeStampApp = app.getApptEndTime();
+			long timems=timeStampNow.getTime()-timeStampApp.getTime();
+			int hours=(int)timems/3600000;
+			if (hours>24) {
+				throw new RuntimeException("Appointment not valid !");
+			}
+		});
+		return appointmentByUniquieKey;
+		
+		
+	}
+
 	
 }
