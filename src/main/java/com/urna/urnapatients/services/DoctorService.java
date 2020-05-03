@@ -18,4 +18,5 @@ public interface DoctorService {
 	public Optional<Doctor> findDoctorByLoginIdsEmail(String email,String secretPasscode);
 	public Optional<Doctor> findDoctorByEmail(String email);
 	public Optional<Doctor> findDoctorByMobile(String mobile);
+	public Iterable<Doctor> findAllDoctorBySpecialization(String speciality);
 }

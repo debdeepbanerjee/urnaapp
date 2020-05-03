@@ -56,5 +56,9 @@ public class DoctorServiceImpl implements DoctorService {
 	public Optional<Doctor> findDoctorByMobile(String mobile) {
 		return doctorRepository.findDoctorByMobile(mobile);
 	}
+	@Override
+	public Iterable<Doctor> findAllDoctorBySpecialization(String speciality) {
+		return doctorRepository.findAllDoctorBySpecialization(speciality);
+	}
 
 }

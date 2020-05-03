@@ -36,6 +36,10 @@ public class DoctorController {
 	public @ResponseBody Iterable<Doctor> getAllDoctors() {
 	    return doctorService.findAll();
 	  }
+	@GetMapping("/speciality/doctors/{speciality}")
+	public @ResponseBody Iterable<Doctor> getAllDoctorsBySpecialization(@PathVariable String speciality) {
+	    return doctorService.findAllDoctorBySpecialization(speciality);
+	  }
 	
 	@GetMapping("/doctor")
 	public @ResponseBody Optional<Doctor> getDoctorById(@Valid @RequestBody Doctor doctor) {
