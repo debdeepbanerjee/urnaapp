@@ -29,3 +29,6 @@ build/
 
 ### VS Code ###
 .vscode/
+/ng-app/node_modules/
+/ng-app/dist/
+/src/main/resources/templates/index.html

@@ -1,5 +1,7 @@
 package com.urna.urnapatients.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -50,7 +52,7 @@ public class Doctor implements java.io.Serializable{
 	private String address;
 	
 	private String dob;
-	
+
 	private String secretPasscode;
 	
 	private String registrationNumber;
@@ -296,8 +298,37 @@ public class Doctor implements java.io.Serializable{
 	public void setConsultationFee(String consultationFee) {
 		this.consultationFee = consultationFee;
 	}
-	
-	
-	
 
+	@Override
+	public String toString() {
+		return "Doctor{" +
+				"id=" + id +
+				", email='" + email + '\'' +
+				", firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				", middleName='" + middleName + '\'' +
+				", fullName='" + fullName + '\'' +
+				", speciality='" + speciality + '\'' +
+				", qualifications='" + qualifications + '\'' +
+				", practice='" + practice + '\'' +
+				", specializations='" + specializations + '\'' +
+				", languageSpoken='" + languageSpoken + '\'' +
+				", phone='" + phone + '\'' +
+				", mobile='" + mobile + '\'' +
+				", address='" + address + '\'' +
+				", dob='" + dob + '\'' +
+				", secretPasscode='" + secretPasscode + '\'' +
+				", registrationNumber='" + registrationNumber + '\'' +
+				", gender='" + gender + '\'' +
+				", consultationFee='" + consultationFee + '\'' +
+				", bankAcctNo='" + bankAcctNo + '\'' +
+				", bankIfscRoutingNo='" + bankIfscRoutingNo + '\'' +
+				", creditCardNo='" + creditCardNo + '\'' +
+				", cerditCardExpDate='" + cerditCardExpDate + '\'' +
+				", creditcardSecurityCode='" + creditcardSecurityCode + '\'' +
+				", debitCardNo='" + debitCardNo + '\'' +
+				", debitCardExpDate='" + debitCardExpDate + '\'' +
+				", debitcardSecurityCode='" + debitcardSecurityCode + '\'' +
+				'}';
+	}
 }

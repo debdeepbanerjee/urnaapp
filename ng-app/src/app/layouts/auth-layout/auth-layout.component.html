@@ -1,0 +1,21 @@
+<header class="navbar navbar-expand flex-column flex-md-row bd-navbar"><a
+    class="navbar-brand mr-0 mr-md-2 navbar-absolute-logo"
+    routerLink="/"> UrnaCare </a>
+  <div class="navbar-nav-scroll ml-md-auto ">
+    <ul class="navbar-nav bd-navbar-nav flex-row">
+      <li class="nav-item">
+        <a class="nav-link" href="javascript: void(0)" (click)="onPortalClick('p')"><i
+            class="nc-icon nc-tv-2"></i> Patient Portal</a></li>
+      <li class="nav-item"><a class="nav-link"
+        href="javascript: void(0)" (click)="onPortalClick('d')"><i
+            class="nc-icon nc-delivery-fast"></i> Doctors Portal</a></li>
+    </ul>
+  </div>
+</header>
+
+<div class="wrapper">
+  <div class="main-panel" data="green">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>

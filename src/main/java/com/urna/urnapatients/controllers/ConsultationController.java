@@ -23,10 +23,11 @@ import com.urna.urnapatients.models.Consultation;
 import com.urna.urnapatients.models.Doctor;
 import com.urna.urnapatients.models.Patient;
 import com.urna.urnapatients.services.ConsultationService;
+import springfox.documentation.annotations.ApiIgnore;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/rest/urna/consultation")
+@RequestMapping("/rest/urna/consultations")
 public class ConsultationController {
 	ConsultationService consultationService;
 	

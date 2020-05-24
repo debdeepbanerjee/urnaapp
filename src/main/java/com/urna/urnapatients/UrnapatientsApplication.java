@@ -6,8 +6,6 @@ import org.springframework.context.annotation.Bean;
 
 import com.urna.urnapatients.services.ConsultationService;
 import com.urna.urnapatients.services.ConsultationServiceImpl;
-import com.urna.urnapatients.services.DoctorService;
-import com.urna.urnapatients.services.DoctorServiceImpl;
 import com.urna.urnapatients.services.OtpService;
 import com.urna.urnapatients.services.OtpServiceImpl;
 import com.urna.urnapatients.services.PatientService;
@@ -23,11 +21,6 @@ public class UrnapatientsApplication {
 	@Bean
 	public ConsultationService getConsultationService() {
 		return new ConsultationServiceImpl();
-	}
-	
-	@Bean
-	public  DoctorService getDoctorService() {
-		return new DoctorServiceImpl();
 	}
 
 	@Bean

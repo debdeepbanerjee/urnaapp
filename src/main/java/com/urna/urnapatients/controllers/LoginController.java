@@ -5,7 +5,9 @@ import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import com.urna.urnapatients.dto.LoginDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -64,4 +66,25 @@ public class LoginController {
 		sess.setAttribute("patient", patientByLoginIdsEmail);
 	    return patientByLoginIdsEmail;
 	  }
+
+	@PostMapping()
+	public ResponseEntity authenticate(@Valid @RequestBody LoginDto loginDto, HttpSession sess) {
+		if("p".equalsIgnoreCase(loginDto.getUserType())) {
+			Optional<Patient> patientOptional = patientService.findPatientByLoginIdsEmail(loginDto.getEmail(), loginDto.getPassword());
+			if(patientOptional.isPresent()) {
+				Patient patient = patientOptional.get();
+				sess.setAttribute("patient", patient);
+				return ResponseEntity.ok(patient);
+			}
+		} else if("d".equalsIgnoreCase(loginDto.getUserType())) {
+			Optional<Doctor> doctorOptional = doctorService.findDoctorByLoginIdsEmail(loginDto.getEmail(), loginDto.getPassword());
+			if(doctorOptional.isPresent()) {
+				Doctor doctor = doctorOptional.get();
+				sess.setAttribute("doctor", doctor);
+				return ResponseEntity.ok(doctor);
+			}
+		}
+
+		return ResponseEntity.badRequest().body("Login Failed");
+	}
 }

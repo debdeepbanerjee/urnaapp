@@ -1,12 +1,10 @@
 package com.urna.urnapatients.models;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "appointment")
@@ -18,15 +16,26 @@ public class Appointment {
 	private Long consultationId;
 	
 	private String uniquieKey;
-	
-	private Long patientId;
-	
-	private Long doctorId;
+
+	@ManyToOne
+	@JoinColumn(name="patient_id", nullable=false)
+	private Patient patient;
+
+	@ManyToOne
+	@JoinColumn(name="doctor_id", nullable=false)
+	private Doctor doctor;
 	
 	private Timestamp apptEndTime;
 	
 	private Long apptEndTimeN;
-	
+
+	private Long appointmentRequestId;
+
+	@Column(columnDefinition = "TIMESTAMP")
+	private LocalDateTime scheduledDate;
+
+
+
 	
 	public Timestamp getApptEndTime() {
 		return apptEndTime;
@@ -69,21 +78,35 @@ public class Appointment {
 		this.uniquieKey = uniquieKey;
 	}
 
-	public Long getPatientId() {
-		return patientId;
+	public Patient getPatient() {
+		return patient;
 	}
 
-	public void setPatientId(Long patientId) {
-		this.patientId = patientId;
+	public void setPatient(Patient patient) {
+		this.patient = patient;
 	}
 
-	public Long getDoctorId() {
-		return doctorId;
+	public Doctor getDoctor() {
+		return doctor;
 	}
 
-	public void setDoctorId(Long doctorId) {
-		this.doctorId = doctorId;
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
 	}
 
-	
+	public Long getAppointmentRequestId() {
+		return appointmentRequestId;
+	}
+
+	public void setAppointmentRequestId(Long appointmentRequestId) {
+		this.appointmentRequestId = appointmentRequestId;
+	}
+
+	public LocalDateTime getScheduledDate() {
+		return scheduledDate;
+	}
+
+	public void setScheduledDate(LocalDateTime scheduledDate) {
+		this.scheduledDate = scheduledDate;
+	}
 }

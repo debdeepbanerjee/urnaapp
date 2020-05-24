@@ -1,10 +1,12 @@
 package com.urna.urnapatients.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import com.urna.urnapatients.dto.SearchDoctorDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,10 +29,9 @@ import com.urna.urnapatients.services.DoctorService;
 @RequestMapping("/rest/urna/doctors")
 public class DoctorController {
  
-	DoctorService doctorService;
+	private final DoctorService doctorService;
 
-	@Autowired
-	public void setDoctorService(DoctorService doctorService) {
+	public DoctorController(DoctorService doctorService) {
 		this.doctorService = doctorService;
 	}
 
@@ -39,7 +40,7 @@ public class DoctorController {
 	    return doctorService.findAll();
 	  }
 	@GetMapping("/speciality/doctors/{speciality}")
-	public @ResponseBody Iterable<Doctor> getAllDoctorsBySpecialization(@PathVariable String speciality) {
+	public @ResponseBody List<SearchDoctorDto> getAllDoctorsBySpecialization(@PathVariable String speciality) {
 	    return doctorService.findAllDoctorBySpecialization(speciality);
 	  }
 	
