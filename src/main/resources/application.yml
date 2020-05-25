@@ -2,7 +2,7 @@ spring:
       datasource:
                hikari:
                     connectionTimeout:20000
-                    maximumPoolSize:10
+                    maximumPoolSize:13
 
                 url:jdbc:${JDBC_DATABASE_URL}
                 username:${JDBC_DATABASE_USERNAME}
