@@ -70,7 +70,11 @@ export class LoginComponent implements OnInit {
     credentials.userType = this.userType;
     this.authService.login(credentials)
     .subscribe(res => {
-      this.router.navigateByUrl('/dashboard');
+      if(this.userType === 'p') {
+        this.router.navigateByUrl('/patient-appointment');
+      } else if(this.userType === 'd') {
+        this.router.navigateByUrl('/doctor-appointment');
+      }
     }, err => {
       console.log(err);
       this.toastr.error('Unable to login');

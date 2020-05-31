@@ -9,21 +9,15 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
   {
-    path: "/dashboard",
-    title: "Dashboard",
-    icon: "icon-chart-pie-36",
+    path: "",
+    title: "Appointments",
+    icon: "icon-notes",
     class: ""
   },
   {
     path: "",
     title: "Profile",
     icon: "icon-single-02",
-    class: ""
-  },
-  {
-    path: "",
-    title: "Appointments",
-    icon: "icon-notes",
     class: ""
   }
 ];
@@ -42,11 +36,13 @@ export class SidebarComponent implements OnInit {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
     const ut = this.authService.getUserType();
     if(ut === 'p') {
+      this.menuItems[0].path = '/patient-appointment';
       this.menuItems[1].path = '/patient-profile';
-      this.menuItems[2].path = '/patient-appointment';
+
     } else if(ut === 'd') {
+      this.menuItems[0].path = '/doctor-appointment';
       this.menuItems[1].path = '/doctor-profile';
-      this.menuItems[2].path = '/doctor-appointment';
+
     }
   }
   isMobileMenu() {
