@@ -7,6 +7,7 @@ export const SPECIALITIES = [
     'Endocrinology',
     'ENT',
     'Gastroenterology',
+    'General',
     'Neurology',
     'Obstetrics and Gynecology',
     'Oncology',

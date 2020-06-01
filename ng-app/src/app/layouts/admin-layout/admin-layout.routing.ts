@@ -7,7 +7,6 @@ import { PatientAppointmentComponent } from 'src/app/pages/appointment/patient-a
 import { DoctorAppointmentComponent } from 'src/app/pages/appointment/doctor-appointment.component';
 
 export const AdminLayoutRoutes: Routes = [
-  { path: "dashboard", component: DashboardComponent },
   { path: "patient-profile", component: PatientProfileComponent },
   { path: "doctor-profile", component: DoctorProfileComponent },
   { path: "patient-appointment", component: PatientAppointmentComponent },
