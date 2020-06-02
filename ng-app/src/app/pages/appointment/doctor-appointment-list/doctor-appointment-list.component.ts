@@ -78,7 +78,7 @@ export class DoctorAppointmentListComponent implements OnInit {
   openConsultation(appointment) {
     if(!this.completed) {
       const modalRef = this.modalService.open(ConsultationEditComponent, { size: 'lg', scrollable: true });
-      modalRef.componentInstance.appointment = appointment.id;
+      modalRef.componentInstance.appointment = appointment;
     } else {
       const modalRef = this.modalService.open(ConsultationViewComponent, { size: 'lg', scrollable: true });
       modalRef.componentInstance.appointment = appointment;

@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
   ]
 })
 export class ConsultationEditComponent implements OnInit {
-  appointmentId;
+  appointment;
   form = new FormGroup({});
   model: any = {};
   options: FormlyFormOptions = {};
@@ -73,10 +73,10 @@ export class ConsultationEditComponent implements OnInit {
 
   onCreate() {
     const consultation = Object.assign({}, this.model);
-    this.appointmentService.addConsultation(this.appointmentId, consultation)
+    this.appointmentService.addConsultation(this.appointment.id, consultation)
     .subscribe(res => {
       this.appointmentService.consultationCreatedEmitter.emit('Y');
-      this.toastr.success('Consultation Added Succesfully');
+      this.toastr.success('Consultation Added Successfully');
       this.activeModal.close('Y');
     }, err => {
       this.toastr.error('Could not add a consultation');
