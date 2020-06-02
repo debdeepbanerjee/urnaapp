@@ -18,7 +18,7 @@
                 <tbody>
                     <ng-container *ngIf="appointments && appointments.length > 0">
                         <tr *ngFor="let a of appointments">
-                            <td>Dr. {{ a.patientFirstName }} {{ a.patientLastName }}</td>
+                            <td>{{ a.patientFirstName }} {{ a.patientLastName }}</td>
                             <td>{{ a.scheduledDate | date: 'MMM d, y, h:mm a' }}</td>
                             <td>
                                 <a [href]="getChatLink(a)" target="_blank" *ngIf="enableChat(a)">Video Chat</a>
