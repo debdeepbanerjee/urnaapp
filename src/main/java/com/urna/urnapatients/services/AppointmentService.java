@@ -11,6 +11,7 @@ import com.urna.urnapatients.models.Patient;
 import com.urna.urnapatients.repo.AppointmentRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,14 +28,16 @@ public class AppointmentService {
     }
 
     public List<AppointmentDto> pendingAppointmentsForPatient(Long patientId) {
+        LocalDateTime scheduledDate = LocalDateTime.now().plusMinutes(30);
        return this.appointmentMapper.toDto(
-                this.appointmentRepository.findByPatientIdAndConsultationIdIsNullOrderByScheduledDate(patientId)
+                this.appointmentRepository.findByPatientIdAndScheduledDateGreaterThanConsultationIdIsNullOrderByScheduledDate(patientId, scheduledDate)
         );
     }
 
     public List<AppointmentDto> pendingAppointmentsForDoctor(Long doctorId) {
+        LocalDateTime scheduledDate = LocalDateTime.now().plusMinutes(30);
         return this.appointmentMapper.toDto(
-                this.appointmentRepository.findByDoctorIdAndConsultationIdIsNullOrderByScheduledDate(doctorId)
+                this.appointmentRepository.findByDoctorIdAndScheduledDateGreaterThanConsultationIdIsNullOrderByScheduledDate(doctorId, scheduledDate)
         );
     }
 
