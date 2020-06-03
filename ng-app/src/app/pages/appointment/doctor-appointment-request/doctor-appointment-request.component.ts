@@ -125,6 +125,7 @@ export class DoctorAppointmentRequestComponent implements OnInit {
           .subscribe(res => {
             console.log(res.body);
             this.toastr.success('Approved');
+            this.appointmentService.consultationCreatedEmitter.emit('Y');
             this.load();
           }, err => {
             this.toastr.error('Error approving');
