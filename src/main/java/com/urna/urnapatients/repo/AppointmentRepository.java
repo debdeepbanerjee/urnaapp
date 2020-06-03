@@ -15,8 +15,8 @@ public interface AppointmentRepository extends CrudRepository <Appointment,Long>
 	@Query("SELECT a FROM Appointment a where a.uniquieKey=?1 and a.id=?2")
 	public Iterable<Appointment> getAppointmentByUniquieKeyAndId(String uniquieKey,Long id);
 
-	List<Appointment> findByPatientIdAndScheduledDateGreaterThanConsultationIdIsNullOrderByScheduledDate(Long patientId, LocalDateTime scheduledDate);
-	List<Appointment> findByDoctorIdAndScheduledDateGreaterThanConsultationIdIsNullOrderByScheduledDate(Long doctorId, LocalDateTime scheduledDate);
+	List<Appointment> findByPatientIdAndScheduledDateGreaterThanAndConsultationIdIsNullOrderByScheduledDate(Long patientId, LocalDateTime scheduledDate);
+	List<Appointment> findByDoctorIdAndScheduledDateGreaterThanAndConsultationIdIsNullOrderByScheduledDate(Long doctorId, LocalDateTime scheduledDate);
 
 	List<Appointment> findByPatientIdAndConsultationIdIsNotNullOrderByScheduledDateDesc(Long patientId);
 	List<Appointment> findByDoctorIdAndConsultationIdIsNotNullOrderByScheduledDateDesc(Long doctorId);

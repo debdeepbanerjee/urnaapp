@@ -30,14 +30,14 @@ public class AppointmentService {
     public List<AppointmentDto> pendingAppointmentsForPatient(Long patientId) {
         LocalDateTime scheduledDate = LocalDateTime.now().plusMinutes(30);
        return this.appointmentMapper.toDto(
-                this.appointmentRepository.findByPatientIdAndScheduledDateGreaterThanConsultationIdIsNullOrderByScheduledDate(patientId, scheduledDate)
+                this.appointmentRepository.findByPatientIdAndScheduledDateGreaterThanAndConsultationIdIsNullOrderByScheduledDate(patientId, scheduledDate)
         );
     }
 
     public List<AppointmentDto> pendingAppointmentsForDoctor(Long doctorId) {
         LocalDateTime scheduledDate = LocalDateTime.now().plusMinutes(30);
         return this.appointmentMapper.toDto(
-                this.appointmentRepository.findByDoctorIdAndScheduledDateGreaterThanConsultationIdIsNullOrderByScheduledDate(doctorId, scheduledDate)
+                this.appointmentRepository.findByDoctorIdAndScheduledDateGreaterThanAndConsultationIdIsNullOrderByScheduledDate(doctorId, scheduledDate)
         );
     }
 
