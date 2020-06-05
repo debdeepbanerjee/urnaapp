@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConsultationViewComponent } from '../consultation-view/consultation-view.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-patient-appointment-list',
@@ -11,36 +12,64 @@ import { ConsultationViewComponent } from '../consultation-view/consultation-vie
   styles: [
   ]
 })
-export class PatientAppointmentListComponent implements OnInit {
+export class PatientAppointmentListComponent implements OnInit, OnDestroy {
 
   appointments: any[];
+  refreshListEmitterSubscription: Subscription;
   @Input() completed = false;
   constructor(
     private appointmentService: AppointmentService, 
     private toastr: ToastrService,
     private modalService: NgbModal) { }
 
+
   ngOnInit(): void {
     this.load();
+    this.refreshListEmitterSubscription = this.appointmentService.refreshListEmitter.subscribe(() => {
+      this.load();
+    });
   }
-
+  ngOnDestroy(): void {
+    if(!!this.refreshListEmitterSubscription) {
+      this.refreshListEmitterSubscription.unsubscribe();
+    }
+  }
   load() {
     if (!this.completed) {
       this.appointmentService.pendingAppointments()
-      .subscribe(res => this.appointments = res.body as any[],
+      .subscribe(res => {
+        this.appointments = res.body as any[];
+        this.pushChatAndConsultationLinks();
+      },
         err => {
           console.log(err);
           this.toastr.error('Unable to fetch upcoming appointments.');
         });
     } else {
       this.appointmentService.completedAppointments()
-      .subscribe(res => this.appointments = res.body as any[],
+      .subscribe(res =>  {
+        this.appointments = res.body as any[];
+        this.pushChatAndConsultationLinks();
+      },
         err => {
           console.log(err);
           this.toastr.error('Unable to fetch past appointments.');
         });
     }
 
+  }
+
+  pushChatAndConsultationLinks() {
+    if(this.appointments && this.appointments.length) {
+        this.appointments.forEach(a => {
+          if(!this.completed) {
+            a.enableChat = this.enableChat(a);
+            if(a.enableChat) {
+              a.chatLink = this.getChatLink(a);
+            }
+          }
+        });
+    }
   }
 
   getChatLink(apmt) {

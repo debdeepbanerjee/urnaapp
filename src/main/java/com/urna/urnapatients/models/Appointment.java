@@ -34,9 +34,6 @@ public class Appointment {
 	@Column(columnDefinition = "TIMESTAMP")
 	private LocalDateTime scheduledDate;
 
-
-
-	
 	public Timestamp getApptEndTime() {
 		return apptEndTime;
 	}

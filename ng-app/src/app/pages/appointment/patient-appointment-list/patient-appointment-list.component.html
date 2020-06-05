@@ -21,8 +21,9 @@
                             <td>Dr. {{ a.doctorFirstName }} {{ a.doctorLastName }}</td>
                             <td>{{ a.scheduledDate | date: 'MMM d, y, h:mm a' }}</td>
                             <td>
-                                <a [href]="getChatLink(a)" target="_blank" *ngIf="enableChat(a)">Video Chat</a>
-                                <button class="btn btn-sm btn-info" *ngIf="completed" (click)="openConsultation(a)">View Consultation</button>
+                                <a class="btn btn-sm btn-warning" [href]="a.chatLink" target="_blank" *ngIf="a.enableChat" >Video Chat</a>
+                                <button class="btn btn-sm btn-info" *ngIf="completed && !!a.consultationId" (click)="openConsultation(a)">View Consultation</button>
+                                <span *ngIf="completed && !a.consultationId">Missed</span>
                             </td>
                         </tr>
                     </ng-container>
