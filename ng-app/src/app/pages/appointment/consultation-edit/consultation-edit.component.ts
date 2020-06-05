@@ -75,7 +75,7 @@ export class ConsultationEditComponent implements OnInit {
     const consultation = Object.assign({}, this.model);
     this.appointmentService.addConsultation(this.appointment.id, consultation)
     .subscribe(res => {
-      this.appointmentService.consultationCreatedEmitter.emit('Y');
+      this.appointmentService.refreshListEmitter.emit();
       this.toastr.success('Consultation Added Successfully');
       this.activeModal.close('Y');
     }, err => {

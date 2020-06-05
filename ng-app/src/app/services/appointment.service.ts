@@ -14,8 +14,9 @@ export class AppointmentService {
   private pendingAppointmentsUrl = '/rest/urna/appointments/pending';
   private completedAppointmentsUrl = '/rest/urna/appointments/completed';
 
-  appointmnetRequestCreatedEmitter = new EventEmitter<string>();
-  consultationCreatedEmitter = new EventEmitter<string>();
+
+  refreshListEmitter = new EventEmitter();
+  
   constructor(private http: HttpClient) { }
 
   getAppointmentRequestsForPatient() {

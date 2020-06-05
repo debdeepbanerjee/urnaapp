@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-patient-appointment-request',
@@ -8,18 +9,24 @@ import { ToastrService } from 'ngx-toastr';
   styles: [
   ]
 })
-export class PatientAppointmentRequestComponent implements OnInit {
+export class PatientAppointmentRequestComponent implements OnInit, OnDestroy {
 
   appointmentRequests: any[];
+  refreshListEmitterSubscription: Subscription;
   constructor(private appointmentService: AppointmentService, private toastr: ToastrService) { }
 
+
   ngOnInit(): void {
-    this.appointmentService.appointmnetRequestCreatedEmitter.subscribe(val => {
-      if('Y' === val) {
-        this.load();
-      }
+    this.refreshListEmitterSubscription = this.appointmentService.refreshListEmitter.subscribe(val => {
+      this.load();
     });
     this.load();
+  }
+
+  ngOnDestroy(): void {
+    if(!!this.refreshListEmitterSubscription) {
+      this.refreshListEmitterSubscription.unsubscribe();
+    }
   }
 
   load() {

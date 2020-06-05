@@ -108,7 +108,7 @@ export class AppointmentRequestEditComponent implements OnInit {
     console.log(aptreq);
     this.appointmentService.createAppointmentRequest(aptreq)
     .subscribe(res => {
-      this.appointmentService.appointmnetRequestCreatedEmitter.emit('Y');
+      this.appointmentService.refreshListEmitter.emit();
       this.toastr.success('Appointment Created Succesfully');
       this.activeModal.close('Y');
     }, err => {
