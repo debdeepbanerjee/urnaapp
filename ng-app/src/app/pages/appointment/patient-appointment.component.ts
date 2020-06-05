@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { AppointmentService } from 'src/app/services/appointment.service';
+import { timer, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-patient-appointment',
@@ -6,11 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styles: [
   ]
 })
-export class PatientAppointmentComponent implements OnInit {
+export class PatientAppointmentComponent implements OnInit, OnDestroy {
+  private timerSource = timer(2 * 60 * 1000, 2 * 60 * 1000); /// every 2 mins
+  private timerSubscription: Subscription;
+  constructor(private appointmentService: AppointmentService) { }
 
-  constructor() { }
+  ngOnDestroy(): void {
+    if(!!this.timerSubscription) {
+      this.timerSubscription.unsubscribe();
+    }
+  }
 
   ngOnInit(): void {
+    this.timerSubscription = this.timerSource.subscribe(v => {
+      this.appointmentService.refreshListEmitter.emit();
+    });
   }
 
 }

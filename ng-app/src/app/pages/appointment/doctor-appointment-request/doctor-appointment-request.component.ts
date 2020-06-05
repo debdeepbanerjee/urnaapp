@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup } from '@angular/forms';
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-doctor-appointment-request',
@@ -11,7 +12,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styles: [
   ]
 })
-export class DoctorAppointmentRequestComponent implements OnInit {
+export class DoctorAppointmentRequestComponent implements OnInit, OnDestroy {
 
   appointmentRequests: any[];
 
@@ -80,17 +81,21 @@ export class DoctorAppointmentRequestComponent implements OnInit {
   ];
 
 
+  private refreshListEmitterSubscription: Subscription;
   constructor(private appointmentService: AppointmentService, private toastr: ToastrService, private modalService: NgbModal) { }
 
+
   ngOnInit(): void {
-    this.appointmentService.appointmnetRequestCreatedEmitter.subscribe(val => {
-      if ('Y' === val) {
-        this.load();
-      }
+    this.refreshListEmitterSubscription = this.appointmentService.refreshListEmitter.subscribe(val => {
+      this.load();
     });
     this.load();
   }
-
+  ngOnDestroy(): void {
+   if(!!this.refreshListEmitterSubscription) {
+     this.refreshListEmitterSubscription.unsubscribe();
+   }
+  }
   load() {
     this.appointmentService.getAppointmentRequestsForDoctor()
       .subscribe(res => {
@@ -125,7 +130,7 @@ export class DoctorAppointmentRequestComponent implements OnInit {
           .subscribe(res => {
             console.log(res.body);
             this.toastr.success('Approved');
-            this.appointmentService.consultationCreatedEmitter.emit('Y');
+            this.appointmentService.refreshListEmitter.emit();
             this.load();
           }, err => {
             this.toastr.error('Error approving');
