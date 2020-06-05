@@ -28,28 +28,30 @@ public class AppointmentService {
     }
 
     public List<AppointmentDto> pendingAppointmentsForPatient(Long patientId) {
-        LocalDateTime scheduledDate = LocalDateTime.now().plusMinutes(30);
+        LocalDateTime scheduledDate = LocalDateTime.now().minusMinutes(60);
        return this.appointmentMapper.toDto(
                 this.appointmentRepository.findByPatientIdAndScheduledDateGreaterThanAndConsultationIdIsNullOrderByScheduledDate(patientId, scheduledDate)
         );
     }
 
     public List<AppointmentDto> pendingAppointmentsForDoctor(Long doctorId) {
-        LocalDateTime scheduledDate = LocalDateTime.now().plusMinutes(30);
+        LocalDateTime scheduledDate = LocalDateTime.now().minusMinutes(60);
         return this.appointmentMapper.toDto(
                 this.appointmentRepository.findByDoctorIdAndScheduledDateGreaterThanAndConsultationIdIsNullOrderByScheduledDate(doctorId, scheduledDate)
         );
     }
 
-    public List<AppointmentDto> completedAppointmentsForPatient(Long patientId) {
+    public List<AppointmentDto> pastAppointmentsForPatient(Long patientId) {
+        LocalDateTime scheduledDate = LocalDateTime.now().minusMinutes(60);
         return this.appointmentMapper.toDto(
-                this.appointmentRepository.findByPatientIdAndConsultationIdIsNotNullOrderByScheduledDateDesc(patientId)
+                this.appointmentRepository.pastAppointmentsForPatient(patientId, scheduledDate)
         );
     }
 
-    public List<AppointmentDto> completedAppointmentsForDoctor(Long doctorId) {
+    public List<AppointmentDto> pastAppointmentsForDoctor(Long doctorId) {
+        LocalDateTime scheduledDate = LocalDateTime.now().minusMinutes(60);
         return this.appointmentMapper.toDto(
-                this.appointmentRepository.findByDoctorIdAndConsultationIdIsNotNullOrderByScheduledDateDesc(doctorId)
+                this.appointmentRepository.pastAppointmentsForDoctor(doctorId, scheduledDate)
         );
     }
 

@@ -168,4 +168,5 @@ public class AppointmentDto implements Serializable {
     public void setScheduledDate(LocalDateTime scheduledDate) {
         this.scheduledDate = scheduledDate;
     }
+
 }

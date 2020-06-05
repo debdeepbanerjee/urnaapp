@@ -87,11 +87,11 @@ public class AppointmentController {
 	public List<AppointmentDto> completedAppointments(@ApiIgnore HttpSession session) {
 		if(session.getAttribute("patient") != null) {
 			Patient patient = (Patient) session.getAttribute("patient");
-			return this.appointmentService.completedAppointmentsForPatient(patient.getId());
+			return this.appointmentService.pastAppointmentsForPatient(patient.getId());
 		}
 		if(session.getAttribute("doctor") != null) {
 			Doctor doctor = (Doctor) session.getAttribute("doctor");
-			return this.appointmentService.completedAppointmentsForDoctor(doctor.getId());
+			return this.appointmentService.pastAppointmentsForDoctor(doctor.getId());
 		}
 		throw new AccessDeniedException();
 	}

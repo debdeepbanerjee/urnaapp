@@ -1,9 +1,11 @@
 package com.urna.urnapatients.repo;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import com.urna.urnapatients.models.Appointment;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,6 +20,13 @@ public interface AppointmentRepository extends CrudRepository <Appointment,Long>
 	List<Appointment> findByPatientIdAndScheduledDateGreaterThanAndConsultationIdIsNullOrderByScheduledDate(Long patientId, LocalDateTime scheduledDate);
 	List<Appointment> findByDoctorIdAndScheduledDateGreaterThanAndConsultationIdIsNullOrderByScheduledDate(Long doctorId, LocalDateTime scheduledDate);
 
-	List<Appointment> findByPatientIdAndConsultationIdIsNotNullOrderByScheduledDateDesc(Long patientId);
-	List<Appointment> findByDoctorIdAndConsultationIdIsNotNullOrderByScheduledDateDesc(Long doctorId);
+	@Query("select a from Appointment a where a.patient.id = :patientId and " +
+			"(a.consultationId is not null or a.scheduledDate < :scheduledDate) " +
+			"order by a.scheduledDate desc")
+	List<Appointment> pastAppointmentsForPatient(@Param("patientId") Long patientId, @Param("scheduledDate") LocalDateTime scheduledDate);
+	@Query("select a from Appointment a where a.doctor.id = :doctorId and " +
+			"(a.consultationId is not null or a.scheduledDate < :scheduledDate) " +
+			"order by a.scheduledDate desc")
+	List<Appointment> pastAppointmentsForDoctor(@Param("doctorId") Long doctorId, @Param("scheduledDate") LocalDateTime scheduledDate);
+
 }
