@@ -31,4 +31,6 @@ public class UrnapatientsApplication {
 	public OtpService getOtpService() {
 		return new OtpServiceImpl();
 	}
+	
+	
 }
