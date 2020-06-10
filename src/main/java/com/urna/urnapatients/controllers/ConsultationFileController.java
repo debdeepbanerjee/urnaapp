@@ -3,6 +3,7 @@ package com.urna.urnapatients.controllers;
 import java.io.IOException;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -31,7 +32,7 @@ public class ConsultationFileController {
 	public ConsultationFileService getConsultationFileService() {
 		return consultationFileService;
 	}
-
+	@Autowired
 	public void setConsultationFileService(ConsultationFileService consultationFileService) {
 		this.consultationFileService = consultationFileService;
 	}
@@ -42,7 +43,9 @@ public class ConsultationFileController {
 		ConsultationFile consultationFile = new ConsultationFile();
 		consultationFile.setConsultationId(Long.parseLong(id));
 		consultationFile.setFile(file.getBytes());
-		return consultationFileService.save(consultationFile, file);
+		ConsultationFile savedObj = consultationFileService.save(consultationFile, file);
+		savedObj.setFile(null);
+		return savedObj;
 	}
 
 	@DeleteMapping("/file/{id}")
