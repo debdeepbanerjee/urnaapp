@@ -1,7 +1,7 @@
 package com.urna.urnapatients.dto;
 
 
-
+import java.util.Set;
 
 public class ConsultationDto implements java.io.Serializable {
 	
@@ -23,7 +23,7 @@ public class ConsultationDto implements java.io.Serializable {
 	private Long cratedByPatientId;
 	
 	private String status;
-	
+	private Set<MedicalFileDto> medicalFiles;
 	public Long getId() {
 		return id;
 	}
@@ -85,5 +85,11 @@ public class ConsultationDto implements java.io.Serializable {
 		this.status = status;
 	}
 
-	
+	public Set<MedicalFileDto> getMedicalFiles() {
+		return medicalFiles;
+	}
+
+	public void setMedicalFiles(Set<MedicalFileDto> medicalFiles) {
+		this.medicalFiles = medicalFiles;
+	}
 }

@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConsultationViewComponent } from '../consultation-view/consultation-view.component';
 import { Subscription } from 'rxjs';
+import { ChatComponent } from '../../chat/chat.component';
 
 @Component({
   selector: 'app-patient-appointment-list',
@@ -91,5 +92,10 @@ export class PatientAppointmentListComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(ConsultationViewComponent, { size: 'lg', scrollable: true });
     modalRef.componentInstance.appointment = appointment;
   }
-
+  
+  openChat(roomId: string, name: String) {
+    const modalRef = this.modalService.open(ChatComponent,  { size: 'sm', scrollable: true, centered: false, backdrop: 'static' });
+    modalRef.componentInstance.roomId = roomId;
+    modalRef.componentInstance.partner = name;
+  }
 }

@@ -6,7 +6,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = { MedicalFileMapper.class })
 public abstract class AppointmentMapper implements EntityMapper<AppointmentDto, Appointment> {
     @Mappings({
             @Mapping(target = "doctorId", source = "doctor.id"),

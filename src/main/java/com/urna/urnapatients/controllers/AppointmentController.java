@@ -1,25 +1,25 @@
 package com.urna.urnapatients.controllers;
 
 import java.sql.Timestamp;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.urna.urnapatients.dto.AppointmentDto;
+import com.urna.urnapatients.dto.MedicalFileDto;
 import com.urna.urnapatients.exceptions.AccessDeniedException;
 import com.urna.urnapatients.models.Consultation;
 import com.urna.urnapatients.models.Doctor;
 import com.urna.urnapatients.models.Patient;
 import com.urna.urnapatients.services.AppointmentService;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import com.urna.urnapatients.controllers.utils.RandomPasswordOtpUtil;
 import com.urna.urnapatients.models.Appointment;
 import com.urna.urnapatients.repo.AppointmentRepository;
+import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.annotations.ApiIgnore;
 
 @CrossOrigin
@@ -105,7 +105,7 @@ public class AppointmentController {
 		this.appointmentService.createConsultation(id, consultation);
 	}
 
-	@GetMapping("/{id}/consultations")
+	@GetMapping(value = "/{id}/consultations")
 	public Consultation getConsultationByAppointmentId(@PathVariable Long id, @ApiIgnore HttpSession session) {
 		Patient patient = (Patient) session.getAttribute("patient");
 		Doctor doctor = (Doctor) session.getAttribute("doctor");

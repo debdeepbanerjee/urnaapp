@@ -4,6 +4,7 @@ package com.urna.urnapatients.dto;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 public class AppointmentDto implements Serializable {
     private Long id ;
@@ -32,6 +33,8 @@ public class AppointmentDto implements Serializable {
     private Long appointmentRequestId;
 
     private LocalDateTime scheduledDate;
+
+    private Set<MedicalFileDto> medicalFiles;
 
     public Long getId() {
         return id;
@@ -169,4 +172,11 @@ public class AppointmentDto implements Serializable {
         this.scheduledDate = scheduledDate;
     }
 
+    public Set<MedicalFileDto> getMedicalFiles() {
+        return medicalFiles;
+    }
+
+    public void setMedicalFiles(Set<MedicalFileDto> medicalFiles) {
+        this.medicalFiles = medicalFiles;
+    }
 }

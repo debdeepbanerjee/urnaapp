@@ -32,7 +32,9 @@
               "src/assets/scss/black-dashboard.scss",
               "src/assets/css/nucleo-icons.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "src/socket.io.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {

@@ -1,8 +1,8 @@
 package com.urna.urnapatients.models;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -33,6 +33,10 @@ public class Appointment {
 
 	@Column(columnDefinition = "TIMESTAMP")
 	private LocalDateTime scheduledDate;
+
+	@OneToMany
+	@JoinColumn(name="appointmentId", referencedColumnName="id")
+	private Set<MedicalFile> medicalFiles;
 
 	public Timestamp getApptEndTime() {
 		return apptEndTime;
@@ -105,5 +109,13 @@ public class Appointment {
 
 	public void setScheduledDate(LocalDateTime scheduledDate) {
 		this.scheduledDate = scheduledDate;
+	}
+
+	public Set<MedicalFile> getMedicalFiles() {
+		return medicalFiles;
+	}
+
+	public void setMedicalFiles(Set<MedicalFile> medicalFiles) {
+		this.medicalFiles = medicalFiles;
 	}
 }

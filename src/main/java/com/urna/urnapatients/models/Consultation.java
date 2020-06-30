@@ -1,12 +1,9 @@
 package com.urna.urnapatients.models;
 
 import java.sql.Timestamp;
+import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "consultation")
@@ -34,6 +31,9 @@ public class Consultation implements java.io.Serializable {
 	private String status;
 	private Timestamp createdOn;
 	private Timestamp lastRespondedOn;
+	@OneToMany
+	@JoinColumn(name="consultationId", referencedColumnName="id")
+	private Set<MedicalFile> medicalFiles;
 	public Long getId() {
 		return id;
 	}
@@ -106,5 +106,12 @@ public class Consultation implements java.io.Serializable {
 	public void setLastRespondedOn(Timestamp lastRespondedOn) {
 		this.lastRespondedOn = lastRespondedOn;
 	}
-	
+
+	public Set<MedicalFile> getMedicalFiles() {
+		return medicalFiles;
+	}
+
+	public void setMedicalFiles(Set<MedicalFile> medicalFiles) {
+		this.medicalFiles = medicalFiles;
+	}
 }

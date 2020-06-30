@@ -29,4 +29,5 @@ public interface AppointmentRepository extends CrudRepository <Appointment,Long>
 			"order by a.scheduledDate desc")
 	List<Appointment> pastAppointmentsForDoctor(@Param("doctorId") Long doctorId, @Param("scheduledDate") LocalDateTime scheduledDate);
 
+	Appointment findByConsultationId(@Param("consultationId") Long consultationId);
 }

@@ -1,6 +1,7 @@
 package com.urna.urnapatients.services;
 
 import com.urna.urnapatients.dto.AppointmentDto;
+import com.urna.urnapatients.dto.MedicalFileDto;
 import com.urna.urnapatients.exceptions.AccessDeniedException;
 import com.urna.urnapatients.exceptions.UrnaException;
 import com.urna.urnapatients.mapper.AppointmentMapper;
@@ -10,10 +11,12 @@ import com.urna.urnapatients.models.Doctor;
 import com.urna.urnapatients.models.Patient;
 import com.urna.urnapatients.repo.AppointmentRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class AppointmentService {

@@ -21,6 +21,7 @@ import { PatientAppointmentListComponent } from 'src/app/pages/appointment/patie
 import { DoctorAppointmentListComponent } from 'src/app/pages/appointment/doctor-appointment-list/doctor-appointment-list.component';
 import { ConsultationEditComponent } from 'src/app/pages/appointment/consultation-edit/consultation-edit.component';
 import { ConsultationViewComponent } from 'src/app/pages/appointment/consultation-view/consultation-view.component';
+import { ChatComponent } from 'src/app/pages/chat/chat.component';
 
 @NgModule({
   imports: [
@@ -46,12 +47,14 @@ import { ConsultationViewComponent } from 'src/app/pages/appointment/consultatio
     PatientAppointmentListComponent,
     DoctorAppointmentListComponent,
     ConsultationEditComponent,
-    ConsultationViewComponent
+    ConsultationViewComponent,
+    ChatComponent
   ],
   entryComponents: [
     AppointmentRequestEditComponent,
     ConsultationEditComponent,
-    ConsultationViewComponent
+    ConsultationViewComponent,
+    ChatComponent
   ]
 })
 export class AdminLayoutModule {}

@@ -6,11 +6,16 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConsultationEditComponent } from '../consultation-edit/consultation-edit.component';
 import { ConsultationViewComponent } from '../consultation-view/consultation-view.component';
 import { Subscription } from 'rxjs';
+import { ChatComponent } from '../../chat/chat.component';
 
 @Component({
   selector: 'app-doctor-appointment-list',
   templateUrl: './doctor-appointment-list.component.html',
   styles: [
+    `::ng-deep .custom-modal .modal-dialog { 
+      max-width: 100%;
+      width: 90%;
+    }`
   ]
 })
 export class DoctorAppointmentListComponent implements OnInit, OnDestroy {
@@ -67,9 +72,7 @@ export class DoctorAppointmentListComponent implements OnInit, OnDestroy {
           a.enableConsultation = this.enableConsultation(a);
           if(!this.completed) {
             a.enableChat = this.enableChat(a);
-            if(a.enableChat) {
-              a.chatLink = this.getChatLink(a);
-            }
+            
           }
         });
     }
@@ -109,6 +112,13 @@ export class DoctorAppointmentListComponent implements OnInit, OnDestroy {
       const modalRef = this.modalService.open(ConsultationViewComponent, { size: 'lg', scrollable: true });
       modalRef.componentInstance.appointment = appointment;
     }
+  }
+
+  openChat(roomId: string, name: string) {
+    const modalRef = this.modalService.open(ChatComponent,  { size: 'sm', scrollable: true, centered: false, backdrop: 'static' });
+    modalRef.componentInstance.roomId = roomId;
+    modalRef.componentInstance.partner = name;
+    modalRef.componentInstance.isDoctor = true;
   }
 
 }
